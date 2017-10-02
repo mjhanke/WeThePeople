@@ -3,3 +3,9 @@ db.sqlite3
 settings.py
 settings.py.orig
 *.sw*
+cmsilv/
+danbenn/
+tbuist/
+venv/
+hirochri/
+mjhanke/
