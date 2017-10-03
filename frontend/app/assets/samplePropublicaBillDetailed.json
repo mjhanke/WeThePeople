@@ -1,0 +1,70 @@
+{
+	"bill_id": "s1094-115",
+	"congress": "115",
+	"bill": "S.1094",
+	"bill_type": "s",
+	"number": "S.1094",
+	"bill_uri": "https://api.propublica.org/congress/v1/115/bills/s1094.json",
+	"title": "Department of Veterans Affairs Accountability and Whistleblower Protection Act of 2017",
+	"sponsor": "Marco Rubio",
+	"sponsor_id": "R000595",
+	"sponsor_uri": "https://api.propublica.org/congress/v1/members/R000595.json",
+	"sponsor_party": "R",
+	"sponsor_state": "FL",
+	"gpo_pdf_uri": "https://www.gpo.gov/fdsys/pkg/BILLS-115s1094es/pdf/BILLS-115s1094es.pdf",
+	"congressdotgov_url": "https://www.congress.gov/bill/115th-congress/senate-bill/1094",
+	"govtrack_url": "https://www.govtrack.us/congress/bills/115/s1094",
+	"introduced_date": "2017-05-11",
+	"active": "true",
+	"house_passage": "",
+	"senate_passage": "2017-06-05",
+	"enacted": "",
+	"vetoed": "",
+	"cosponsors": "39",
+	"withdrawn_cosponsors": "0",
+	"primary_subject": "Armed Forces and National Security",
+	"committees": "Senate Veterans&#39; Affairs Committee",
+	"latest_major_action_date": "2017-06-07",
+	"latest_major_action": "Held at the desk.",
+	"last_vote_date": "",
+	"house_passage_vote": null,
+	"senate_passage_vote": "2017-06-05",
+	"summary": "",
+	"summary_short": "",
+	"versions": [],
+	"actions": [{
+		"datetime": "2017-06-07",
+		"description": "Held at the desk."
+	}, {
+		"datetime": "2017-06-07",
+		"description": "Received in the House."
+	}, {
+		"datetime": "2017-06-07",
+		"description": "Message on Senate action sent to the House."
+	}, {
+		"datetime": "2017-06-06",
+		"description": "Passed Senate with an amendment by Voice Vote."
+	}, {
+		"datetime": "2017-06-06",
+		"description": "The committee substitute agreed to by Unanimous Consent. (text: CR S3261-3266)"
+	}, {
+		"datetime": "2017-06-06",
+		"description": "Measure laid before Senate by unanimous consent. (consideration: CR S3261-3281)"
+	}, {
+		"datetime": "2017-05-24",
+		"description": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 103."
+	}, {
+		"datetime": "2017-05-24",
+		"description": "Committee on Veterans&#39; Affairs. Reported by Senator Isakson with an amendment in the nature of a substitute. Without written report."
+	}, {
+		"datetime": "2017-05-24",
+		"description": "Committee on Veterans&#39; Affairs. Ordered to be reported with an amendment in the nature of a substitute favorably."
+	}, {
+		"datetime": "2017-05-17",
+		"description": "Committee on Veterans&#39; Affairs. Hearings held."
+	}, {
+		"datetime": "2017-05-11",
+		"description": "Read twice and referred to the Committee on Veterans&#39; Affairs."
+	}],
+	"votes": []
+}
