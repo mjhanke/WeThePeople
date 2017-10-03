@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+/* Begin PBXBuildFile section */
+		1EA9ACDE4D38B147FC80FE7F /* Pods_WeThePeople.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1D0F6CF7901117D4E48581 /* Pods_WeThePeople.framework */; };
+		FF0F80831F3A2A15009ABDB7 /* AddressInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F80811F3A2A15009ABDB7 /* AddressInputController.swift */; };
+		FF0F80841F3A2A15009ABDB7 /* AddressInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */; };
+		FF0F80871F3A2B0F009ABDB7 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */; };
+		FF0F80881F3A2B0F009ABDB7 /* OnboardingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */; };
+		FF8085721F363DD4009C850E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF80856C1F363DD4009C850E /* Extensions.swift */; };
+		FF8085B51F365716009C850E /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085A61F365716009C850E /* OpenSans-SemiboldItalic.ttf */; };
+		FF8085B61F365716009C850E /* Magnetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8085A71F365716009C850E /* Magnetic.swift */; };
+		FF8085B71F365716009C850E /* SKMultilineLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8085A91F365716009C850E /* SKMultilineLabelNode.swift */; };
+		FF8085B81F365716009C850E /* MagneticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8085AA1F365716009C850E /* MagneticView.swift */; };
+		FF8085B91F365716009C850E /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085AB1F365716009C850E /* OpenSans-Light.ttf */; };
+		FF8085BA1F365716009C850E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8085AC1F365716009C850E /* Node.swift */; };
+		FF8085BB1F365716009C850E /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085AD1F365716009C850E /* OpenSans-Bold.ttf */; };
+		FF8085BC1F365716009C850E /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085AE1F365716009C850E /* OpenSans-LightItalic.ttf */; };
+		FF8085BD1F365716009C850E /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085AF1F365716009C850E /* OpenSans-BoldItalic.ttf */; };
+		FF8085BE1F365716009C850E /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085B01F365716009C850E /* OpenSans-ExtraBold.ttf */; };
+		FF8085BF1F365716009C850E /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085B11F365716009C850E /* OpenSans-ExtraBoldItalic.ttf */; };
+		FF8085C01F365716009C850E /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085B21F365716009C850E /* OpenSans-Italic.ttf */; };
+		FF8085C11F365716009C850E /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085B31F365716009C850E /* OpenSans-Regular.ttf */; };
+		FF8085C21F365716009C850E /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085B41F365716009C850E /* OpenSans-Semibold.ttf */; };
+		FF910A211F35710A0095E582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF910A201F35710A0095E582 /* AppDelegate.swift */; };
+		FF910A281F35710A0095E582 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF910A271F35710A0095E582 /* Assets.xcassets */; };
+		FF910A2B1F35710A0095E582 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF910A291F35710A0095E582 /* LaunchScreen.storyboard */; };
+		FF910A3D1F36200A0095E582 /* TopicBubbleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */; };
+		FF910A3E1F36200A0095E582 /* TopicBubbleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */; };
+		FF9216361F74154500BE4041 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9216341F74154500BE4041 /* NewsfeedController.swift */; };
+		FF9216371F74154500BE4041 /* NewsfeedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF9216351F74154500BE4041 /* NewsfeedController.xib */; };
+		FFB245641F505E2D00702984 /* topic_hierarchy_edited.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */; };
+		FFF87C0B1F42614700E8C53A /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF87C0A1F42614700E8C53A /* LoadingButton.swift */; };
+		4378DC8B01D24A3CAF255AC0 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */; };
+		65931AE69B2F4FAB965FC02E /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */; };
+		7B11264CDB2C4B6A8EF6543F /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */; };
+		2DE7523237804990AF109878 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */; };
+		D79FF3DECE604BD58FFFF7E1 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */; };
+		72D1CC50D84E4CCDB70672BA /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */; };
+		4EB7EA6BF4B94227A544FC32 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */; };
+		95BC1A8B1E6F46F88207579D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */; };
+		320DA315BE3C44F78BF963CC /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */; };
+		54F0CEAA5E7042C38FC23EB6 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7DE728FA1B2412F9BD6C52B9 /* Pods-WeThePeople.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeThePeople.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople.debug.xcconfig"; sourceTree = "<group>"; };
+		D1D50627366B0ADC5BDCDD51 /* Pods-WeThePeople.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeThePeople.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople.release.xcconfig"; sourceTree = "<group>"; };
+		EF1D0F6CF7901117D4E48581 /* Pods_WeThePeople.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeThePeople.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0F80811F3A2A15009ABDB7 /* AddressInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressInputController.swift; sourceTree = "<group>"; };
+		FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressInputController.xib; sourceTree = "<group>"; };
+		FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
+		FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingController.xib; sourceTree = "<group>"; };
+		FF80856C1F363DD4009C850E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FF8085A61F365716009C850E /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		FF8085A71F365716009C850E /* Magnetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Magnetic.swift; sourceTree = "<group>"; };
+		FF8085A81F365716009C850E /* Magnetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magnetic.h; sourceTree = "<group>"; };
+		FF8085A91F365716009C850E /* SKMultilineLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKMultilineLabelNode.swift; sourceTree = "<group>"; };
+		FF8085AA1F365716009C850E /* MagneticView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticView.swift; sourceTree = "<group>"; };
+		FF8085AB1F365716009C850E /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		FF8085AC1F365716009C850E /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		FF8085AD1F365716009C850E /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		FF8085AE1F365716009C850E /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		FF8085AF1F365716009C850E /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		FF8085B01F365716009C850E /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		FF8085B11F365716009C850E /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		FF8085B21F365716009C850E /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		FF8085B31F365716009C850E /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		FF8085B41F365716009C850E /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		FF910A1D1F35710A0095E582 /* WeThePeople.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeThePeople.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF910A201F35710A0095E582 /* AppDelegate.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FF910A271F35710A0095E582 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF910A2A1F35710A0095E582 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FF910A2C1F35710A0095E582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicBubbleController.swift; sourceTree = "<group>"; };
+		FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicBubbleController.xib; sourceTree = "<group>"; };
+		FF9216341F74154500BE4041 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
+		FF9216351F74154500BE4041 /* NewsfeedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedController.xib; sourceTree = "<group>"; };
+		FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topic_hierarchy_edited.json; sourceTree = "<group>"; };
+		FFF87C0A1F42614700E8C53A /* LoadingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
+		5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; name = "OpenSans-Bold.ttf"; path = "../app/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-BoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-ExtraBold.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; name = "OpenSans-Italic.ttf"; path = "../app/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; name = "OpenSans-Light.ttf"; path = "../app/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-LightItalic.ttf"; path = "../app/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../app/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBold.ttf"; path = "../app/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF910A1A1F35710A0095E582 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EA9ACDE4D38B147FC80FE7F /* Pods_WeThePeople.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E02507789319DD617D69E14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF1D0F6CF7901117D4E48581 /* Pods_WeThePeople.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EFE864217A8399A5322A0559 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7DE728FA1B2412F9BD6C52B9 /* Pods-WeThePeople.debug.xcconfig */,
+				D1D50627366B0ADC5BDCDD51 /* Pods-WeThePeople.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FF8085C31F365726009C850E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FF8085AD1F365716009C850E /* OpenSans-Bold.ttf */,
+				FF8085AF1F365716009C850E /* OpenSans-BoldItalic.ttf */,
+				FF8085B01F365716009C850E /* OpenSans-ExtraBold.ttf */,
+				FF8085B11F365716009C850E /* OpenSans-ExtraBoldItalic.ttf */,
+				FF8085B21F365716009C850E /* OpenSans-Italic.ttf */,
+				FF8085AB1F365716009C850E /* OpenSans-Light.ttf */,
+				FF8085AE1F365716009C850E /* OpenSans-LightItalic.ttf */,
+				FF8085B31F365716009C850E /* OpenSans-Regular.ttf */,
+				FF8085B41F365716009C850E /* OpenSans-Semibold.ttf */,
+				FF8085A61F365716009C850E /* OpenSans-SemiboldItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FF8085C41F365739009C850E /* External */ = {
+			isa = PBXGroup;
+			children = (
+				FF8085A81F365716009C850E /* Magnetic.h */,
+				FF8085A71F365716009C850E /* Magnetic.swift */,
+				FF8085AA1F365716009C850E /* MagneticView.swift */,
+				FF8085AC1F365716009C850E /* Node.swift */,
+				FF8085A91F365716009C850E /* SKMultilineLabelNode.swift */,
+				FFF87C0A1F42614700E8C53A /* LoadingButton.swift */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		FF910A141F3571090095E582 = {
+			isa = PBXGroup;
+			children = (
+				8E02507789319DD617D69E14 /* Frameworks */,
+				EFE864217A8399A5322A0559 /* Pods */,
+				FF910A1E1F35710A0095E582 /* Products */,
+				FF910A1F1F35710A0095E582 /* WeThePeople */,
+				5EA1F00F5B5941D7A2986A01 /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+		FF910A1E1F35710A0095E582 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF910A1D1F35710A0095E582 /* WeThePeople.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF910A1F1F35710A0095E582 /* WeThePeople */ = {
+			isa = PBXGroup;
+			children = (
+				FF9216341F74154500BE4041 /* NewsfeedController.swift */,
+				FF9216351F74154500BE4041 /* NewsfeedController.xib */,
+				FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */,
+				FF8085C41F365739009C850E /* External */,
+				FF8085C31F365726009C850E /* Fonts */,
+				FF910A201F35710A0095E582 /* AppDelegate.swift */,
+				FF910A271F35710A0095E582 /* Assets.xcassets */,
+				FF80856C1F363DD4009C850E /* Extensions.swift */,
+				FF910A2C1F35710A0095E582 /* Info.plist */,
+				FF910A291F35710A0095E582 /* LaunchScreen.storyboard */,
+				FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */,
+				FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */,
+				FF0F80811F3A2A15009ABDB7 /* AddressInputController.swift */,
+				FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */,
+				FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */,
+				FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */,
+			);
+			path = WeThePeople;
+			sourceTree = "<group>";
+		};
+		5EA1F00F5B5941D7A2986A01 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */,
+				F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */,
+				D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */,
+				1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */,
+				D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */,
+				4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */,
+				5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */,
+				C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */,
+				F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */,
+				47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF910A1C1F35710A0095E582 /* WeThePeople */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF910A2F1F35710A0095E582 /* Build configuration list for PBXNativeTarget "WeThePeople" */;
+			buildPhases = (
+				06FBAFA3D04D91893267983E /* [CP] Check Pods Manifest.lock */,
+				FF910A191F35710A0095E582 /* Sources */,
+				FF910A1A1F35710A0095E582 /* Frameworks */,
+				FF910A1B1F35710A0095E582 /* Resources */,
+				E2C840724FA6025F76680880 /* [CP] Embed Pods Frameworks */,
+				30C3347A66063E10BC6CC08E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WeThePeople;
+			productName = WeThePeople;
+			productReference = FF910A1D1F35710A0095E582 /* WeThePeople.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF910A151F3571090095E582 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 830;
+				LastUpgradeCheck = 830;
+				ORGANIZATIONNAME = "Daniel Bennett";
+				TargetAttributes = {
+					FF910A1C1F35710A0095E582 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 9CZ4UVFHRQ;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FF910A181F3571090095E582 /* Build configuration list for PBXProject "WeThePeople" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FF910A141F3571090095E582;
+			productRefGroup = FF910A1E1F35710A0095E582 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF910A1C1F35710A0095E582 /* WeThePeople */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF910A1B1F35710A0095E582 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF8085B51F365716009C850E /* OpenSans-SemiboldItalic.ttf in Resources */,
+				FF0F80841F3A2A15009ABDB7 /* AddressInputController.xib in Resources */,
+				FF8085C01F365716009C850E /* OpenSans-Italic.ttf in Resources */,
+				FF910A2B1F35710A0095E582 /* LaunchScreen.storyboard in Resources */,
+				FF8085C21F365716009C850E /* OpenSans-Semibold.ttf in Resources */,
+				FF8085BE1F365716009C850E /* OpenSans-ExtraBold.ttf in Resources */,
+				FF8085BC1F365716009C850E /* OpenSans-LightItalic.ttf in Resources */,
+				FF8085BB1F365716009C850E /* OpenSans-Bold.ttf in Resources */,
+				FF910A3E1F36200A0095E582 /* TopicBubbleController.xib in Resources */,
+				FF8085B91F365716009C850E /* OpenSans-Light.ttf in Resources */,
+				FF0F80881F3A2B0F009ABDB7 /* OnboardingController.xib in Resources */,
+				FF8085BF1F365716009C850E /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				FF8085BD1F365716009C850E /* OpenSans-BoldItalic.ttf in Resources */,
+				FF8085C11F365716009C850E /* OpenSans-Regular.ttf in Resources */,
+				FFB245641F505E2D00702984 /* topic_hierarchy_edited.json in Resources */,
+				FF9216371F74154500BE4041 /* NewsfeedController.xib in Resources */,
+				FF910A281F35710A0095E582 /* Assets.xcassets in Resources */,
+				4378DC8B01D24A3CAF255AC0 /* OpenSans-Bold.ttf in Resources */,
+				65931AE69B2F4FAB965FC02E /* OpenSans-BoldItalic.ttf in Resources */,
+				7B11264CDB2C4B6A8EF6543F /* OpenSans-ExtraBold.ttf in Resources */,
+				2DE7523237804990AF109878 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				D79FF3DECE604BD58FFFF7E1 /* OpenSans-Italic.ttf in Resources */,
+				72D1CC50D84E4CCDB70672BA /* OpenSans-Light.ttf in Resources */,
+				4EB7EA6BF4B94227A544FC32 /* OpenSans-LightItalic.ttf in Resources */,
+				95BC1A8B1E6F46F88207579D /* OpenSans-Regular.ttf in Resources */,
+				320DA315BE3C44F78BF963CC /* OpenSans-SemiBold.ttf in Resources */,
+				54F0CEAA5E7042C38FC23EB6 /* OpenSans-SemiBoldItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06FBAFA3D04D91893267983E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WeThePeople-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30C3347A66063E10BC6CC08E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2C840724FA6025F76680880 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/React/React.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF910A191F35710A0095E582 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF910A3D1F36200A0095E582 /* TopicBubbleController.swift in Sources */,
+				FF0F80831F3A2A15009ABDB7 /* AddressInputController.swift in Sources */,
+				FFF87C0B1F42614700E8C53A /* LoadingButton.swift in Sources */,
+				FF9216361F74154500BE4041 /* NewsfeedController.swift in Sources */,
+				FF8085B61F365716009C850E /* Magnetic.swift in Sources */,
+				FF8085B81F365716009C850E /* MagneticView.swift in Sources */,
+				FF910A211F35710A0095E582 /* AppDelegate.swift in Sources */,
+				FF8085721F363DD4009C850E /* Extensions.swift in Sources */,
+				FF8085B71F365716009C850E /* SKMultilineLabelNode.swift in Sources */,
+				FF8085BA1F365716009C850E /* Node.swift in Sources */,
+				FF0F80871F3A2B0F009ABDB7 /* OnboardingController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FF910A291F35710A0095E582 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF910A2A1F35710A0095E582 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FF910A2D1F35710A0095E582 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF910A2E1F35710A0095E582 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF910A301F35710A0095E582 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DE728FA1B2412F9BD6C52B9 /* Pods-WeThePeople.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				DEVELOPMENT_TEAM = 9CZ4UVFHRQ;
+				INFOPLIST_FILE = WeThePeople/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = danbennett.WeThePeople;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		FF910A311F35710A0095E582 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1D50627366B0ADC5BDCDD51 /* Pods-WeThePeople.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				DEVELOPMENT_TEAM = 9CZ4UVFHRQ;
+				INFOPLIST_FILE = WeThePeople/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = danbennett.WeThePeople;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF910A181F3571090095E582 /* Build configuration list for PBXProject "WeThePeople" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF910A2D1F35710A0095E582 /* Debug */,
+				FF910A2E1F35710A0095E582 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF910A2F1F35710A0095E582 /* Build configuration list for PBXNativeTarget "WeThePeople" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF910A301F35710A0095E582 /* Debug */,
+				FF910A311F35710A0095E582 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FF910A151F3571090095E582 /* Project object */;
+}

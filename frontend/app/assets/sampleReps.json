@@ -1,0 +1,542 @@
+{
+	"kind": "civicinfo#representativeInfoResponse",
+	"normalizedInput": {
+		"line1": "1341 Geddes Avenue",
+		"city": "Ann Arbor",
+		"state": "MI",
+		"zip": "48104"
+	},
+	"divisions": {
+		"ocd-division/country:us": {
+			"name": "United States",
+			"officeIndices": [0, 1]
+		},
+		"ocd-division/country:us/state:mi": {
+			"name": "Michigan",
+			"officeIndices": [2, 4, 5, 14, 15, 16]
+		},
+		"ocd-division/country:us/state:mi/cd:12": {
+			"name": "Michigan's 12th congressional district",
+			"officeIndices": [3]
+		},
+		"ocd-division/country:us/state:mi/county:washtenaw": {
+			"name": "Washtenaw County",
+			"officeIndices": [8, 9, 10, 11, 12]
+		},
+		"ocd-division/country:us/state:mi/county:washtenaw/council_district:8": {
+			"name": "Washtenaw County MI Board of Commissioners District 8",
+			"officeIndices": [13]
+		},
+		"ocd-division/country:us/state:mi/county:washtenaw/school_district:ann_arbor_public_schools": {
+			"name": "ann arbor public schools"
+		},
+		"ocd-division/country:us/state:mi/place:ann_arbor": {
+			"name": "Ann Arbor city"
+		},
+		"ocd-division/country:us/state:mi/place:ann_arbor/ward:2": {
+			"name": "Ann Arbor MI City Ward 2"
+		},
+		"ocd-division/country:us/state:mi/sldl:53": {
+			"name": "Michigan State House district 53",
+			"officeIndices": [7]
+		},
+		"ocd-division/country:us/state:mi/sldu:18": {
+			"name": "Michigan State Senate district 18",
+			"officeIndices": [6]
+		}
+	},
+	"offices": [{
+		"name": "President of the United States",
+		"divisionId": "ocd-division/country:us",
+		"levels": ["country"],
+		"roles": ["headOfState", "headOfGovernment"],
+		"officialIndices": [0]
+	}, {
+		"name": "Vice-President of the United States",
+		"divisionId": "ocd-division/country:us",
+		"levels": ["country"],
+		"roles": ["deputyHeadOfGovernment"],
+		"officialIndices": [1]
+	}, {
+		"name": "United States Senate",
+		"divisionId": "ocd-division/country:us/state:mi",
+		"levels": ["country"],
+		"roles": ["legislatorUpperBody"],
+		"officialIndices": [2, 3]
+	}, {
+		"name": "United States House of Representatives MI-12",
+		"divisionId": "ocd-division/country:us/state:mi/cd:12",
+		"levels": ["country"],
+		"roles": ["legislatorLowerBody"],
+		"officialIndices": [4]
+	}, {
+		"name": "Governor",
+		"divisionId": "ocd-division/country:us/state:mi",
+		"levels": ["administrativeArea1"],
+		"roles": ["headOfGovernment"],
+		"officialIndices": [5]
+	}, {
+		"name": "Lieutenant Governor",
+		"divisionId": "ocd-division/country:us/state:mi",
+		"levels": ["administrativeArea1"],
+		"roles": ["deputyHeadOfGovernment"],
+		"officialIndices": [6]
+	}, {
+		"name": "MI State Senate District 18",
+		"divisionId": "ocd-division/country:us/state:mi/sldu:18",
+		"levels": ["administrativeArea1"],
+		"roles": ["legislatorUpperBody"],
+		"officialIndices": [7]
+	}, {
+		"name": "MI State House District 53",
+		"divisionId": "ocd-division/country:us/state:mi/sldl:53",
+		"levels": ["administrativeArea1"],
+		"roles": ["legislatorLowerBody"],
+		"officialIndices": [8]
+	}, {
+		"name": "Sheriff",
+		"divisionId": "ocd-division/country:us/state:mi/county:washtenaw",
+		"officialIndices": [9]
+	}, {
+		"name": "Treasurer",
+		"divisionId": "ocd-division/country:us/state:mi/county:washtenaw",
+		"officialIndices": [10]
+	}, {
+		"name": "Prosecuting Attorney",
+		"divisionId": "ocd-division/country:us/state:mi/county:washtenaw",
+		"officialIndices": [11]
+	}, {
+		"name": "Water Resources Commission",
+		"divisionId": "ocd-division/country:us/state:mi/county:washtenaw",
+		"officialIndices": [12]
+	}, {
+		"name": "County Clerk/Register of Deeds",
+		"divisionId": "ocd-division/country:us/state:mi/county:washtenaw",
+		"officialIndices": [13]
+	}, {
+		"name": "Commission District 8",
+		"divisionId": "ocd-division/country:us/state:mi/county:washtenaw/council_district:8",
+		"officialIndices": [14]
+	}, {
+		"name": "Attorney General",
+		"divisionId": "ocd-division/country:us/state:mi",
+		"officialIndices": [15]
+	}, {
+		"name": "Secretary of State",
+		"divisionId": "ocd-division/country:us/state:mi",
+		"officialIndices": [16]
+	}, {
+		"name": "State Board of Education Member  ",
+		"divisionId": "ocd-division/country:us/state:mi",
+		"officialIndices": [17, 18, 19, 20, 21, 22, 23, 24]
+	}],
+	"officials": [{
+		"name": "Donald J. Trump",
+		"address": [{
+			"line1": "The White House",
+			"line2": "1600 Pennsylvania Avenue NW",
+			"city": "Washington",
+			"state": "DC",
+			"zip": "20500"
+		}],
+		"party": "Republican",
+		"phones": ["(202) 456-1111"],
+		"urls": ["http://www.whitehouse.gov/"],
+		"photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/PE%20Color.jpg",
+		"channels": [{
+			"type": "GooglePlus",
+			"id": "+whitehouse"
+		}, {
+			"type": "Facebook",
+			"id": "whitehouse"
+		}, {
+			"type": "Twitter",
+			"id": "potus"
+		}, {
+			"type": "YouTube",
+			"id": "whitehouse"
+		}]
+	}, {
+		"name": "Mike Pence",
+		"address": [{
+			"line1": "The White House",
+			"line2": "1600 Pennsylvania Avenue NW",
+			"city": "Washington",
+			"state": "DC",
+			"zip": "20500"
+		}],
+		"party": "Republican",
+		"phones": ["(202) 456-1111"],
+		"urls": ["http://www.whitehouse.gov/"],
+		"photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/VPE%20Color.jpg",
+		"channels": [{
+			"type": "GooglePlus",
+			"id": "+whitehouse"
+		}, {
+			"type": "Facebook",
+			"id": "whitehouse"
+		}, {
+			"type": "Twitter",
+			"id": "VP"
+		}]
+	}, {
+		"name": "Debbie Stabenow",
+		"address": [{
+			"line1": "731 Hart Senate Office Building",
+			"city": "Washington",
+			"state": "DC",
+			"zip": "20510"
+		}],
+		"party": "Democratic",
+		"phones": ["(202) 224-4822"],
+		"urls": ["http://www.stabenow.senate.gov/"],
+		"photoUrl": "http://bioguide.congress.gov/bioguide/photo/S/S000770.jpg",
+		"channels": [{
+			"type": "Facebook",
+			"id": "stabenow"
+		}, {
+			"type": "Twitter",
+			"id": "stabenow"
+		}, {
+			"type": "YouTube",
+			"id": "SenatorStabenow"
+		}]
+	}, {
+		"name": "Gary C. Peters",
+		"address": [{
+			"line1": "724 Hart Senate Office Building",
+			"city": "Washington",
+			"state": "DC",
+			"zip": "20510"
+		}],
+		"party": "Democratic",
+		"phones": ["(202) 224-6221"],
+		"urls": ["http://www.peters.senate.gov"],
+		"photoUrl": "http://bioguide.congress.gov/bioguide/photo/P/P000595.jpg",
+		"channels": [{
+			"type": "Facebook",
+			"id": "SenGaryPeters"
+		}, {
+			"type": "Twitter",
+			"id": "SenGaryPeters"
+		}, {
+			"type": "YouTube",
+			"id": "UC7LYNbnKSK2VZqQ98YROWHQ"
+		}]
+	}, {
+		"name": "Debbie Dingell",
+		"address": [{
+			"line1": "116 Cannon House Office Building",
+			"city": "Washington",
+			"state": "DC",
+			"zip": "20515"
+		}],
+		"party": "Democratic",
+		"phones": ["(202) 225-4071"],
+		"urls": ["https://debbiedingell.house.gov"],
+		"photoUrl": "https://www.congress.gov/img/member/114_rp_mi_12_dingell_debbie_200.jpg",
+		"channels": [{
+			"type": "Facebook",
+			"id": "RepDebbieDingell"
+		}, {
+			"type": "Twitter",
+			"id": "RepDebDingell"
+		}, {
+			"type": "YouTube",
+			"id": "UCnoP3KLT-HOvzDfC1-I-9lQ"
+		}]
+	}, {
+		"name": "Rick Snyder",
+		"address": [{
+			"line1": "P.O. Box 30013",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"party": "Republican",
+		"phones": ["(517) 373-3400"],
+		"emails": ["rick.snyder@michigan.gov"],
+		"channels": [{
+			"type": "GooglePlus",
+			"id": "+RickSnyder"
+		}, {
+			"type": "Facebook",
+			"id": "GovernorRickSnyder"
+		}, {
+			"type": "Twitter",
+			"id": "onetoughnerd"
+		}, {
+			"type": "YouTube",
+			"id": "govsnyder"
+		}]
+	}, {
+		"name": "Brian Calley",
+		"address": [{
+			"line1": "P.O. Box 30013",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"party": "Republican",
+		"phones": ["(517) 373-3400"],
+		"emails": ["brian.calley@michigan.gov"],
+		"channels": [{
+			"type": "Twitter",
+			"id": "LtGovCalley"
+		}, {
+			"type": "YouTube",
+			"id": "LGBrianCalley"
+		}, {
+			"type": "Facebook",
+			"id": "briancalley"
+		}]
+	}, {
+		"name": "Rebekah Warren",
+		"address": [{
+			"line1": "Post Office Box 30036",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"party": "Democratic",
+		"phones": ["(517) 373-2406"],
+		"urls": ["http://warren.senatedems.com/"],
+		"photoUrl": "http://senatedems.com/warren/wp-content/uploads/sites/9/2014/11/Warren_Bio-848x975.jpg",
+		"emails": ["SenRWarren@senate.michigan.gov"],
+		"channels": [{
+			"type": "Facebook",
+			"id": "FansOfRebekah"
+		}]
+	}, {
+		"name": "Yousef Rabhi",
+		"address": [{
+			"line1": "S-987 House Office Building",
+			"line2": "124 North Capitol Avenue",
+			"line3": "P.O. Box 30014",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909-7514"
+		}],
+		"party": "Democratic",
+		"phones": ["(517) 373-2577"],
+		"urls": ["http://housedems.com/state-rep-jeff-irwin"],
+		"photoUrl": "http://housedems.com/sites/default/files/representative-headshots/2016-headshots/53_Rabhi.jpg",
+		"emails": ["YousefRabhi@house.mi.gov"],
+		"channels": [{
+			"type": "Facebook",
+			"id": "VoteRabhi"
+		}, {
+			"type": "Twitter",
+			"id": "voterabhi"
+		}]
+	}, {
+		"name": "Jerry L. Clayton",
+		"address": [{
+			"line1": "2201 Hogback Road,",
+			"city": "Ann Arbor",
+			"state": "MI",
+			"zip": "48105"
+		}],
+		"party": "Democratic",
+		"phones": ["(734) 222-6850"],
+		"urls": ["http://www.ewashtenaw.org/government/sheriff/about-us/administration"]
+	}, {
+		"name": "Catherine McClary",
+		"address": [{
+			"line1": "PO Box 8645",
+			"city": "Ann Arbor",
+			"state": "MI",
+			"zip": "48107"
+		}],
+		"party": "Democratic",
+		"phones": ["(734) 222-6600"],
+		"urls": ["http://www.ewashtenaw.org/government/treasurer"],
+		"emails": ["taxes@ewashtenaw.org"]
+	}, {
+		"name": "Brian L. Mackie",
+		"address": [{
+			"line1": "PO Box 8645",
+			"city": "Ann Arbor",
+			"state": "MI",
+			"zip": "48107"
+		}],
+		"party": "Democratic",
+		"phones": ["(734) 222-6620"],
+		"urls": ["http://www.ewashtenaw.org/government/prosecuting_attorney"]
+	}, {
+		"name": "Evan N. Pratt",
+		"address": [{
+			"line1": "PO Box 8645",
+			"city": "Ann Arbor",
+			"state": "MI",
+			"zip": "48107"
+		}],
+		"party": "Democratic",
+		"phones": ["(734) 222-6860"],
+		"urls": ["http://www.ewashtenaw.org/government/drain_commissioner"],
+		"emails": ["pratte@ewashtenaw.org"]
+	}, {
+		"name": "Lawrence Kestenbaum",
+		"address": [{
+			"line1": "PO Box 8645",
+			"city": "Ann Arbor",
+			"state": "MI",
+			"zip": "48107"
+		}],
+		"party": "Democratic",
+		"phones": ["(734) 222-6700"],
+		"urls": ["http://www.ewashtenaw.org/government/clerk_register"]
+	}, {
+		"name": "Jason Morgan",
+		"address": [{
+			"line1": "PO Box 8645",
+			"city": "Ann Arbor",
+			"state": "MI",
+			"zip": "48107"
+		}],
+		"party": "Democratic",
+		"phones": ["(734) 222-6850"],
+		"urls": ["http://www.ewashtenaw.org/government/boc/members/district_8/district_8"],
+		"emails": ["morganj@ewashtenaw.org"]
+	}, {
+		"name": "Bill Schuette",
+		"address": [{
+			"line1": "G. Mennen Williams Building",
+			"line2": "7th Floor",
+			"line3": "525 W. Ottawa Street, P.O. Box 30212",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"party": "Republican",
+		"phones": ["(517) 373-1110"],
+		"emails": ["miag@michigan.gov"],
+		"channels": [{
+			"type": "Facebook",
+			"id": "MIAttorneyGeneral"
+		}, {
+			"type": "Twitter",
+			"id": "MIAttyGen"
+		}]
+	}, {
+		"name": "Ruth Johnson",
+		"address": [{
+			"line1": "3315 E. Michigan Avenue,",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48912"
+		}],
+		"party": "Republican",
+		"phones": ["(888) 767-6424"],
+		"emails": ["sos-news@michigan.gov"],
+		"channels": [{
+			"type": "Facebook",
+			"id": "MichiganSoS"
+		}, {
+			"type": "Twitter",
+			"id": "MichSoS"
+		}]
+	}, {
+		"name": "Casandra E. Ulbrich",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"phones": ["(517) 373-3900"],
+		"emails": ["ulbrichc@michigan.gov"],
+		"channels": [{
+			"type": "Facebook",
+			"id": "casandraulbrichSBE"
+		}]
+	}, {
+		"name": "Kathleen N. Straus",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"phones": ["(517) 373-3900"],
+		"emails": ["Nicolette_Snyder@nikkisnyder.org"],
+		"channels": [{
+			"type": "Facebook",
+			"id": "NikkiSnyderSBOE"
+		}]
+	}, {
+		"name": "Michelle Fecteau",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"party": "Republican",
+		"phones": ["(517) 373-3900"],
+		"emails": ["mfecteau@aaupaft.org"]
+	}, {
+		"name": "Pamela Pugh",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"phones": ["(517) 373-3900"],
+		"emails": ["pampugh@umich.edu"],
+		"channels": [{
+			"type": "Facebook",
+			"id": "pampughsmith4sbe"
+		}]
+	}, {
+		"name": "Richard Zeile",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"phones": ["(517) 373-3900"],
+		"emails": ["drzeile@juno.com"]
+	}, {
+		"name": "Lupe Ramos-Montigny",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"phones": ["(517) 373-3900"],
+		"emails": ["lrmontigny@yahoo.com"]
+	}, {
+		"name": "John C. Austin",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"party": "Republican",
+		"phones": ["(517) 373-3900"],
+		"emails": ["McMillinT1@michigan.gov"]
+	}, {
+		"name": "Eileen Lappin Weiser",
+		"address": [{
+			"line1": "608 W. Allegan Street",
+			"line2": "P.O. Box 30008",
+			"city": "Lansing",
+			"state": "MI",
+			"zip": "48909"
+		}],
+		"phones": ["(517) 373-3900"],
+		"emails": ["eileen_weiser@msn.com"]
+	}]
+}

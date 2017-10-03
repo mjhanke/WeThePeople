@@ -1,0 +1,40 @@
+Group 1
+Armed Forces
+Crime
+Emergency Management
+Disaster Response
+
+Group 2
+Animals
+Arts
+Education
+Science
+Social Sciences
+Sports
+
+Group 3
+Welfare
+Civil Rights
+Families
+Health
+Housing
+Employment
+
+Group 4
+Commerce
+Finance
+Transportation
+Employment
+Law
+Taxes
+
+Group 5
+Energy
+Environmental Protection
+Natural Resources
+Water Resources
+
+Group 6
+Foreign Trade
+Int’l Affairs
+Immigration
