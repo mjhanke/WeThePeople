@@ -48,9 +48,11 @@ export default class BillCell extends Component {
       );
     }
     else {
-      styles.cardView.height = topic = getTopic(this.props.bill);
-      const details = getContent(this.props.bill);
-      const date = moment(this.props.bill.latest_major_action_date).format('YYYY-MM-DD');
+      styles.cardView.height = this.getTopic(this.props.bill);
+      const titles = this.props.bill.titles;
+      const details = titles[titles.length - 1].title
+      const actions = this.props.bill.actions;
+      const date = moment(actions[actions.length - 1].acted_at).format('YYYY-MM-DD');
       const relativeDate = moment(date).fromNow();
       const party = ' (' + this.state.party + '-' + this.state.state + ')';
       const sponsor = this.state.sponsor.replace('&#39;', '').replace('&#39;', '')
@@ -80,7 +82,7 @@ export default class BillCell extends Component {
                 </Text>
               </View>
               <Text style = {styles.date}>
-                {relativeDate}
+                {"relative date"}
               </Text>
             </View>
           </View>
@@ -91,7 +93,24 @@ export default class BillCell extends Component {
         </TouchableHighlight>
         );
       }
+    }
 
+    /* Returns reader-friendly topic of bill */
+    getTopic(bill) {
+      var topic;
+      if (bill.subjects_top_term === '') {
+        topic = bill.committees[0].committee
+          .replace(new RegExp('Senate '), '')
+          .replace(new RegExp(' Committee'), '');
+      }
+      else {
+        topic = bill.subjects_top_term;
+      }
+      topic = topic
+        .replace(new RegExp(' and.*'), '')
+        .replace(new RegExp(",.*"), "")
+        .replace(new RegExp('&#39;'), '');
+      return topic;
     }
 }
 
@@ -159,7 +178,7 @@ let styles = StyleSheet.create({
   },
   sponsor: {
     fontSize: 18,
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: 'OpenSans-Semibold',
   },
   party: {
     fontSize: 18,
@@ -184,41 +203,3 @@ let styles = StyleSheet.create({
     borderWidth: 0.5,
   },
 });
-
-/* Returns reader-friendly topic of bill */
-function getTopic(bill) {
-  var topic;
-  if (bill.primary_subject === '') {
-    topic = bill.committees
-      .replace(new RegExp('Senate '), '')
-      .replace(new RegExp(' Committee'), '');
-  }
-  else {
-    topic = bill.primary_subject;
-  }
-  topic = topic
-    .replace(new RegExp(' and.*'), '')
-    .replace(new RegExp(",.*"), "")
-    .replace(new RegExp('&#39;'), '');
-  return topic;
-}
-
-function getContent(bill) {
-  var content =
-  capitalizeFirstLetter(
-    bill.title
-    .replace(new RegExp('(A bill )'), '')
-    .replace(new RegExp('(to )'), '')
-    .replace(new RegExp('(A resolution )'), '')
-    .replace(new RegExp('(A joint resolution )'), '')
-  );
-
-  if (content[content.length - 1]== '.') {
-    content = content.slice(0, -1);
-  }
-  return content;
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}

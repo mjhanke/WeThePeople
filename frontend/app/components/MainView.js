@@ -62,7 +62,17 @@ export default class MainView extends Component {
         negotiatePan
         >
         <TabView
+          billWasTapped={(bill) => {this.billWasTapped(bill)}}
           toggleDrawer={() => { this.toggleDrawer() }}/>
+          <View>
+            <TouchableHighlight style={styles.addButton}
+                underlayColor='white' onPress={()=>{console.log('pressed')}}>
+                <Image
+                  style = {styles.actionButtonImage}
+                  source={require('../images/instabug_icon.png')}
+                />
+            </TouchableHighlight>
+          </View>
       </Drawer>
     );
   }
@@ -75,6 +85,30 @@ export default class MainView extends Component {
 const styles = StyleSheet.create({
   drawer: {
     flex: 1,
+  },
+  addButton: {
+    height: 70,
+    width: 70,
+    borderRadius: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
+  actionButtonImage: {
+    height: 70,
+    width: 70,
+    borderRadius: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   }
 });
 

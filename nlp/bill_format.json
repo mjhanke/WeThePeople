@@ -1,0 +1,60 @@
+{
+    "actions": [
+      {
+        "date": "",
+        "action": ""
+      }
+    ],
+    "bill_status": {
+      "passed_upper": "a date",
+      "passed_lower": "a date",
+      "signed": "a date",
+      "vetoed": "a date",
+    },
+    "bill_id": "",
+    "topic": "",
+    "subtopics": [],
+    "scraped_topics": [],
+    "state": "mi",
+    "level_code": "0 => federal, 1 => state, 2 => local",
+    "human_summary": "",
+    "machine_summary": "",
+    "title": "",
+    "short_title": "",
+    "last_updated": "",
+    "full_text": "",
+    "house_committee": "",
+    "senate_committee": "",
+    "sponsor": {
+      "first_name": "",
+      "last_name": "",
+      "facebook_id": "",
+      "leg_id": "",
+      "state": "mi",
+      "title": ""
+    },
+    "cosponsors": [
+      {
+        "first_name": "",
+        "last_name": "",
+        "facebook_id": "",
+        "id": "",
+        "state": "mi",
+        "title": ""
+      }
+    ],
+    "related_bills": [
+      {
+        "bill_id": ""
+      }
+    ],
+    "history": {
+        "active": true,
+        "awaiting_signature": false,
+        "enacted": false,
+        "vetoed": false,
+    },
+    "introduction_date": "",
+    "updated_at": "",
+    "url": ""
+}
