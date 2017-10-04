@@ -24,6 +24,7 @@ import Recent from './Recent'
 import MyReps from './MyReps'
 import Elections from './Elections'
 import BillDetail from './BillDetail'
+import CongressFeed from './CongressFeed'
 
 
 export default class TabView extends Component {
@@ -34,16 +35,18 @@ export default class TabView extends Component {
   state = {
     index: 0,
     routes: [
-      { key: '1', title: 'RECENT' },
-      { key: '2', title: 'MY REPS' },
-      { key: '3', title: 'ELECTIONS' },
+      { key: '1', title: 'CONGRESS' },
+      { key: '2', title: 'STATE' },
+      { key: '3', title: 'MY REPS' },
     ],
   };
 
   _renderScene = SceneMap({
-    '1': () => <Recent />,
-    '2': () => <MyReps />,
-    '3': () => <Elections />,
+    '1': () => <CongressFeed
+                  billWasTapped = {(bill) => {this.billTapHandler(bill)}}
+               />,
+    '2': () => <Recent />,
+    '3': () => <MyReps />,
   });
 
   _handleIndexChange = index => this.setState({ index });
@@ -61,7 +64,7 @@ export default class TabView extends Component {
 
   constructor(props) {
     super(props);
-    this.billWasTapped = this.billWasTapped.bind(this);
+    this.billTapHandler = this.billTapHandler.bind(this);
   }
 
   render() {
@@ -79,9 +82,8 @@ export default class TabView extends Component {
     );
   }
 
-  billWasTapped(bill) {
-    const { navigate } = this.props.navigation;
-    navigate('BillDetail', { bill: bill });
+  billTapHandler(bill) {
+    this.props.billWasTapped(bill)
   }
 }
 
