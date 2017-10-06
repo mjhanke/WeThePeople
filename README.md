@@ -1,6 +1,26 @@
 # WeThePeople
 
-## Endpoints
+## Getting Started 
+
+To run the iOS app:
+
+Navigate to the "frontend" folder and do:
+
+```bash
+brew install yarn
+yarn install
+cd ios/
+sudo gem install cocoapods
+pod install
+open WeThePeople.xcworkspace
+cd ..
+yarn start
+```
+
+There will be an error in one of the React files. Change "RCTAnimation/" to "React/". 
+
+Sorry about the hack.
+
 ```python
 """
 create-user/
@@ -20,31 +40,4 @@ Returns:
     state(list): list of state level bill objects
     national(list): list of national level bill objects
 """
-```
-
-## Bill Format
-```python
-BILL-OBJECTS:
-{
-    "subjects": [string, string],
-    "subjects_top_term": string,
-    "human_summary": string,
-    "machine_summary": string,
-    "title": string,
-    "last_updated": string (timestamp)
-    "full_text_url": string,
-    "committee": string,
-    "cosponsors": [
-        {People Object}
-    ],
-    "history": {
-        "active": bool,
-        "awaiting_signature": bool,
-        "enacted": bool,
-        "vetoed": bool,
-    }
-    "introduction_date": string,
-    "sponsor": {People Object}
-}
-
 ```
