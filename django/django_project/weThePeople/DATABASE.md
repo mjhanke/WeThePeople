@@ -25,6 +25,9 @@ Database Name: wtp
 
 ##Using in Python##
 The connection to the MongoDB is established in db\_connect.py to use the db put the following line in the top of your program:
+
 `from db_connect.py import test_db, wtp_db`
+
 to access a collection in a database use:
+
 `collection = <db>.<collection_name>`
