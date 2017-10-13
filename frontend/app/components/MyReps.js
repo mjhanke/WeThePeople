@@ -14,8 +14,7 @@ import LoadingScreen from './LoadingScreen';
 
 export default class MyReps extends Component {
   componentWillMount() {
-
-    let address = '6578 Brookhills Ct Se';
+    let address = this.props.voterAddress;
     CivicAPI.getRepresentatives(address).then(
       (response) => this.parseReps(response));
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {true}});
