@@ -46,7 +46,9 @@ export default class TabView extends Component {
                   billWasTapped = {(bill) => {this.billTapHandler(bill)}}
                />,
     '2': () => <Recent />,
-    '3': () => <MyReps />,
+    '3': () => <MyReps
+                  voterAddress = {this.props.voterAddress}
+               />,
   });
 
   _handleIndexChange = index => this.setState({ index });

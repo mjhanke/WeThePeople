@@ -25,16 +25,6 @@ export default class Recent extends Component {
     };
   }
 
-  componentWillMount() {
-    CongressAPI.getRecentBills().then((bills) => {
-      this.state = {
-        dataSource: this.state.dataSource.cloneWithRows(bills),
-        fetched: true,
-      };
-      this.forceUpdate();
-    });
-  }
-
   render() {
     console.log("\nBeginning Recent.js rendering...");
     if (this.state.fetched == false) {

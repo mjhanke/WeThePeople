@@ -72,7 +72,9 @@ export default class MyReps extends Component {
         </View>
         </Image>
         <View style = {styles.descriptionView}>
-          <Text style = {styles.name}>
+          <Text
+            style = {styles.name}
+          >
             <Text>
               {this.state.name}
             </Text>
@@ -80,7 +82,10 @@ export default class MyReps extends Component {
               {this.state.party}
             </Text>
           </Text>
-          <Text style = {styles.position}>
+          <Text
+            style = {styles.position}
+            adjustsFontSizeToFit = {true}
+          >
             {this.state.position}
           </Text>
         </View>
@@ -121,9 +126,10 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 20,
+    fontSize: 18,
     margin: 14,
     marginBottom: 7,
+
     //backgroundColor: 'yellow',
   },
   position: {
@@ -132,6 +138,8 @@ const styles = StyleSheet.create({
     margin: 14,
     marginTop: 0,
     fontFamily: 'OpenSans-Light',
+    marginBottom: 14,
+
     //backgroundColor: 'cyan',
   },
   initialsView: {
