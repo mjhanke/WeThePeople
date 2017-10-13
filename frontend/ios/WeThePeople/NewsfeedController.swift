@@ -21,10 +21,19 @@ class NewsfeedController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let voterAddress = UserDefaults.standard.string(forKey: "address")
-        let props: [String : Any]? = ["voterAddress": voterAddress]
+        var props: [String : Any] = [:]
+        if let voterAddress: Any = UserDefaults.standard.string(forKey: "address") {
+            props = ["voterAddress": voterAddress]
+        }
+
+        #if DEBUG
+            let jsCodeLocation = URL(string: "http://localhost:8081/index.ios.bundle?platform=ios")
+        #else
+            let jsCodeLocation = CodePush.bundleURL()
+        #endif
+
         reactView = RCTRootView(
-            bundleURL: URL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
+            bundleURL: jsCodeLocation,
             moduleName: "WeThePeople",
             initialProperties: props,
             launchOptions: nil)
