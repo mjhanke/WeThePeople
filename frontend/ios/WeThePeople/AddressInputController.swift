@@ -21,7 +21,7 @@ class AddressInputController: UIViewController {
 
     func setupNextButton() {
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        nextButton.layer.cornerRadius = 25
+        nextButton.layer.cornerRadius = 2
         nextButton.alpha = 0.5
         nextButton.isEnabled = false
         NotificationCenter.default.addObserver(

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,10 +32,20 @@
                         <action selector="instabugButton:" destination="-1" eventType="touchUpInside" id="OVe-w5-Cpl"/>
                     </connections>
                 </button>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welogo" translatesAutoresizingMaskIntoConstraints="NO" id="eI5-lu-Rni">
+                    <rect key="frame" x="129" y="275" width="117" height="116"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="eI5-lu-Rni" secondAttribute="height" multiplier="117:116" id="Blm-9E-yH0"/>
+                        <constraint firstAttribute="width" constant="117" id="YV1-Uv-VDK"/>
+                    </constraints>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="eI5-lu-Rni" firstAttribute="width" secondItem="eI5-lu-Rni" secondAttribute="height" multiplier="117:116" id="6Yp-vV-WeB"/>
                 <constraint firstAttribute="bottom" secondItem="MFL-T8-riD" secondAttribute="bottom" constant="11" id="PWO-p1-kLH"/>
+                <constraint firstItem="eI5-lu-Rni" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="doE-ED-DKN"/>
+                <constraint firstItem="eI5-lu-Rni" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="tEf-pr-tYD"/>
                 <constraint firstAttribute="trailing" secondItem="MFL-T8-riD" secondAttribute="trailing" constant="16" id="y3T-Q5-j6W"/>
             </constraints>
             <point key="canvasLocation" x="81.5" y="54.5"/>
@@ -42,5 +53,6 @@
     </objects>
     <resources>
         <image name="instabug_icon" width="579" height="584"/>
+        <image name="welogo" width="532" height="532"/>
     </resources>
 </document>

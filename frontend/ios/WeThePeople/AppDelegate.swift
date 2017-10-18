@@ -8,28 +8,36 @@
 
 import UIKit
 import Instabug
+import BugsnagReactNative
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
          self.window = UIWindow(frame: UIScreen.main.bounds)
 
          Instabug.start(withToken: "e140795f7b604e58644361120c96b45c", invocationEvent: IBGInvocationEvent.shake)
-
-         let nav = UINavigationController()
-         nav.hideNavBarBackground()
-         let addressVC = AddressInputController()
-         let onboardingVC = OnboardingController()
-         let newsfeedVC = NewsfeedController()
-         nav.viewControllers = [addressVC]
-         nav.hideNavBarBackground()
-         self.window!.rootViewController = newsfeedVC
-         self.window?.makeKeyAndVisible()
+         #if DEBUG
+            BugsnagReactNative.start()
+         #endif
+         let finishedOnboarding = UserDefaults.standard.bool(forKey: "finishedOnboarding")
+         if finishedOnboarding  {
+            let newsfeedVC = NewsfeedController()
+            self.window!.rootViewController = newsfeedVC
+            self.window?.makeKeyAndVisible()
+         } else {
+            let nav = UINavigationController()
+            nav.hideNavBarBackground()
+            let addressVC = AddressInputController()
+            //let onboardingVC = OnboardingController()
+            nav.viewControllers = [addressVC]
+            nav.hideNavBarBackground()
+            self.window!.rootViewController = nav
+            self.window?.makeKeyAndVisible()
+         }
 
          return true
     }

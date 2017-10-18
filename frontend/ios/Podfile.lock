@@ -1,4 +1,9 @@
 PODS:
+  - BugsnagReactNative (2.5.0):
+    - BugsnagReactNative/Core (= 2.5.0)
+    - React
+  - BugsnagReactNative/Core (2.5.0):
+    - React
   - CodePush (5.1.3):
     - CodePush/Base64 (= 5.1.3)
     - CodePush/Core (= 5.1.3)
@@ -54,6 +59,7 @@ PODS:
   - Yoga (0.48.4.React)
 
 DEPENDENCIES:
+  - BugsnagReactNative (from `../node_modules/bugsnag-react-native`)
   - CodePush (from `../node_modules/react-native-code-push`)
   - React/BatchedBridge (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
@@ -72,6 +78,8 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
+  BugsnagReactNative:
+    :path: ../node_modules/bugsnag-react-native
   CodePush:
     :path: ../node_modules/react-native-code-push
   React:
@@ -80,11 +88,12 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
 SPEC CHECKSUMS:
+  BugsnagReactNative: 7810890dca86366c6a8ef9b46ce587f6de33635e
   CodePush: ffe876b57db57e0295653d69aa1653b0278b43ad
   React: 6d68659481a8a56e0f6b3dbecd984d5b9bb2d6c5
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   Yoga: ccefa1454b2e9825dce3b2df98088b7f0e3c2675
 
-PODFILE CHECKSUM: 104007bf39d8cf6f478cd0a576a87561d568ab97
+PODFILE CHECKSUM: 49fd54b920565fbb5201047010e1f85ac0bbe98a
 
 COCOAPODS: 1.3.1
