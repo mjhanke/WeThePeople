@@ -9,6 +9,7 @@
 import UIKit
 import React
 import Instabug
+import CodePush
 
 class NewsfeedController: UIViewController {
 
@@ -21,16 +22,24 @@ class NewsfeedController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         var props: [String : Any] = [:]
         if let voterAddress: Any = UserDefaults.standard.string(forKey: "address") {
             props = ["voterAddress": voterAddress]
         }
 
+        props = ["voterAddress": "1341 geddes"]
+
+
         #if DEBUG
             let jsCodeLocation = URL(string: "http://localhost:8081/index.ios.bundle?platform=ios")
         #else
+            //let jsCodeLocation = Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+
             let jsCodeLocation = CodePush.bundleURL()
         #endif
+
+        print(jsCodeLocation)
 
         reactView = RCTRootView(
             bundleURL: jsCodeLocation,
@@ -38,6 +47,7 @@ class NewsfeedController: UIViewController {
             initialProperties: props,
             launchOptions: nil)
         view.addSubview(reactView)
+
     }
 
     override func viewDidAppear(_ animated: Bool) {

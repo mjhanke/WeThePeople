@@ -25,6 +25,7 @@
 		FF0F80881F3A2B0F009ABDB7 /* OnboardingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */; };
 		FF5A5BB11F85699B00EB2E9D /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5A5BB01F85699B00EB2E9D /* Instabug.framework */; };
 		FF5A5BB21F85699B00EB2E9D /* Instabug.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FF5A5BB01F85699B00EB2E9D /* Instabug.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FF666B551F96F02E00F2FE62 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = FF666B541F96F02E00F2FE62 /* main.jsbundle */; };
 		FF8085721F363DD4009C850E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF80856C1F363DD4009C850E /* Extensions.swift */; };
 		FF8085B51F365716009C850E /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085A61F365716009C850E /* OpenSans-SemiboldItalic.ttf */; };
 		FF8085B61F365716009C850E /* Magnetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8085A71F365716009C850E /* Magnetic.swift */; };
@@ -86,6 +87,7 @@
 		FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingController.xib; sourceTree = "<group>"; };
 		FF5A5BB01F85699B00EB2E9D /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
+		FF666B541F96F02E00F2FE62 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = SOURCE_ROOT; };
 		FF80856C1F363DD4009C850E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FF8085A61F365716009C850E /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		FF8085A71F365716009C850E /* Magnetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Magnetic.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		FF9216341F74154500BE4041 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
 		FF9216351F74154500BE4041 /* NewsfeedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedController.xib; sourceTree = "<group>"; };
 		FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topic_hierarchy_edited.json; sourceTree = "<group>"; };
+		FFC412181F96EC0700A36DB6 /* WeThePeople-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeThePeople-Bridging-Header.h"; sourceTree = "<group>"; };
 		FFF3E4301F8FE2A700C0A7DC /* React.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = React.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF87C0A1F42614700E8C53A /* LoadingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -236,6 +239,7 @@
 		FF910A1F1F35710A0095E582 /* WeThePeople */ = {
 			isa = PBXGroup;
 			children = (
+				FF666B541F96F02E00F2FE62 /* main.jsbundle */,
 				FF9216341F74154500BE4041 /* NewsfeedController.swift */,
 				FF9216351F74154500BE4041 /* NewsfeedController.xib */,
 				FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */,
@@ -252,6 +256,7 @@
 				FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */,
 				FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */,
 				FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */,
+				FFC412181F96EC0700A36DB6 /* WeThePeople-Bridging-Header.h */,
 			);
 			path = WeThePeople;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				FF910A281F35710A0095E582 /* Assets.xcassets in Resources */,
 				4378DC8B01D24A3CAF255AC0 /* OpenSans-Bold.ttf in Resources */,
 				65931AE69B2F4FAB965FC02E /* OpenSans-BoldItalic.ttf in Resources */,
+				FF666B551F96F02E00F2FE62 /* main.jsbundle in Resources */,
 				7B11264CDB2C4B6A8EF6543F /* OpenSans-ExtraBold.ttf in Resources */,
 				2DE7523237804990AF109878 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				D79FF3DECE604BD58FFFF7E1 /* OpenSans-Italic.ttf in Resources */,
@@ -394,6 +400,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BugsnagReactNative/BugsnagReactNative.framework",
 				"${BUILT_PRODUCTS_DIR}/CodePush/CodePush.framework",
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -401,6 +408,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BugsnagReactNative.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodePush.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -571,8 +579,10 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../react-native/Libraries",
 					"$(SRCROOT)/../../react-native/React/**",
+					"$(BUILT_PRODUCTS_DIR)/include/React/**",
+					"$(inherited)/**",
+					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
 				);
 				INFOPLIST_FILE = WeThePeople/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -602,8 +612,10 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../react-native/Libraries",
 					"$(SRCROOT)/../../react-native/React/**",
+					"$(BUILT_PRODUCTS_DIR)/include/React/**",
+					"$(inherited)/**",
+					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
 				);
 				INFOPLIST_FILE = WeThePeople/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -611,8 +623,8 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = WeThePeopleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f438e70-7542-4029-b737-bdb323615577";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore WeThePeopleApp";
+				PROVISIONING_PROFILE = "dda67d8b-9d65-4b48-96d4-618577754179";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc WeThePeopleApp";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

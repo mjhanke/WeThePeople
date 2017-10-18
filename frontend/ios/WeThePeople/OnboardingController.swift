@@ -58,6 +58,7 @@ class OnboardingController: UIViewController {
             break
         case .subtopicSelect:
             let nextVC = NewsfeedController()
+            UserDefaults.standard.set(true, forKey: "finishedOnboarding")
             present(nextVC, animated: true, completion: nil)
             break
         }

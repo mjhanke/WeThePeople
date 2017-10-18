@@ -1,30 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry,
 } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
-import codePush from "react-native-code-push";
+import codePush from 'react-native-code-push';
+import { Client } from 'bugsnag-react-native';
 /* Welcome screens */
 import MainView from './app/components/MainView';
-import WelcomeScreen from './app/components/WelcomeScreen';
 import BillDetail from './app/components/BillDetail';
-import Elections from './app/components/Elections';
-import Profile from './app/components/Profile';
 
-class WeThePeople extends React.Component {
+export default class WeThePeople extends React.Component {
+  constructor(props) {
+    super(props);
+    if (!__DEV__) {
+      // Initialize Bugsnag bug tracking in production
+      const bugsnag = new Client();
+    }
+  }
   render() {
-    console.log('this.props in WeThePeople', this.props); // This will list the initialProps.
-
-    // StackNavigator **only** accepts a screenProps prop so we're passing
-    // initialProps through that.
-    return <Navigator screenProps={this.props} />;
+    return (
+      <Navigator screenProps={this.props} />
+    );
   }
 }
 
 const Navigator = StackNavigator({
-  MainView: { screen: MainView, navigationOptions: { header: null }},
+  MainView: { screen: MainView, navigationOptions: { header: null } },
   BillDetail: { screen: BillDetail },
 });
 
