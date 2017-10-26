@@ -10,3 +10,8 @@ mechanize
 BeautifulSoup4
 mock
 xmltodict
+urllib3
+pyopenssl
+ndg-httpsclient
+pyasn1
+requests
