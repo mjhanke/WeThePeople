@@ -22,7 +22,6 @@ export default class Elections extends Component {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

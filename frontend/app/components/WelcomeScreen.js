@@ -10,25 +10,25 @@ import {
   Dimensions,
 } from 'react-native';
 
-import colors from '../assets/colors.json'
+import colors from '../assets/colors.json';
 
 export default class WelcomeScreen extends Component {
   render() {
     return (
       <Image
-        style = {styles.container}
-        source = {require('../images/golden-gate-withlogo.png')}
+        style={styles.container}
+        source={require('../images/golden-gate-withlogo.png')}
       >
-      <TouchableHighlight
-        style = {styles.footer}
-        onPress = {this.onPressContinueButton}
-      >
-        <View style = {styles.buttonBackground}>
-          <Text style = {styles.buttonText}>
-            {'Let\'s get started'}
-          </Text>
-        </View>
-      </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.footer}
+          onPress={this.onPressContinueButton}
+        >
+          <View style={styles.buttonBackground}>
+            <Text style={styles.buttonText}>
+              {'Let\'s get started'}
+            </Text>
+          </View>
+        </TouchableHighlight>
       </Image>
     );
   }

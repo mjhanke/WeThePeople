@@ -5,7 +5,6 @@ rm -rf node_modules
 yarn install
 rm -fr $TMPDIR/react-*
 cd ios/
-pod install
 open WeThePeople.xcworkspace
 cd ..
 yarn start -- --reset-cache

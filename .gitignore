@@ -2,7 +2,6 @@ db.sqlite3
 *.pyc
 settings.py
 settings.py.orig
-*.sw*
 cmsilv/
 danbenn/
 tbuist/

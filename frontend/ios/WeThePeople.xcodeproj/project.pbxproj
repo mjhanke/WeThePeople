@@ -5,12 +5,27 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		1EA9ACDE4D38B147FC80FE7F /* Pods_WeThePeople.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1D0F6CF7901117D4E48581 /* Pods_WeThePeople.framework */; };
+		1EAC66A6CF0842399189EA42 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC9B41E4D14FD189BDBF3C /* libz.tbd */; };
+		2DE7523237804990AF109878 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */; };
+		320DA315BE3C44F78BF963CC /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */; };
+		4378DC8B01D24A3CAF255AC0 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */; };
+		4EB7EA6BF4B94227A544FC32 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */; };
+		54F0CEAA5E7042C38FC23EB6 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */; };
+		65931AE69B2F4FAB965FC02E /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */; };
+		72D1CC50D84E4CCDB70672BA /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */; };
+		7B11264CDB2C4B6A8EF6543F /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */; };
+		95BC1A8B1E6F46F88207579D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */; };
+		D79FF3DECE604BD58FFFF7E1 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */; };
 		FF0F80831F3A2A15009ABDB7 /* AddressInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F80811F3A2A15009ABDB7 /* AddressInputController.swift */; };
 		FF0F80841F3A2A15009ABDB7 /* AddressInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */; };
 		FF0F80871F3A2B0F009ABDB7 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */; };
 		FF0F80881F3A2B0F009ABDB7 /* OnboardingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */; };
+		FF5A5BB11F85699B00EB2E9D /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5A5BB01F85699B00EB2E9D /* Instabug.framework */; };
+		FF5A5BB21F85699B00EB2E9D /* Instabug.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FF5A5BB01F85699B00EB2E9D /* Instabug.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FF666B551F96F02E00F2FE62 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = FF666B541F96F02E00F2FE62 /* main.jsbundle */; };
 		FF8085721F363DD4009C850E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF80856C1F363DD4009C850E /* Extensions.swift */; };
 		FF8085B51F365716009C850E /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF8085A61F365716009C850E /* OpenSans-SemiboldItalic.ttf */; };
 		FF8085B61F365716009C850E /* Magnetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8085A71F365716009C850E /* Magnetic.swift */; };
@@ -29,32 +44,48 @@
 		FF910A211F35710A0095E582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF910A201F35710A0095E582 /* AppDelegate.swift */; };
 		FF910A281F35710A0095E582 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF910A271F35710A0095E582 /* Assets.xcassets */; };
 		FF910A2B1F35710A0095E582 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF910A291F35710A0095E582 /* LaunchScreen.storyboard */; };
-		FF910A3D1F36200A0095E582 /* TopicBubbleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */; };
-		FF910A3E1F36200A0095E582 /* TopicBubbleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */; };
 		FF9216361F74154500BE4041 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9216341F74154500BE4041 /* NewsfeedController.swift */; };
 		FF9216371F74154500BE4041 /* NewsfeedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF9216351F74154500BE4041 /* NewsfeedController.xib */; };
 		FFB245641F505E2D00702984 /* topic_hierarchy_edited.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */; };
+		FFF3E42F1F8FE2A700C0A7DC /* React.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF3E4301F8FE2A700C0A7DC /* React.framework */; };
 		FFF87C0B1F42614700E8C53A /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF87C0A1F42614700E8C53A /* LoadingButton.swift */; };
-		4378DC8B01D24A3CAF255AC0 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */; };
-		65931AE69B2F4FAB965FC02E /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */; };
-		7B11264CDB2C4B6A8EF6543F /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */; };
-		2DE7523237804990AF109878 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */; };
-		D79FF3DECE604BD58FFFF7E1 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */; };
-		72D1CC50D84E4CCDB70672BA /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */; };
-		4EB7EA6BF4B94227A544FC32 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */; };
-		95BC1A8B1E6F46F88207579D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */; };
-		320DA315BE3C44F78BF963CC /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */; };
-		54F0CEAA5E7042C38FC23EB6 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FF5A5BB31F85699B00EB2E9D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FF5A5BB21F85699B00EB2E9D /* Instabug.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		22BC9B41E4D14FD189BDBF3C /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../app/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../app/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../app/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		7DE728FA1B2412F9BD6C52B9 /* Pods-WeThePeople.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeThePeople.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople.debug.xcconfig"; sourceTree = "<group>"; };
+		C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../app/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		D1D50627366B0ADC5BDCDD51 /* Pods-WeThePeople.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeThePeople.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople.release.xcconfig"; sourceTree = "<group>"; };
+		D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../app/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		EF1D0F6CF7901117D4E48581 /* Pods_WeThePeople.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeThePeople.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBold.ttf"; path = "../app/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-BoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		FF0F80811F3A2A15009ABDB7 /* AddressInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressInputController.swift; sourceTree = "<group>"; };
 		FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressInputController.xib; sourceTree = "<group>"; };
 		FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingController.xib; sourceTree = "<group>"; };
+		FF5A5BB01F85699B00EB2E9D /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
+		FF666B541F96F02E00F2FE62 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = SOURCE_ROOT; };
 		FF80856C1F363DD4009C850E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FF8085A61F365716009C850E /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		FF8085A71F365716009C850E /* Magnetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Magnetic.swift; sourceTree = "<group>"; };
@@ -76,22 +107,12 @@
 		FF910A271F35710A0095E582 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF910A2A1F35710A0095E582 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF910A2C1F35710A0095E582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicBubbleController.swift; sourceTree = "<group>"; };
-		FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicBubbleController.xib; sourceTree = "<group>"; };
 		FF9216341F74154500BE4041 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
 		FF9216351F74154500BE4041 /* NewsfeedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedController.xib; sourceTree = "<group>"; };
 		FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topic_hierarchy_edited.json; sourceTree = "<group>"; };
+		FFC412181F96EC0700A36DB6 /* WeThePeople-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeThePeople-Bridging-Header.h"; sourceTree = "<group>"; };
+		FFF3E4301F8FE2A700C0A7DC /* React.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = React.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF87C0A1F42614700E8C53A /* LoadingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
-		5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; name = "OpenSans-Bold.ttf"; path = "../app/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-BoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-ExtraBold.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; name = "OpenSans-Italic.ttf"; path = "../app/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; name = "OpenSans-Light.ttf"; path = "../app/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-LightItalic.ttf"; path = "../app/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../app/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBold.ttf"; path = "../app/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,17 +120,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF3E42F1F8FE2A700C0A7DC /* React.framework in Frameworks */,
 				1EA9ACDE4D38B147FC80FE7F /* Pods_WeThePeople.framework in Frameworks */,
+				FF5A5BB11F85699B00EB2E9D /* Instabug.framework in Frameworks */,
+				1EAC66A6CF0842399189EA42 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		182AA61AEFC64A7C9DDF15B6 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		5EA1F00F5B5941D7A2986A01 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */,
+				F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */,
+				D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */,
+				1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */,
+				D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */,
+				4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */,
+				5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */,
+				C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */,
+				F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */,
+				47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		8E02507789319DD617D69E14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FFF3E4301F8FE2A700C0A7DC /* React.framework */,
 				EF1D0F6CF7901117D4E48581 /* Pods_WeThePeople.framework */,
+				22BC9B41E4D14FD189BDBF3C /* libz.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -153,14 +203,24 @@
 			path = External;
 			sourceTree = "<group>";
 		};
+		FF8F0B061F8E8B2300C99F2A /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		FF910A141F3571090095E582 = {
 			isa = PBXGroup;
 			children = (
+				FF5A5BB01F85699B00EB2E9D /* Instabug.framework */,
 				8E02507789319DD617D69E14 /* Frameworks */,
 				EFE864217A8399A5322A0559 /* Pods */,
 				FF910A1E1F35710A0095E582 /* Products */,
 				FF910A1F1F35710A0095E582 /* WeThePeople */,
 				5EA1F00F5B5941D7A2986A01 /* Resources */,
+				182AA61AEFC64A7C9DDF15B6 /* Libraries */,
+				FF8F0B061F8E8B2300C99F2A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +235,7 @@
 		FF910A1F1F35710A0095E582 /* WeThePeople */ = {
 			isa = PBXGroup;
 			children = (
+				FF666B541F96F02E00F2FE62 /* main.jsbundle */,
 				FF9216341F74154500BE4041 /* NewsfeedController.swift */,
 				FF9216351F74154500BE4041 /* NewsfeedController.xib */,
 				FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */,
@@ -185,33 +246,14 @@
 				FF80856C1F363DD4009C850E /* Extensions.swift */,
 				FF910A2C1F35710A0095E582 /* Info.plist */,
 				FF910A291F35710A0095E582 /* LaunchScreen.storyboard */,
-				FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */,
-				FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */,
 				FF0F80811F3A2A15009ABDB7 /* AddressInputController.swift */,
 				FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */,
 				FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */,
 				FF0F80861F3A2B0F009ABDB7 /* OnboardingController.xib */,
+				FFC412181F96EC0700A36DB6 /* WeThePeople-Bridging-Header.h */,
 			);
 			path = WeThePeople;
 			sourceTree = "<group>";
-		};
-		5EA1F00F5B5941D7A2986A01 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				5FE43272F96745BCBEE71CA1 /* OpenSans-Bold.ttf */,
-				F5718A9027AA40419735F37A /* OpenSans-BoldItalic.ttf */,
-				D16D8219D5AE4A3BAB7745FF /* OpenSans-ExtraBold.ttf */,
-				1E3C2FA9E6774311A50D51CE /* OpenSans-ExtraBoldItalic.ttf */,
-				D2E566E0DDDA4470AD0CC476 /* OpenSans-Italic.ttf */,
-				4015C4B9CE764A0CB7373104 /* OpenSans-Light.ttf */,
-				5A00303145664758AC12BFBB /* OpenSans-LightItalic.ttf */,
-				C57F38910F134EF09CCA43DD /* OpenSans-Regular.ttf */,
-				F35EC45B4B9A4026A430A393 /* OpenSans-SemiBold.ttf */,
-				47A354934F124CE9B231D39A /* OpenSans-SemiBoldItalic.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -226,6 +268,8 @@
 				FF910A1B1F35710A0095E582 /* Resources */,
 				E2C840724FA6025F76680880 /* [CP] Embed Pods Frameworks */,
 				30C3347A66063E10BC6CC08E /* [CP] Copy Pods Resources */,
+				FF5A5BB31F85699B00EB2E9D /* Embed Frameworks */,
+				FF5A5BB41F856D4200EB2E9D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -249,7 +293,7 @@
 					FF910A1C1F35710A0095E582 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 9CZ4UVFHRQ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -284,7 +328,6 @@
 				FF8085BE1F365716009C850E /* OpenSans-ExtraBold.ttf in Resources */,
 				FF8085BC1F365716009C850E /* OpenSans-LightItalic.ttf in Resources */,
 				FF8085BB1F365716009C850E /* OpenSans-Bold.ttf in Resources */,
-				FF910A3E1F36200A0095E582 /* TopicBubbleController.xib in Resources */,
 				FF8085B91F365716009C850E /* OpenSans-Light.ttf in Resources */,
 				FF0F80881F3A2B0F009ABDB7 /* OnboardingController.xib in Resources */,
 				FF8085BF1F365716009C850E /* OpenSans-ExtraBoldItalic.ttf in Resources */,
@@ -295,6 +338,7 @@
 				FF910A281F35710A0095E582 /* Assets.xcassets in Resources */,
 				4378DC8B01D24A3CAF255AC0 /* OpenSans-Bold.ttf in Resources */,
 				65931AE69B2F4FAB965FC02E /* OpenSans-BoldItalic.ttf in Resources */,
+				FF666B551F96F02E00F2FE62 /* main.jsbundle in Resources */,
 				7B11264CDB2C4B6A8EF6543F /* OpenSans-ExtraBold.ttf in Resources */,
 				2DE7523237804990AF109878 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				D79FF3DECE604BD58FFFF7E1 /* OpenSans-Italic.ttf in Resources */,
@@ -349,12 +393,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BugsnagReactNative/BugsnagReactNative.framework",
+				"${BUILT_PRODUCTS_DIR}/CodePush/CodePush.framework",
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BugsnagReactNative.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodePush.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
@@ -364,6 +412,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeThePeople/Pods-WeThePeople-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FF5A5BB41F856D4200EB2E9D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instabug.framework/Instabug.bundle/strip-frameworks.sh\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -371,7 +432,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF910A3D1F36200A0095E582 /* TopicBubbleController.swift in Sources */,
 				FF0F80831F3A2A15009ABDB7 /* AddressInputController.swift in Sources */,
 				FFF87C0B1F42614700E8C53A /* LoadingButton.swift in Sources */,
 				FF9216361F74154500BE4041 /* NewsfeedController.swift in Sources */,
@@ -501,12 +561,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODEPUSH_KEY = "";
+				"CODEPUSH_KEY[arch=*]" = "Ahub-poPwNX2trjdDY-XdyHeVXKL67d71918-ee82-47cf-a4a3-867baa95b7f4 ";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9CZ4UVFHRQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(BUILT_PRODUCTS_DIR)/include/React/**",
+					"$(inherited)/**",
+					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
+				);
 				INFOPLIST_FILE = WeThePeople/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = danbennett.WeThePeople;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = WeThePeopleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dda67d8b-9d65-4b48-96d4-618577754179";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc WeThePeopleApp";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -517,12 +595,29 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODEPUSH_KEY = "";
+				"CODEPUSH_KEY[arch=*]" = "JrWbK00LJT2hotWhcFaNNqd07Ub667d71918-ee82-47cf-a4a3-867baa95b7f4";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9CZ4UVFHRQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(BUILT_PRODUCTS_DIR)/include/React/**",
+					"$(inherited)/**",
+					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
+				);
 				INFOPLIST_FILE = WeThePeople/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = danbennett.WeThePeople;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = WeThePeopleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dda67d8b-9d65-4b48-96d4-618577754179";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc WeThePeopleApp";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
