@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse 
 from db_connect import test_db, wtp_db
 
 def index(request):
@@ -16,3 +16,23 @@ def testdb(request):
 	del person['_id']
 	people_collection.delete_many({})
 	return JsonResponse(person)
+
+def get_bills(request):
+	if(request.method != 'GET'):
+		return JsonResponse({"status": "error", "message": "request method should be GET"})
+	#get interests
+	interestsString = request.GET.get("topics", "")
+	if(interestsString == ""):
+		return JsonResponse({"status": "error", "message": "no topics selected as interests"})
+	listOfInterests = interestsString.split(',')
+	#get national legislation
+	relevant_bills = []
+	for interest in listOfInterests:
+		relevant_bills = relevant_bills + list(wtp_db.bills.find({"$and" :[ { "$or": [ {"topic": interest }, { "subtopics": interest}] }, {"level_code": 0}]}))
+	return JsonResponse(relevant_bills, safe=False)
+
+def create_user(request):
+	return JsonResponse({'status': 'not implemented'})
+
+def address(request):
+	return JsonResponse({'status': 'not implemented'})
