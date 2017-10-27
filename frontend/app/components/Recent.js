@@ -7,26 +7,26 @@ import {
   Image,
   Dimensions,
   ListView,
-  Alert
+  Alert,
 } from 'react-native';
 
 import CongressAPI from './CongressAPI';
 import BillCell from './BillCell';
-import LoadingScreen from './LoadingScreen'
+import LoadingScreen from './LoadingScreen';
 
 export default class Recent extends Component {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {true}});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { true; } });
     this.state = {
       dataSource: ds.cloneWithRows([]),
-      fetched: false
+      fetched: false,
     };
   }
 
   render() {
-    console.log("\nBeginning Recent.js rendering...");
+    console.log('\nBeginning Recent.js rendering...');
     if (this.state.fetched == false) {
       return (
         <LoadingScreen />
@@ -44,15 +44,16 @@ export default class Recent extends Component {
   renderRow(rowData) {
     return (
       <View>
-      <BillCell
-        bill={rowData}
-        billWasTapped = {(bill) => {this.billTapHandler(bill)}} />
+        <BillCell
+          bill={rowData}
+          billWasTapped={(bill) => { this.billTapHandler(bill); }}
+        />
       </View>
     );
   }
 
   billTapHandler(bill) {
-    this.props.billWasTapped(bill)
+    this.props.billWasTapped(bill);
   }
 }
 

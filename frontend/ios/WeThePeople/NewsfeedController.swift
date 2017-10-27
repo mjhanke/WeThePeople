@@ -20,22 +20,25 @@ class NewsfeedController: UIViewController {
     }
     var reactView: RCTRootView!
 
+    var selectedSubtopics: [String]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         var props: [String : Any] = [:]
         if let voterAddress: Any = UserDefaults.standard.string(forKey: "address") {
-            props = ["voterAddress": voterAddress]
+            props["voterAddress"] = voterAddress
+        }
+        if let subtopics = selectedSubtopics {
+            props["subtopics"] = subtopics
         }
 
-        props = ["voterAddress": "1341 geddes"]
-
+        print(props)
 
         #if DEBUG
             let jsCodeLocation = URL(string: "http://localhost:8081/index.ios.bundle?platform=ios")
         #else
             //let jsCodeLocation = Bundle.main.url(forResource: "main", withExtension: "jsbundle")
-
             let jsCodeLocation = CodePush.bundleURL()
         #endif
 

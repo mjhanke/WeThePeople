@@ -44,8 +44,6 @@
 		FF910A211F35710A0095E582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF910A201F35710A0095E582 /* AppDelegate.swift */; };
 		FF910A281F35710A0095E582 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF910A271F35710A0095E582 /* Assets.xcassets */; };
 		FF910A2B1F35710A0095E582 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF910A291F35710A0095E582 /* LaunchScreen.storyboard */; };
-		FF910A3D1F36200A0095E582 /* TopicBubbleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */; };
-		FF910A3E1F36200A0095E582 /* TopicBubbleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */; };
 		FF9216361F74154500BE4041 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9216341F74154500BE4041 /* NewsfeedController.swift */; };
 		FF9216371F74154500BE4041 /* NewsfeedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF9216351F74154500BE4041 /* NewsfeedController.xib */; };
 		FFB245641F505E2D00702984 /* topic_hierarchy_edited.json in Resources */ = {isa = PBXBuildFile; fileRef = FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */; };
@@ -109,8 +107,6 @@
 		FF910A271F35710A0095E582 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF910A2A1F35710A0095E582 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF910A2C1F35710A0095E582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicBubbleController.swift; sourceTree = "<group>"; };
-		FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicBubbleController.xib; sourceTree = "<group>"; };
 		FF9216341F74154500BE4041 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
 		FF9216351F74154500BE4041 /* NewsfeedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedController.xib; sourceTree = "<group>"; };
 		FFB245631F505E2D00702984 /* topic_hierarchy_edited.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topic_hierarchy_edited.json; sourceTree = "<group>"; };
@@ -250,8 +246,6 @@
 				FF80856C1F363DD4009C850E /* Extensions.swift */,
 				FF910A2C1F35710A0095E582 /* Info.plist */,
 				FF910A291F35710A0095E582 /* LaunchScreen.storyboard */,
-				FF910A3B1F36200A0095E582 /* TopicBubbleController.swift */,
-				FF910A3C1F36200A0095E582 /* TopicBubbleController.xib */,
 				FF0F80811F3A2A15009ABDB7 /* AddressInputController.swift */,
 				FF0F80821F3A2A15009ABDB7 /* AddressInputController.xib */,
 				FF0F80851F3A2B0F009ABDB7 /* OnboardingController.swift */,
@@ -334,7 +328,6 @@
 				FF8085BE1F365716009C850E /* OpenSans-ExtraBold.ttf in Resources */,
 				FF8085BC1F365716009C850E /* OpenSans-LightItalic.ttf in Resources */,
 				FF8085BB1F365716009C850E /* OpenSans-Bold.ttf in Resources */,
-				FF910A3E1F36200A0095E582 /* TopicBubbleController.xib in Resources */,
 				FF8085B91F365716009C850E /* OpenSans-Light.ttf in Resources */,
 				FF0F80881F3A2B0F009ABDB7 /* OnboardingController.xib in Resources */,
 				FF8085BF1F365716009C850E /* OpenSans-ExtraBoldItalic.ttf in Resources */,
@@ -439,7 +432,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF910A3D1F36200A0095E582 /* TopicBubbleController.swift in Sources */,
 				FF0F80831F3A2A15009ABDB7 /* AddressInputController.swift in Sources */,
 				FFF87C0B1F42614700E8C53A /* LoadingButton.swift in Sources */,
 				FF9216361F74154500BE4041 /* NewsfeedController.swift in Sources */,
@@ -570,6 +562,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODEPUSH_KEY = "";
+				"CODEPUSH_KEY[arch=*]" = "Ahub-poPwNX2trjdDY-XdyHeVXKL67d71918-ee82-47cf-a4a3-867baa95b7f4 ";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -590,8 +583,8 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = WeThePeopleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f438e70-7542-4029-b737-bdb323615577";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore WeThePeopleApp";
+				PROVISIONING_PROFILE = "dda67d8b-9d65-4b48-96d4-618577754179";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc WeThePeopleApp";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;

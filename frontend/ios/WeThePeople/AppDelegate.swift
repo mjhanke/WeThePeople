@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
          self.window = UIWindow(frame: UIScreen.main.bounds)
 
-         Instabug.start(withToken: "e140795f7b604e58644361120c96b45c", invocationEvent: IBGInvocationEvent.shake)
-         #if DEBUG
+         #if !DEBUG
+            Instabug.start(withToken: "e140795f7b604e58644361120c96b45c", invocationEvent: IBGInvocationEvent.shake)
             BugsnagReactNative.start()
          #endif
          let finishedOnboarding = UserDefaults.standard.bool(forKey: "finishedOnboarding")
