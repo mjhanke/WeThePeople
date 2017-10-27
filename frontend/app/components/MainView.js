@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  AppRegistry,
-} from 'react-native';
-
 import TabView from './TabView';
 
 export default class MainView extends Component {
+  constructor(props) {
+    super(props);
+    this.billWasTapped = this.billWasTapped.bind(this);
+    this.personWasTapped = this.personWasTapped.bind(this);
+  }
   billWasTapped(bill) {
     const { navigate } = this.props.navigation;
-    navigate('BillDetail', { bill });
+    navigate('BillDetail', { bill, personWasTapped: this.personWasTapped });
+  }
+  personWasTapped(legId) {
+    const { navigate } = this.props.navigation;
+    navigate('ProfilePage', { legId });
   }
   render() {
     return (
       <TabView
-        billWasTapped={(bill) => { this.billWasTapped(bill); }}
-        toggleDrawer={() => { this.toggleDrawer(); }}
+        billWasTapped={bill => this.billWasTapped(bill)}
+        personWasTapped={bill => this.personWasTapped(bill)}
+        toggleDrawer={() => this.toggleDrawer()}
         voterAddress={this.props.screenProps.voterAddress}
       />
     );
@@ -30,5 +36,3 @@ MainView.propTypes = {
     voterAddress: PropTypes.string.isRequired,
   }).isRequired,
 };
-
-AppRegistry.registerComponent('MainView', () => MainView);

@@ -3,21 +3,17 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   Image,
-  TouchableHighlight,
   ScrollView,
-  Dimensions,
 } from 'react-native';
-import moment from 'moment';
+import PropTypes from 'prop-types';
 import CongressAPI from './CongressAPI';
-import We from '../images/We.png';
-import images from '../assets/images'
-import BillProgress from './BillProgress'
+import BillProgress from './BillProgress';
+import NameHeader from './NameHeader';
 
 export default class BillDetail extends Component {
   static navigationOptions = {
-    headerStyle: {backgroundColor: 'white'}
+    headerStyle: { backgroundColor: 'white' },
   };
 
   componentWillMount() {
@@ -27,121 +23,121 @@ export default class BillDetail extends Component {
       billExcerpts: '',
       sponsor: '',
       bill: params.bill,
-      imageUrl: ' '
-    }
+      imageUrl: ' ',
+      legId: '',
+      personWasTapped: params.personWasTapped,
+    };
     const url = this.state.bill.sponsor.bioguide_id;
     CongressAPI.getLegislator(url)
       .then((response) => {
-        this.state.sponsor = response.first_name + ' ' + response.last_name + ' (' + response.current_party + ')';
-        this.state.imageUrl = 'https://graph.facebook.com/' + response.facebook_account
-          + '/picture?type=large';
-        this.forceUpdate();
-      })
+        this.setState({
+          sponsor: `${response.first_name} ${response.last_name} `,
+          imageUrl: `https://graph.facebook.com/${response.facebook_account}/picture?type=large`,
+          party: `(${response.current_party}-${response.roles[0].state})`,
+          legId: response.member_id,
+        });
+      });
     this.loadShortenedSummary(this.state.bill);
   }
 
+  loadShortenedSummary(bill) {
+    const summary = bill.summary.text;
+    if (summary.length === 0) {
+      this.state.summary = '';
+      return;
+    }
+    this.state.summary = `${summary.split('.')[0]}.`;
+  }
+
+  renderBillExcerpts() {
+    if (this.state.billExcerpts === '') {
+      return null;
+    }
+    return (
+      <View style={styles.excerptsWrapper}>
+        <Text style={styles.excerptsHeader}>
+            Excerpts from Full Bill
+        </Text>
+        <Text style={styles.billExcerpts}>
+          {this.state.billExcerpts}
+        </Text>
+      </View>
+    );
+  }
+
   render() {
-    const details = 'A bill to amend title 38, United States Code, to improve the accountability of employees of the Department of Veterans Affairs, and for other purposes.'
-    const date = 'latest action date'
-    const relativeDate = 'latest action date'
+    const details = 'A bill to amend title 38, United States Code, to improve the accountability of employees of the Department of Veterans Affairs, and for other purposes.';
+    const subject = 'VETERANS AFFAIRS';
+    const date = 'latest action date';
+    const relativeDate = 'latest action date';
+    const sponsor = 'Sherrod Brown';
     return (
       <ScrollView
-        style = {styles.backgroundView}
-        contentContainerStyle = {styles.scrollViewContent}>
-        <View style = {styles.subjectWrapper}>
-          <Text style = {styles.subject}>
-            {'MY TOPIC'}
+        style={styles.backgroundView}
+        contentContainerStyle={styles.scrollViewContent}
+      >
+        <View style={styles.subjectWrapper}>
+          <Text style={styles.subject}>
+            {subject}
           </Text>
         </View>
-        <View style = {styles.header}>
-          <Image
-            style = {styles.profilePic}
-            source = {{uri: this.state.imageUrl}}
-          />
-          <View style = {styles.nameView}>
-            <Text style = {styles.sponsor}>
-              <Text>
-                {this.state.sponsor}
-              </Text>
-            </Text>
-            <Text style = {styles.date}>
-              {relativeDate}
-            </Text>
-          </View>
-        </View>
-        <View style = {styles.contentWrapper}>
-          <Text style = {styles.title}>
+        <NameHeader
+          name={this.state.sponsor}
+          imageUrl={this.state.imageUrl}
+          party={this.state.party}
+          wasTapped={this.state.personWasTapped}
+          date={'3 days ago'}
+          legId={this.state.legId}
+        />
+        <View style={styles.contentWrapper}>
+          <Text style={styles.title}>
             {details}
           </Text>
 
-          <BillProgress style = {styles.progressView}/>
+          <BillProgress style={styles.progressView} />
         </View>
-        <View style = {styles.summaryView}>
-          <Text style = {styles.summary}>
+        <View style={styles.summaryView}>
+          <Text style={styles.summary}>
             {this.state.summary}
           </Text>
         </View>
-        {this._renderBillExcerpts()}
+        {this.renderBillExcerpts()}
       </ScrollView>
-      );
-    }
-
-    _renderBillExcerpts() {
-      if (this.state.billExcerpts === '') {
-        return null;
-      }
-      return (
-        <View style = {styles.excerptsWrapper}>
-          <Text style = {styles.excerptsHeader}>
-            Excerpts from Full Bill
-          </Text>
-          <Text style = {styles.billExcerpts}>
-            {this.state.billExcerpts}
-          </Text>
-        </View>
-      );
-    }
-
-    loadShortenedSummary(bill) {
-      let summary = bill.summary.text;
-      if (summary.length === 0) {
-        this.state.summary = '';
-        return;
-      }
-      if (summary.includes('This bill ')) {
-        summary = summary.split('This bill ')[1];
-      }
-      this.state.summary = this.capitalizeFirstLetter(summary.split('.')[0] + '.');
-    }
-
-    capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+    );
+  }
 }
+
+BillDetail.propTypes = {
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.object.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 let styles = StyleSheet.create({
   backgroundView: {
     backgroundColor: '#CFD8DC',
     flex: 1,
-    //backgroundColor: 'magenta',
+    // backgroundColor: 'magenta',
   },
   scrollViewContent: {
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    //backgroundColor: 'blue',
+    // backgroundColor: 'blue',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    //backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     marginLeft: 7,
     marginRight: 7,
     backgroundColor: 'white',
   },
   subject: {
     backgroundColor: 'white',
-    //backgroundColor: 'purple',
+    // backgroundColor: 'purple',
     height: 15,
     fontSize: 13,
     fontFamily: 'OpenSans-Light',
@@ -150,7 +146,7 @@ let styles = StyleSheet.create({
   },
   subjectWrapper: {
     backgroundColor: 'white',
-    //backgroundColor: 'red',
+    // backgroundColor: 'red',
     marginLeft: 7,
     marginRight: 7,
     marginTop: 7,
@@ -164,30 +160,30 @@ let styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 25,
     backgroundColor: 'white',
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
     fontFamily: 'OpenSans-Light',
   },
   progressView: {
     flex: 1,
-    //backgroundColor: 'cyan',
+    // backgroundColor: 'cyan',
   },
   date: {
     marginTop: 5,
     marginLeft: 15,
     fontSize: 14,
     color: 'grey',
-    //backgroundColor: 'green',
+    // backgroundColor: 'green',
   },
   nameView: {
     flexDirection: 'column',
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
   },
   sponsor: {
     marginTop: 15,
     marginLeft: 15,
     fontSize: 18,
     fontFamily: 'avenir-medium',
-    //backgroundColor: 'green',
+    // backgroundColor: 'green',
   },
   profilePic: {
     height: 60,
@@ -195,19 +191,19 @@ let styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 15,
     marginLeft: 15,
-    //backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     borderWidth: 0.5,
   },
   contentWrapper: {
     flex: 1,
     backgroundColor: 'white',
-    //backgroundColor: 'cyan',
+    // backgroundColor: 'cyan',
     marginLeft: 7,
     marginRight: 7,
   },
   summary: {
     flex: -1,
-    //backgroundColor: 'orange',
+    // backgroundColor: 'orange',
     margin: 15,
     marginTop: 21,
     marginBottom: 28,
@@ -227,21 +223,21 @@ let styles = StyleSheet.create({
 
   },
   excerptsHeader: {
-    //backgroundColor: 'red',
+    // backgroundColor: 'red',
     flex: 1,
     fontFamily: 'OpenSans-Light',
     margin: 15,
     marginTop: 21,
     marginBottom: 0,
-    fontSize: 17
+    fontSize: 17,
   },
   billExcerpts: {
     flex: -1,
-    //backgroundColor: 'orange',
+    // backgroundColor: 'orange',
     margin: 15,
     marginTop: 0,
     fontFamily: 'OpenSans-Light',
     fontSize: 15,
-  }
+  },
 
 });

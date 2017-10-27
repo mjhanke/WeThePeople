@@ -22,7 +22,6 @@ class OnboardingController: UIViewController {
     }
 
     var topicNodes = [TopicNode]()
-    var selectedNodes = [TopicNode]()
 
     let generator = UIImpactFeedbackGenerator(style: .medium)
 
@@ -48,21 +47,30 @@ class OnboardingController: UIViewController {
     }
 
     func nextButtonTapped() {
-
         switch type {
         case .topicSelect:
             let nextVC = OnboardingController()
             nextVC.type = .subtopicSelect
-            nextVC.selectedNodes = selectedNodes
+            nextVC.topicNodes = topicNodes.filter({ $0.isSelected == true })
             navigationController?.pushViewController(nextVC, animated: true)
             break
         case .subtopicSelect:
             let nextVC = NewsfeedController()
+            nextVC.selectedSubtopics = extractSelectedSubtopics()
             UserDefaults.standard.set(true, forKey: "finishedOnboarding")
             present(nextVC, animated: true, completion: nil)
             break
         }
+    }
 
+    func extractSelectedSubtopics() -> [String] {
+        var allSelectedSubtopics = [String]()
+        topicNodes.forEach({topicNode in
+            let subtopics = topicNode.subtopics.filter({ $0.isSelected })
+            let subtopicNames = subtopics.map({ $0.realName })
+            allSelectedSubtopics += subtopicNames
+        })
+        return allSelectedSubtopics
     }
 
     func loadTopicNodes() {
@@ -85,48 +93,67 @@ class OnboardingController: UIViewController {
     func addTopicNodesToScreen() {
         switch type {
         case .topicSelect:
-            assert(selectedNodes.isEmpty)
+            assert(!topicNodes.isEmpty)
             for topic in topicNodes {
-                let image = UIImage(named: topic.image_name)
-                if image != nil {
-                    let node = Node(text: topic.topic_display_name, image: image!,
+                if topic.image != nil {
+                    let node = Node(text: topic.name, image: topic.image!,
                                     color: topic.color, radius: 55)
-
                     magnetic.addChild(node)
                 }
             }
         case .subtopicSelect:
-            assert(!selectedNodes.isEmpty)
-            for topic in selectedNodes {
-                let image = UIImage(named: topic.image_name)
-                let subtopics = topic.subtopic_display_names
-                for i in stride(from: 0, to: subtopics.count/*[subtopics.count, 5].min()!*/, by: 1) {
-                    let node = Node(text: subtopics[i], image: image!,
-                                    color: topic.color, radius: 60)
-                    magnetic.addChild(node)
+            assert(!topicNodes.isEmpty)
+            for topic in topicNodes {
+                if topic.image != nil && topic.isSelected {
+                    for subtopic in topic.subtopics {
+                        let node = Node(text: subtopic.displayName, image: topic.image!,
+                                        color: topic.color, radius: 60)
+                        magnetic.addChild(node)
+                    }
                 }
             }
         }
     }
-
 }
 
 extension OnboardingController: MagneticDelegate {
     func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
-        let topicName = node.label.text
-        if let i = topicNodes.index(where: { $0.topic_display_name == topicName }) {
-            selectedNodes.append(topicNodes[i])
+        let name = node.label.text
+        switch type {
+        case .topicSelect:
+            if let i = topicNodes.index(where: { $0.name == name }) {
+                topicNodes[i].isSelected = true
+            }
+        case .subtopicSelect:
+            if let i = topicNodes.index(where: {
+                $0.subtopics.index( where: { $0.displayName == name }) != nil
+            }) {
+                let j = topicNodes[i].subtopics.index( where: { $0.displayName == name })
+                topicNodes[i].subtopics[j!].isSelected = true
+            }
         }
+
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         generator.impactOccurred()
     }
 
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
-        let topicName = node.label.text
-        if let i = selectedNodes.index(where: { $0.topic_display_name == topicName }) {
-            selectedNodes.remove(at: i)
+        let name = node.label.text
+        switch type {
+        case .topicSelect:
+            if let i = topicNodes.index(where: { $0.name == name }) {
+                topicNodes[i].isSelected = false
+            }
+        case .subtopicSelect:
+            if let i = topicNodes.index(where: {
+                $0.subtopics.index( where: { $0.displayName == name }) != nil
+            }) {
+                let j = topicNodes[i].subtopics.index( where: { $0.displayName == name })
+                topicNodes[i].subtopics[j!].isSelected = false
+            }
         }
-        if selectedNodes.isEmpty {
+
+        if topicNodes.isEmpty {
             self.navigationItem.rightBarButtonItem?.isEnabled = false
         }
         generator.impactOccurred()
@@ -134,25 +161,36 @@ extension OnboardingController: MagneticDelegate {
 }
 
 class TopicNode {
-    let topic_display_name: String
-    let should_show_to_users: Bool
-    let image_name: String
-    var subtopic_display_names = [String]()
-    var group_id: Int
-    init(_ jsonTopic: JSON) {
-        topic_display_name = jsonTopic["topic_display_name"].stringValue
-        should_show_to_users = jsonTopic["should_show_to_users"].boolValue
-        image_name = jsonTopic["image_name"].stringValue
-        group_id = jsonTopic["group_id"].intValue
-        let subtopics = jsonTopic["subtopic_display_names"].arrayValue
-        for subtopic in subtopics {
-            subtopic_display_names.append(subtopic.stringValue)
+    let name: String
+    let image: UIImage?
+    var subtopics = [Topic]()
+    let color: UIColor
+    var isSelected = false
+    init(_ json: JSON) {
+        name = json["topic_display_name"].stringValue
+        color = TopicNode.colorMap[json["group_id"].intValue]
+        image = UIImage(named: json["image_name"].stringValue)
+        let subtopics_display = json["subtopic_display_names"].arrayValue
+        let subtopics_full = json["subtopic_full_names"].arrayValue
+        assert(subtopics_full.count == subtopics_display.count)
+        for (index, _) in subtopics_display.enumerated() {
+            let display = subtopics_display[index].stringValue
+            let real    = subtopics_full[index].stringValue
+            let subtopic = Topic(display, realName: real)
+            subtopics.append(subtopic)
         }
     }
-    var color: UIColor {
-        return TopicNode.colorMap[group_id]
-    }
     static var colorMap: [UIColor] = [.white, .blue, .pink, .purple, .yellow, .green, .orange]
+}
+
+class Topic {
+    let displayName: String
+    let realName: String
+    var isSelected = false
+    init(_ displayName: String, realName: String) {
+        self.displayName = displayName
+        self.realName = realName
+    }
 }
 
 enum OnboardingViewType {

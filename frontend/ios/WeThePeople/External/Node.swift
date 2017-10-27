@@ -38,6 +38,9 @@ open class Node: MaskNode {
         set { label.text = newValue }
     }
 
+    public var parentTopicIndex: Int?
+    public var subtopicIndex: Int?
+
     /**
      The image displayed by the node.
      */

@@ -14,13 +14,12 @@ import LoadingScreen from './LoadingScreen';
 
 export default class MyReps extends Component {
   componentWillMount() {
-    let address = this.props.voterAddress;
-    CivicAPI.getRepresentatives(address).then(
-      (response) => this.parseReps(response));
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {true}});
+    const address = this.props.voterAddress;
+    CivicAPI.getRepresentatives(address).then(response => this.parseReps(response));
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { true; } });
     this.state = {
       dataSource: ds.cloneWithRows([]),
-      fetched: false
+      fetched: false,
     };
   }
   render() {
@@ -39,34 +38,34 @@ export default class MyReps extends Component {
   }
 
   renderRow(rowData) {
-    return(
+    return (
       <MyRepsCell
-        person = {rowData}
+        person={rowData}
       />
     );
   }
 
   parseReps(response) {
     // Match politicians with their offices
-    let reps = response['officials'];
-    let positions = [];
-    let offices = response['offices'];
-    for (let i in offices) {
-      let office = offices[i];
-      let officeName = office['name'].replace(/(Senate)/g, 'Senator');
-      for (let j in office['officialIndices']) {
-        let index = office['officialIndices'][j];
-        reps[index].position = officeName;
+    const reps = response.officials;
+    if (reps !== undefined) {
+      const positions = [];
+      const offices = response.offices;
+      for (const i in offices) {
+        const office = offices[i];
+        const officeName = office.name.replace(/(Senate)/g, 'Senator');
+        for (const j in office.officialIndices) {
+          const index = office.officialIndices[j];
+          reps[index].position = officeName;
+        }
       }
+      const repsWithoutPresident = reps.filter(rep => this.isNotPresident(rep));
+
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(repsWithoutPresident),
+        fetched: true,
+      });
     }
-
-    let repsWithoutPresident = reps.filter((rep) => this.isNotPresident(rep));
-
-    this.state = {
-      dataSource: this.state.dataSource.cloneWithRows(repsWithoutPresident),
-      fetched: true
-    };
-    this.forceUpdate();
   }
 
   isNotPresident(rep) {

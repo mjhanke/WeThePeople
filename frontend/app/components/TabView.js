@@ -18,25 +18,16 @@ export default class TabView extends Component {
     toggleDrawer: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.billTapHandler = this.billTapHandler.bind(this);
-  }
-
   state = {
     index: 0,
     routes: [
       { key: '1', title: 'CONGRESS' },
-      { key: '2', title: 'STATE' },
+      //{ key: '2', title: 'STATE' },
       { key: '3', title: 'MY REPS' },
     ],
   };
 
   handleIndexChange = index => this.setState({ index });
-
-  billTapHandler(bill) {
-    this.props.billWasTapped(bill);
-  }
 
   renderHeader = props => (
     <TabBar
@@ -50,7 +41,8 @@ export default class TabView extends Component {
   renderScene = SceneMap({
     1: () => (
       <CongressFeed
-        billWasTapped={(bill) => { this.billTapHandler(bill); }}
+        billWasTapped={this.props.billWasTapped}
+        personWasTapped={this.props.personWasTapped}
       />
     ),
     2: () => <Recent />,
@@ -79,6 +71,8 @@ export default class TabView extends Component {
 
 TabView.propTypes = {
   billWasTapped: PropTypes.func.isRequired,
+  personWasTapped: PropTypes.func.isRequired,
+  voterAddress: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

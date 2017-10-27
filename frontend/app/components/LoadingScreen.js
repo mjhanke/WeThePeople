@@ -8,24 +8,24 @@ import {
   Image,
 } from 'react-native';
 
-import images from '../assets/images'
+import images from '../assets/images';
 
- export default class LoadingScreen extends Component {
+export default class LoadingScreen extends Component {
   render() {
-     return (
-       <View style = {styles.backgroundView}>
-         <View style = {styles.loadingContainer}>
-           <Image
-             source = {images.hamster}
-             style = {styles.loadingIcon}
-           />
-           <Text style = {styles.loadingText}t>
+    return (
+      <View style={styles.backgroundView}>
+        <View style={styles.loadingContainer}>
+          <Image
+            source={images.hamster}
+            style={styles.loadingIcon}
+          />
+          <Text style={styles.loadingText}t>
              Loading...
-           </Text>
-         </View>
-       </View>
-     );
-   }
+          </Text>
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   loadingIcon: {
     flex: 2,
-    //backgroundColor: 'cyan',
+    // backgroundColor: 'cyan',
     resizeMode: 'contain',
   },
   loadingText: {
@@ -52,5 +52,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontFamily: 'OpenSans-Light',
     fontSize: 24,
-  }
+  },
 });

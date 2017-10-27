@@ -4,29 +4,24 @@ import {
   Text,
   View,
   Button,
-  Image,
+  ImageBackground,
   ListView,
   Dimensions,
 } from 'react-native';
 
-import CivicAPI from './CivicAPI'
+import CivicAPI from './CivicAPI';
 
 export default class MyReps extends Component {
   componentWillMount() {
     const person = this.props.person;
 
-    let imageUrl = undefined;
-
-    //console.log('****THE ROW DATA IS AS FOLLOWS****');
-    //console.log(this.props.person);
+    let imageUrl;
 
     if (person.channels != undefined) {
-      const channels = person.channels.filter((channel) => {
-        return (channel.type === 'Facebook') ? true : false;
-      })
+      const channels = person.channels.filter(channel => (channel.type === 'Facebook'));
       if (channels.length != 0) {
-        imageUrl = 'https://graph.facebook.com/'
-        + channels[0].id + '/picture?type=large';
+        imageUrl = `https://graph.facebook.com/${
+          channels[0].id}/picture?type=large`;
       }
     }
 
@@ -35,10 +30,10 @@ export default class MyReps extends Component {
     const position = person.position;
     let party = '';
     if (person.party != undefined && person.party != 'Unknown') {
-      party = ' (' + person.party[0] + ')';
+      party = ` (${person.party[0]})`;
     }
 
-    const displayName = firstName + ' ' + lastName; //+ ' (' + party + ')';
+    const displayName = `${firstName} ${lastName}`; // + ' (' + party + ')';
     const initials = firstName[0] + lastName[0];
 
     let initialsColor = 'transparent';
@@ -48,43 +43,44 @@ export default class MyReps extends Component {
 
     this.state = {
       name: displayName,
-      //party: party,
-      imageUrl: imageUrl,
-      initials: initials,
-      initialsColor: initialsColor,
-      position: position,
-      party: party
-    }
+      // party: party,
+      imageUrl,
+      initials,
+      initialsColor,
+      position,
+      party,
+    };
   }
 
   render() {
     return (
-      <View style = {styles.backgroundView}>
-        <Image
-          style = {styles.profilePic}
-          source = {{uri: this.state.imageUrl}}
+      <View style={styles.backgroundView}>
+        <ImageBackground
+          style={styles.profilePic}
+          source={{ uri: this.state.imageUrl }}
         >
-        <View style={styles.initialsView}>
+          <View style={styles.initialsView}>
             <Text style={[styles.initialsText,
-              {color: this.state.initialsColor}]}>
+              { color: this.state.initialsColor }]}
+            >
               {this.state.initials}
             </Text>
-        </View>
-        </Image>
-        <View style = {styles.descriptionView}>
+          </View>
+        </ImageBackground>
+        <View style={styles.descriptionView}>
           <Text
-            style = {styles.name}
+            style={styles.name}
           >
             <Text>
               {this.state.name}
             </Text>
-            <Text style = {styles.party}>
+            <Text style={styles.party}>
               {this.state.party}
             </Text>
           </Text>
           <Text
-            style = {styles.position}
-            adjustsFontSizeToFit = {true}
+            style={styles.position}
+            adjustsFontSizeToFit
           >
             {this.state.position}
           </Text>
@@ -92,7 +88,6 @@ export default class MyReps extends Component {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -102,19 +97,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     height: Dimensions.get('window').width * 0.4,
-    //backgroundColor: 'cyan',
+    // backgroundColor: 'cyan',
     marginTop: 7,
     marginLeft: 7,
   },
   profilePic: {
     height: (Dimensions.get('window').width * 0.4),
     width: (Dimensions.get('window').width * 0.4),
-    //backgroundColor: 'gray',
+    // backgroundColor: 'gray',
     borderWidth: 0.5,
     marginRight: 7,
     borderColor: 'black',
     borderRadius: ((Dimensions.get('window').width * 0.4) - 7) / 2,
-    resizeMode: 'contain',
+    //resizeMode: 'contain',
   },
   descriptionView: {
     height: 140,
@@ -122,7 +117,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').width * 0.4,
     width: Dimensions.get('window').width * 0.6 - 21,
     marginRight: 7,
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
   },
   name: {
     fontFamily: 'OpenSans-Regular',
@@ -130,7 +125,7 @@ const styles = StyleSheet.create({
     margin: 14,
     marginBottom: 7,
 
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
   },
   position: {
     flex: 1,
@@ -140,11 +135,11 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Light',
     marginBottom: 14,
 
-    //backgroundColor: 'cyan',
+    // backgroundColor: 'cyan',
   },
   initialsView: {
     flex: 1,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   initialsText: {
     flex: 1,
@@ -155,10 +150,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 58,
     fontFamily: 'OpenSans-Light',
-    //backgroundColor: 'cyan',
+    // backgroundColor: 'cyan',
   },
   party: {
     fontFamily: 'OpenSans-Light',
-  }
+  },
 
 });
