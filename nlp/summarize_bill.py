@@ -26,13 +26,21 @@ def summarize_bill(title, text):
     text = re.sub(r'\s+', ' ', text)
 
     text = fix_punctuation_errors(text)
-
+    # print '\n\n'.join(nltk.sent_tokenize(text))
     # Get top 5 sentences from TextRank summarization algorithm
     summary = Summarize(title, text)
 
     # Remove leading whitespace
     summary = [sentence.lstrip() for sentence in summary]
     return summary
+
+def simplify_human_summary(text):
+    """Clean up human summary"""
+    text = remove_special_characters(text)
+    text = replace_formal_words(text)
+    text = re.sub(r'\s+', ' ', text)
+    text = fix_punctuation_errors(text)
+    return text
 
 def remove_page_artifacts(title, text):
     """Removes headers and titles from page, if scrapped from congress.gov"""
@@ -53,7 +61,7 @@ def remove_special_characters(text):
     text = text.replace('--', ' ').replace('``', ' ')
 
     # Break up run-on sentences
-    text = text.replace(';', '.')
+    # text = text.replace(';', '.')
     return text
 
 def remove_uppercase(text):
@@ -78,8 +86,8 @@ def remove_filler_phrases(text):
         'Whereas ', ', and for other purposes', ' A BILL',
         ' for certain purposes', ' thereon', ' or other disposition',
         ' by adding at the end the following new clause',
-        'It is the sense of Congress that ',
-        'Supporting the understanding that ', ' fiscal year'
+        'It is the sense of Congress that ', 'the State of ', '_'
+        'Supporting the understanding that ', ' fiscal year', 'hereby '
     ]
 
     for filler in filler_phrases:
@@ -102,7 +110,8 @@ def remove_legal_phrases(text):
     'legislative day', ' inserting', ' to clause', 'pursuant to',
     'the Clerk shall', 'was referred to the', 'he period beginning '
     ' considered and passed', 'legislative History', 'read twice and referred',
-    'n this Act', ' debate will not exceed', 'he concurrent resolution'
+    'n this Act', ' debate will not exceed', 'he concurrent resolution',
+    ', Clerk'
     ]
     for sentence in sentences:
         if all(substr.lower() not in sentence.lower() for substr in bad_substrs)\
@@ -117,8 +126,8 @@ def fix_punctuation_errors(text):
     punctuation_errors = [('\'\'', ''), ('. .', '. '), (',.', '.'),
                            (' ,', ','), (' .', '.'), (' :', ':'), ('..', '.'),
                            (',.', '.'), ('$ ', '$'), (' ).', '.'),
-                           (' \'', '\''), ('.,', '.'), (' s ', '\'s '),
-                           (') ', '')
+                           (' \'', '\''), ('.,', '.'), (' s ', '\'s '), (',,', ','),
+                           (') ', ''), (' ;', ';')
                          ]
     for k, v in punctuation_errors:
         text = text.replace(k, v)
@@ -144,7 +153,7 @@ def replace_formal_words(text):
                     ('appropriated', 'set aside'),
                     ('Notwithstanding', 'In spite of'),
                     ('promulgate', 'make known'),
-                     ('terminated', 'cancelled'),
+                    ('terminated', 'cancelled'),
                     ('degree-granting institution', 'college'),
                     ('initiated', 'started'),
                     ('amend ', 'change '), ('prohibit', 'prevent'),
@@ -159,7 +168,7 @@ def replace_formal_words(text):
                     ('aggregation', 'collection'), ('amending', 'changing'),
                     ('may ', 'can '), ('obtain', 'get'), ('acquire ', 'get'),
                     (' for the purpose of ', ' for '),
-                    ('expenditures', 'spending'),
+                    ('expenditures', 'spending'), ('elicited', 'caused'),
                     ('at the conclusion', 'at the end'),
                     ('jurisdiction', 'legal authority'),
                     ('subpoena', 'court order'),
@@ -169,8 +178,9 @@ def replace_formal_words(text):
                     ('additional', 'more'), ('establishing', 'setting up'),
                     ('regarding', 'on'), ('remediation', 'remedying'),
                     ('locate ', 'find '), ('appropriations', 'funding'),
-                    ('disbursements', 'spending'),
-                    ('derived from', 'coming from')
+                    ('disbursements', 'spending'), ('reduce', 'lower'),
+                    ('derived from', 'coming from'), ('automobile', 'car'),
+                    ('financial support', 'money')
                     ]
     for k, v in replacements:
         text = text.replace(k, v)
@@ -205,7 +215,7 @@ def test_state_bills():
 
 def test_national_bills():
     """Test efficacy of summarizer on wide range of state bills"""
-    endpoint = 'https://api.propublica.org/congress/v1/115/house/bills/introduced.json?offset=280'
+    endpoint = 'https://api.propublica.org/congress/v1/115/house/bills/introduced.json?offset=300'
     headers = {
         'X-API-Key': '76l8Lwp3w45mu6BeOShc17r3H4I264iK2mqMfX1k'
     }
@@ -228,4 +238,4 @@ def summarize_bill_from_url(title, url):
     summary = [sentence.lstrip() for sentence in summary]
     return '\n\n'.join(summary)
 
-test_national_bills()
+#print summarize_bill_from_url('guns', 'https://www.congress.gov/bill/115th-congress/house-bill/3999/text?format=txt')
