@@ -5,13 +5,14 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsfeedController" customModule="WeThePeople" customModuleProvider="target">
             <connections>
-                <outlet property="newsfeedView" destination="YzB-Ir-Tu7" id="kcA-8w-sXC"/>
+                <outlet property="instabugButton" destination="MFL-T8-riD" id="Gn9-NT-akw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,19 +21,38 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YzB-Ir-Tu7">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFL-T8-riD">
+                    <rect key="frame" x="284" y="581" width="75" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="75" id="Bbo-2t-syI"/>
+                        <constraint firstAttribute="height" constant="75" id="SfW-oj-ZNM"/>
+                    </constraints>
+                    <state key="normal" image="instabug_icon"/>
+                    <connections>
+                        <action selector="instabugButton:" destination="-1" eventType="touchUpInside" id="OVe-w5-Cpl"/>
+                    </connections>
+                </button>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welogo" translatesAutoresizingMaskIntoConstraints="NO" id="eI5-lu-Rni">
+                    <rect key="frame" x="129" y="275" width="117" height="116"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="eI5-lu-Rni" secondAttribute="height" multiplier="117:116" id="Blm-9E-yH0"/>
+                        <constraint firstAttribute="width" constant="117" id="YV1-Uv-VDK"/>
+                    </constraints>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="YzB-Ir-Tu7" secondAttribute="bottom" id="C1e-E3-8QF"/>
-                <constraint firstItem="YzB-Ir-Tu7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GL9-VS-hMZ"/>
-                <constraint firstItem="YzB-Ir-Tu7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="WpU-XF-m71"/>
-                <constraint firstAttribute="trailing" secondItem="YzB-Ir-Tu7" secondAttribute="trailing" id="vi5-r2-RpF"/>
+                <constraint firstItem="eI5-lu-Rni" firstAttribute="width" secondItem="eI5-lu-Rni" secondAttribute="height" multiplier="117:116" id="6Yp-vV-WeB"/>
+                <constraint firstAttribute="bottom" secondItem="MFL-T8-riD" secondAttribute="bottom" constant="11" id="PWO-p1-kLH"/>
+                <constraint firstItem="eI5-lu-Rni" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="doE-ED-DKN"/>
+                <constraint firstItem="eI5-lu-Rni" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="tEf-pr-tYD"/>
+                <constraint firstAttribute="trailing" secondItem="MFL-T8-riD" secondAttribute="trailing" constant="16" id="y3T-Q5-j6W"/>
             </constraints>
             <point key="canvasLocation" x="81.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="instabug_icon" width="579" height="584"/>
+        <image name="welogo" width="532" height="532"/>
+    </resources>
 </document>

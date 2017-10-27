@@ -6,17 +6,17 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Image
-} from 'react-native'
+  Image,
+} from 'react-native';
 
 export default class ControlPanel extends Component {
   render() {
-    let {closeDrawer} = this.props
+    const { closeDrawer } = this.props;
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.controlText}>The Control Panel is under construction. Be sure to check back later!</Text>
       </ScrollView>
-    )
+    );
   }
 }
 
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginBottom: 12,
   },
-})
+});

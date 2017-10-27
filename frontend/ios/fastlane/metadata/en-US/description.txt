@@ -1,0 +1,3 @@
+Stay on top of bills in Congress with WeThePeople!
+
+WeThePeople integrates data from the Propublica Congress API. The API is supported by the Sunlight Foundation, the New York Times, and government officials nationwide.

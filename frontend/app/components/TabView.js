@@ -1,96 +1,84 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
-  TouchableHighlight,
-  Text,
   View,
-  Button,
-  Alert,
-  Image,
-  Animated,
-  TouchableOpacity
 } from 'react-native';
 import {
-  StackNavigator,
-} from 'react-navigation';
-import {
-  TabViewAnimated, TabBar, SceneMap
+  TabViewAnimated, TabBar, SceneMap,
 } from 'react-native-tab-view';
 import PropTypes from 'prop-types';
 
 /* Tab bar pages */
-import Recent from './Recent'
-import MyReps from './MyReps'
-import Elections from './Elections'
-import BillDetail from './BillDetail'
-import CongressFeed from './CongressFeed'
-
+import Recent from './Recent';
+import MyReps from './MyReps';
+import CongressFeed from './CongressFeed';
 
 export default class TabView extends Component {
   static propTypes = {
-    toggleDrawer: PropTypes.func.isRequired
+    toggleDrawer: PropTypes.func.isRequired,
   };
 
   state = {
     index: 0,
     routes: [
       { key: '1', title: 'CONGRESS' },
-      { key: '2', title: 'STATE' },
+      //{ key: '2', title: 'STATE' },
       { key: '3', title: 'MY REPS' },
     ],
   };
 
-  _renderScene = SceneMap({
-    '1': () => <CongressFeed
-                  billWasTapped = {(bill) => {this.billTapHandler(bill)}}
-               />,
-    '2': () => <Recent />,
-    '3': () => <MyReps />,
-  });
+  handleIndexChange = index => this.setState({ index });
 
-  _handleIndexChange = index => this.setState({ index });
+  renderHeader = props => (
+    <TabBar
+      {...props}
+      indicatorStyle={styles.indicator}
+      labelStyle={styles.tabBarLabel}
+      style={styles.tabBarHeader}
+    />
+  );
 
-  _renderHeader = props => {
-    return (
-      <TabBar
-        {...props}
-        indicatorStyle={styles.indicator}
-        labelStyle={styles.tabBarLabel}
-        style={styles.tabBarHeader}
+  renderScene = SceneMap({
+    1: () => (
+      <CongressFeed
+        billWasTapped={this.props.billWasTapped}
+        personWasTapped={this.props.personWasTapped}
       />
-    );
-  };
-
-  constructor(props) {
-    super(props);
-    this.billTapHandler = this.billTapHandler.bind(this);
-  }
+    ),
+    2: () => <Recent />,
+    3: () => (
+      <MyReps
+        voterAddress={this.props.voterAddress}
+      />
+    ),
+  });
 
   render() {
     return (
-      <View style = {styles.container}>
+      <View style={styles.container}>
         <TabViewAnimated
           style={styles.container}
           navigationState={this.state}
-          renderScene={this._renderScene}
-          renderHeader={this._renderHeader}
-          onIndexChange={this._handleIndexChange}
+          renderScene={this.renderScene}
+          renderHeader={this.renderHeader}
+          onIndexChange={this.handleIndexChange}
           lazy={false}
         />
       </View>
     );
   }
-
-  billTapHandler(bill) {
-    this.props.billWasTapped(bill)
-  }
 }
+
+TabView.propTypes = {
+  billWasTapped: PropTypes.func.isRequired,
+  personWasTapped: PropTypes.func.isRequired,
+  voterAddress: PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   tabBarHeader: {
     backgroundColor: 'white',
@@ -98,11 +86,9 @@ const styles = StyleSheet.create({
   },
   tabBarLabel: {
     fontFamily: 'OpenSans-Semibold',
-    color: '#222'
+    color: '#222',
   },
   indicator: {
-    backgroundColor: 'black'
-  }
+    backgroundColor: 'black',
+  },
 });
-
-AppRegistry.registerComponent('MainView', () => MainView);

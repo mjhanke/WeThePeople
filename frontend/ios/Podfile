@@ -4,7 +4,7 @@ platform :ios, '9.0'
 target 'WeThePeople' do
   # Your 'node_modules' directory is probably in the root of your project,
   # but if not, adjust the `:path` accordingly
- use_frameworks! 
+ use_frameworks!
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
@@ -20,14 +20,16 @@ target 'WeThePeople' do
     'RCTVibration',
     'BatchedBridge',
     'RCTAnimation'
-  ]  
+  ]
 # Explicitly include Yoga if you are using RN >= 0.42.0
+  pod 'BugsnagReactNative', path: '../node_modules/bugsnag-react-native'
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
   pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
   pod 'SwiftyJSON'
 end
 
-post_install do |installer|
-  installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
-    configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
-  end
-end
+# post_install do |installer|
+#   installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
+#     configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+#   end
+# end

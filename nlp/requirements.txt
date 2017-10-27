@@ -1,0 +1,4 @@
+nltk
+pyteaser
+nameparser
+newspaper

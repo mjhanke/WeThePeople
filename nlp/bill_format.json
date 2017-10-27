@@ -6,6 +6,7 @@
       }
     ],
     "bill_status": {
+      "active": "bool for: has seen activity beyond introduction (its ok if state doesnt have this)",
       "passed_upper": "a date",
       "passed_lower": "a date",
       "signed": "a date",
@@ -22,7 +23,7 @@
     "title": "",
     "short_title": "",
     "last_updated": "",
-    "full_text": "",
+    "full_text_url": "",
     "house_committee": "",
     "senate_committee": "",
     "sponsor": {
@@ -38,7 +39,7 @@
         "first_name": "",
         "last_name": "",
         "picture_url": "",
-        "id": "",
+        "leg_id": "",
         "state": "mi",
         "title": ""
       }
@@ -48,13 +49,5 @@
         "bill_id": ""
       }
     ],
-    "history": {
-        "active": true,
-        "awaiting_signature": false,
-        "enacted": false,
-        "vetoed": false,
-    },
     "introduction_date": "",
-    "updated_at": "",
-    "url": ""
 }
