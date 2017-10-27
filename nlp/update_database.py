@@ -39,7 +39,6 @@ def load_json_to_database():
         # replace every one, without checking if the contents have changed.
         # True flag is an "upsert": performs an insert if nothing found
         congress_bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
-
 from pymongo import MongoClient
 def insert_bills(bill):
         client = MongoClient()
