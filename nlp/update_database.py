@@ -15,6 +15,7 @@ def load_json_to_database():
     congress_bills = database.congress
 
     # PATH = '/home/danielbennett481/congress/data/115/bills'
+    # use environment variable
     PATH = '/Users/danbennett/PythonProjects/bulkBillData/114-congress/bills'
 
     bills = []
@@ -38,3 +39,9 @@ def load_json_to_database():
         # replace every one, without checking if the contents have changed.
         # True flag is an "upsert": performs an insert if nothing found
         congress_bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
+
+from pymongo import MongoClient
+def insert_bills(bill):
+        client = MongoClient()
+        db = client.wtp
+        db.bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
