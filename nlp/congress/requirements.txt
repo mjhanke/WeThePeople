@@ -15,3 +15,7 @@ pyopenssl
 ndg-httpsclient
 pyasn1
 requests
+nltk
+nameparser
+pyteaser
+newspaper

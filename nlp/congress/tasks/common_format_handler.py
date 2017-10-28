@@ -7,6 +7,8 @@ import json
 import requests
 import nltk
 import nameparser
+import os
+import pdb
 from string import Template
 from pprint import pprint
 from summarize_bill import summarize_bill_from_url
@@ -107,13 +109,16 @@ def bill_committee_codes(bill):
             committee_codes += action['committees']
     # Remove duplicates
     committee_codes = list(set(committee_codes))
-    assert len(committee_codes) <= 2
+    # assert len(committee_codes) <= 2
     return committee_codes
 
 
 def committee_name(code):
     """Find full name of committee based off thomas_id."""
-    with open('congress_committees.json') as file:
+    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    rel_path = 'congress_committees.json'
+
+    with open(os.path.join(script_dir, rel_path)) as file:
         committees = json.load(file)
         # element for element in people if element['name'] == name
         matching_names = [comm['name'] for comm in committees
@@ -205,6 +210,5 @@ def machine_summary(bill):
     """Get TextRank summary of bill"""
     url = full_text_url(bill)
     title = bill_title(bill)
-    print url
     summary = summarize_bill_from_url(title, url)
     return summary

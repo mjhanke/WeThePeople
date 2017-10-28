@@ -9,6 +9,9 @@ import amendment_info
 import fdsys
 import utils
 
+import sys
+import pdb
+from common_format_handler import convert_congress_bill
 
 def run(options):
     bill_id = options.get('bill_id', None)
@@ -89,9 +92,13 @@ def get_bills_to_process(options):
                     # file need to be updated?
                     bulkfile_lastmod = utils.read(fn.replace(".xml", "-lastmod.txt"))
                     parse_lastmod = utils.read(get_data_path(congress, bill_type, bill_type_and_number, "data-fromfdsys-lastmod.txt"))
-                    if bulkfile_lastmod != parse_lastmod or options.get("force"):
+                    #if bulkfile_lastmod != parse_lastmod or options.get("force"):
+                    if not os.path.isfile(fn.replace('fdsys_billstatus.xml', 'formatted.json')):
+                        print("%s formatted doesn't exist" % bill_type_and_number)
                         bill_id = bill_type_and_number + "-" + congress
                         yield bill_id
+                    else:
+                        print("%s formatted exists" % bill_type_and_number)
 
 def process_bill(bill_id, options):
     fdsys_xml_path = _path_to_billstatus_file(bill_id)
@@ -105,6 +112,15 @@ def process_bill(bill_id, options):
     utils.write(
         unicode(json.dumps(bill_data, indent=2, sort_keys=True)),
         os.path.dirname(fdsys_xml_path) + '/data.json')
+
+    try:
+        formatted = convert_congress_bill(bill_data)
+        utils.write(
+            unicode(formatted),
+            os.path.dirname(fdsys_xml_path) + '/formatted.json')
+        print("Formatted %s" % fdsys_xml_path)
+    except:
+        print("FAILED FORMATTING %s" % fdsys_xml_path)
 
     from bill_info import create_govtrack_xml
     with open(os.path.dirname(fdsys_xml_path) + '/data.xml', 'wb') as xml_file:
@@ -220,4 +236,3 @@ def process_amendments(bill_id, bill_amendments, options):
 
     for amdt in amdt_list['amendment']:
         amendment_info.process_amendment(amdt, bill_id, options)
-
