@@ -4,7 +4,8 @@ from newspaper import Article
 import requests
 import json
 import re
-import nltk
+import pdb
+import nltk # must nltk.download('punkt') on system. not here
 from pprint import pprint
 
 def summarize_bill(title, text):
@@ -232,8 +233,10 @@ def summarize_bill_from_url(title, url):
     article = Article(url)
     article.download()
     article.parse()
-    #print article.text
-    assert 'The page you requested is unavailable' not in article.text
+
+    if 'The page you requested is unavailable' in article.text:
+        return ''
+
     summary = summarize_bill(title, article.text)
     summary = [sentence.lstrip() for sentence in summary]
     return '\n\n'.join(summary)
