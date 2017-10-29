@@ -37,6 +37,8 @@ def convert_congress_bill(bill):
     new_bill['cosponsors'] = bill_cosponsors(bill)
     new_bill['related_bills'] = bill['related_bills']
     new_bill['introduction_date'] = introduction_date(bill)
+    new_bill['short_title'] = shortened_title(bill)
+    new_bill['title'] = bill_title(bill)
     return json.dumps(new_bill)
 
 def bill_actions(bill):
