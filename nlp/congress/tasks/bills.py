@@ -10,7 +10,10 @@ import fdsys
 import utils
 
 import sys
+from os import path
 import pdb
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from common_format_handler import convert_congress_bill
 
 def run(options):
@@ -87,20 +90,30 @@ def get_bills_to_process(options):
                 ):
 
                 fn = get_data_path(congress, bill_type, bill_type_and_number, fdsys.FDSYS_BILLSTATUS_FILENAME)
+                folder_name = fn.split('/')[4]
+
                 if os.path.exists(fn):
                     # The FDSys bulk data file exists. Does our JSON data
                     # file need to be updated?
                     bulkfile_lastmod = utils.read(fn.replace(".xml", "-lastmod.txt"))
                     parse_lastmod = utils.read(get_data_path(congress, bill_type, bill_type_and_number, "data-fromfdsys-lastmod.txt"))
-                    #if bulkfile_lastmod != parse_lastmod or options.get("force"):
-                    if not os.path.isfile(fn.replace('fdsys_billstatus.xml', 'formatted.json')):
+                    if bulkfile_lastmod != parse_lastmod or options.get("force"):
+                    # if not os.path.isfile(fn.replace('fdsys_billstatus.xml', 'formatted.json')):
                         print("%s formatted doesn't exist" % bill_type_and_number)
                         bill_id = bill_type_and_number + "-" + congress
                         yield bill_id
                     else:
                         print("%s formatted exists" % bill_type_and_number)
+                    # if folder_name == "hjres109":
+                    #     print("this one %s" % bill_type_and_number)
+                    #     bill_id = bill_type_and_number + "-" + congress
+                    #     process_bill(bill_id, None)
+                    #     wait = input("pause")
+                    # else:
+                    #     print("not this one")
 
 def process_bill(bill_id, options):
+    #pdb.set_trace()
     fdsys_xml_path = _path_to_billstatus_file(bill_id)
     logging.info("[%s] Processing %s..." % (bill_id, fdsys_xml_path))
 
@@ -115,9 +128,12 @@ def process_bill(bill_id, options):
 
     try:
         formatted = convert_congress_bill(bill_data)
+        # CALL CURT'S INSERT FUNCTION HERE
+
         utils.write(
             unicode(formatted),
             os.path.dirname(fdsys_xml_path) + '/formatted.json')
+        # maybe a logging.info call instead
         print("Formatted %s" % fdsys_xml_path)
     except:
         print("FAILED FORMATTING %s" % fdsys_xml_path)
