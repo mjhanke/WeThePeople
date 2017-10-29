@@ -63,3 +63,8 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 
+
+
+# Things related to state bill scraping
+/nlp/states/full
+/nlp/states/pdfs

@@ -7,6 +7,8 @@ import json
 import requests
 import nltk
 import nameparser
+import os
+import pdb
 from string import Template
 from pprint import pprint
 from summarize_bill import summarize_bill_from_url
@@ -14,6 +16,7 @@ from summarize_bill import simplify_human_summary
 
 def convert_congress_bill(bill):
     """Converts bill from congress scraper to our common format"""
+    #pdb.set_trace()
     new_bill = {}
     new_bill['actions'] = bill_actions(bill)
     new_bill['status'] = {}
@@ -109,13 +112,16 @@ def bill_committee_codes(bill):
             committee_codes += action['committees']
     # Remove duplicates
     committee_codes = list(set(committee_codes))
-    assert len(committee_codes) <= 2
+    # assert len(committee_codes) <= 2
     return committee_codes
 
 
 def committee_name(code):
     """Find full name of committee based off thomas_id."""
-    with open('congress_committees.json') as file:
+    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    file_name = 'congress_committees.json'
+
+    with open(os.path.join(script_dir, file_name)) as file:
         committees = json.load(file)
         # element for element in people if element['name'] == name
         matching_names = [comm['name'] for comm in committees
@@ -144,7 +150,7 @@ def house_committee(bill):
 
 def human_summary(bill):
     """Grab human-written bill summary, if one exists."""
-    if 'summary' in bill and 'text' in bill['summary']:
+    if 'summary' in bill and bill['summary'] != None and 'text' in bill['summary']:
         return simplify_human_summary(bill['summary']['text'])
     return ''
 
@@ -205,12 +211,8 @@ def last_updated_date(bill):
 
 def machine_summary(bill):
     """Get TextRank summary of bill"""
+    #pdb.set_trace()
     url = full_text_url(bill)
     title = bill_title(bill)
-    print url
     summary = summarize_bill_from_url(title, url)
     return summary
-
-with open('tempBill.json') as data_file:
-    data = json.load(data_file)
-    print convert_congress_bill(data)

@@ -20,7 +20,7 @@ Database Name: test
  * Notes: test db for testing 
 
 Database Name: wtp
- * Collections: bills, representatives
+ * Collections: bills, users
  * Notes: main db that contains legislative bills and representatives 
 
 ##Using in Python##
