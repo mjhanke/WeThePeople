@@ -8,6 +8,12 @@ import PyPDF2
 import requests
 import uuid
 
+'''
+import sys
+sys.path.append("..")
+import summarize_bill
+'''
+
 states = ['ak', 'al', 'ar', 'az', 'ca', 'co', 'de', 'fl', 'ga', 'hi', 'ia', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mo', 'ms', 'mt', 'nc', 'nd', 'ne', 'nh', 'nj', 'nm', 'nv', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy']
 broken_states = ['ct', 'mn', 'ny', 'tx']
 #ct is fucked, ny too many requests...need more filters
@@ -194,7 +200,6 @@ print("ftp", all_ftp, len(all_ftp))
 def flatten(_list):
   return [item for sublist in _list for item in sublist]
 
-'''
 import time
 
 #For one state XXX
@@ -205,11 +210,17 @@ bill_ids = get_state_bill_ids('mi')
 print(len(bill_ids), "bill ids", time.time() - start)
 #TODO narrow down to only most recent updates here
 
+bill_ids = bill_ids[:10] #So we can test without taking too much time
+
 start = time.time()
 p = Pool(10)
 bills = p.map(get_bill_details, bill_ids)
 #Sync version
 #bills = [get_bill_details(bill_id) for bill_id in bill_ids]
 print("bill details", time.time() - start)
-'''
+
+for idx, bill in enumerate(bills):
+  url = bill['full_text_url']
+  with open('test/' + str(idx) + '.txt', 'w') as f:
+    f.write(download_html(url))
 
