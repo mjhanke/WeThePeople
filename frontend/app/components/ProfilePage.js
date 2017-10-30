@@ -11,7 +11,6 @@ import {
   ImageBackground,
 } from 'react-native';
 import CongressAPI from './CongressAPI';
-import ProgressiveImage from './ProgressiveImage';
 
 export default class ProfilePage extends Component {
   static navigationOptions = {
