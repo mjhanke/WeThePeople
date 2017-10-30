@@ -68,3 +68,5 @@ fastlane/screenshots
 # Things related to state bill scraping
 /nlp/states/full
 /nlp/states/pdfs
+/nlp/states/test
+*.sw*
