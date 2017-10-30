@@ -1,3 +1,5 @@
+from __future__ import with_statement
+from __future__ import absolute_import
 import requests
 import json
 import time
@@ -7,6 +9,9 @@ from newspaper import Article
 import PyPDF2
 import requests
 import uuid
+from io import open
+import time
+
 
 '''
 import sys
@@ -14,83 +19,84 @@ sys.path.append("..")
 import summarize_bill
 '''
 
-states = ['ak', 'al', 'ar', 'az', 'ca', 'co', 'de', 'fl', 'ga', 'hi', 'ia', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mo', 'ms', 'mt', 'nc', 'nd', 'ne', 'nh', 'nj', 'nm', 'nv', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy']
-broken_states = ['ct', 'mn', 'ny', 'tx']
+
+states = [u'ak', u'al', u'ar', u'az', u'ca', u'co', u'de', u'fl', u'ga', u'hi', u'ia', u'id', u'il', u'in', u'ks', u'ky', u'la', u'ma', u'md', u'me', u'mi', u'mo', u'ms', u'mt', u'nc', u'nd', u'ne', u'nh', u'nj', u'nm', u'nv', u'oh', u'ok', u'or', u'pa', u'ri', u'sc', u'sd', u'tn', u'ut', u'va', u'vt', u'wa', u'wi', u'wv', u'wy']
+broken_states = [u'ct', u'mn', u'ny', u'tx']
 #ct is fucked, ny too many requests...need more filters
 
-apikey = 'b80dbeb2-7653-4b55-ba06-c382003f4eaa'
+apikey = u'b80dbeb2-7653-4b55-ba06-c382003f4eaa'
 
 def get_state_bill_ids(state):
   #API can be filtered by updated since yesterday
-  params = {"apikey": apikey, 'state': state, 'search_window': 'session'}
-  result = requests.get('https://openstates.org/api/v1/bills/', params=params)
+  params = {u"apikey": apikey, u'state': state, u'search_window': u'session'}
+  result = requests.get(u'https://openstates.org/api/v1/bills/', params=params)
   bills = json.loads(result.text)
-  new_bills = [(bill['id'], bill['updated_at']) for bill in bills]
+  new_bills = [(bill[u'id'], bill[u'updated_at']) for bill in bills]
   return new_bills
 
 def get_sponsor(leg_id):
   if not leg_id:
     return {}
-  result = requests.get("https://openstates.org/api/v1/legislators/" + leg_id, params={"apikey": apikey})
+  result = requests.get(u"https://openstates.org/api/v1/legislators/" + leg_id, params={u"apikey": apikey})
   raw = json.loads(result.text)
   sponsor = {}
 
-  sponsor["first_name"] = raw['first_name']
-  sponsor["last_name"] = raw['last_name']
-  sponsor["picture_url"] = raw['photo_url'] #Picture url replacing facebook_id, can use facebook id to get it though
-  sponsor["leg_id"] = leg_id
-  sponsor["state"] = raw['state']
+  sponsor[u"first_name"] = raw[u'first_name']
+  sponsor[u"last_name"] = raw[u'last_name']
+  sponsor[u"picture_url"] = raw[u'photo_url'] #Picture url replacing facebook_id, can use facebook id to get it though
+  sponsor[u"leg_id"] = leg_id
+  sponsor[u"state"] = raw[u'state']
   #sponsor["title"] = raw['roles'][current]['title'] #will have to think of something
 
   return sponsor
 
 def get_bill_details(tup):
   bill_id, last_updated = tup
-  result = requests.get("https://openstates.org/api/v1/bills/" + bill_id, params={"apikey": apikey})
+  result = requests.get(u"https://openstates.org/api/v1/bills/" + bill_id, params={u"apikey": apikey})
   raw = json.loads(result.text)
 
   B = {}
 
-  B['actions'] = [{'date': a['date'], 'action': a['action']} for a in raw['actions']]
-  B['bill_status'] = {
-    'active': False, #bool for has seen activity beyond introduction, ok for state not to have
-    'passed_upper' :raw['action_dates']['passed_upper'],
-    'passed_lower': raw['action_dates']['passed_lower'],
-    'signed': raw['action_dates']['signed'],
-    'vetoed': None
+  B[u'actions'] = [{u'date': a[u'date'], u'action': a[u'action']} for a in raw[u'actions']]
+  B[u'bill_status'] = {
+    u'active': False, #bool for has seen activity beyond introduction, ok for state not to have
+    u'passed_upper' :raw[u'action_dates'][u'passed_upper'],
+    u'passed_lower': raw[u'action_dates'][u'passed_lower'],
+    u'signed': raw[u'action_dates'][u'signed'],
+    u'vetoed': None
   }
-  B['bill_id'] = raw['bill_id']
-  B['openstates_id'] = raw['id']
-  B['topic'] = "" #We need to pick this
-  B['subtopics'] = [s.title() for s in raw['subjects']]
-  if 'scraped_subjects' in raw:
-    B['scraped_topics'] = [s.title() for s in raw['scraped_subjects']]
-  B['state'] = raw['state']
-  B['level_code'] = 1 #state
-  B['human_summary'] = ""
-  B['machine_summary'] = "" #get this lol
-  B['title'] = raw['title']
-  B['short_title'] = ""
-  B['last_updated'] = raw['updated_at']
+  B[u'bill_id'] = raw[u'bill_id']
+  B[u'openstates_id'] = raw[u'id']
+  B[u'topic'] = u"" #We need to pick this
+  B[u'subtopics'] = [s.title() for s in raw[u'subjects']]
+  if u'scraped_subjects' in raw:
+    B[u'scraped_topics'] = [s.title() for s in raw[u'scraped_subjects']]
+  B[u'state'] = raw[u'state']
+  B[u'level_code'] = 1 #state
+  B[u'human_summary'] = u""
+  B[u'machine_summary'] = u"" #get this lol
+  B[u'title'] = raw[u'title']
+  B[u'short_title'] = u""
+  B[u'last_updated'] = raw[u'updated_at']
 
-  if raw['versions']:
-    B["full_text_url"] = raw['versions'][-1]['url'] #Get latest text
+  if raw[u'versions']:
+    B[u"full_text_url"] = raw[u'versions'][-1][u'url'] #Get latest text
   else:
-    B["full_text_url"] = ""
+    B[u"full_text_url"] = u""
 
   #Generate sponsors
-  B['cosponsors'] = []
-  all_sponsors = [(s['leg_id'], s['type']) for s in raw['sponsors']]
+  B[u'cosponsors'] = []
+  all_sponsors = [(s[u'leg_id'], s[u'type']) for s in raw[u'sponsors']]
   for sponsor in all_sponsors:
-    if sponsor[1] == 'primary':
-      B['sponsor'] = get_sponsor(sponsor[0])
+    if sponsor[1] == u'primary':
+      B[u'sponsor'] = get_sponsor(sponsor[0])
     else:
-      B['cosponsors'].append(get_sponsor(sponsor[0]))
+      B[u'cosponsors'].append(get_sponsor(sponsor[0]))
 
-  B["related_bills"] = [] #TODO
-  B["history"] = {} #TODO
+  B[u"related_bills"] = [] #TODO
+  B[u"history"] = {} #TODO
 
-  B["introduction_date"] = raw['created_at']
+  B[u"introduction_date"] = raw[u'created_at']
 
   return B
 
@@ -98,15 +104,15 @@ def identify_url_format(url):
   url = url.lower()
 
   if not url:
-    ret = 'nourl'
+    ret = u'nourl'
   else:
-    if 'ftp' in url:
-      ret = 'ftp'
+    if u'ftp' in url:
+      ret = u'ftp'
     else: #probably http
-      if 'pdf' in url:
-        ret = 'pdf'
+      if u'pdf' in url:
+        ret = u'pdf'
       else: #regular html file
-        ret = 'html'
+        ret = u'html'
 
   return ret
 
@@ -114,32 +120,32 @@ def download_ftp(url):
   pass
 
 def download_pdf(url):
-  _uuid = str(uuid.uuid4())
-  filename = 'pdfs/' + _uuid + '.pdf'
+  _uuid = unicode(uuid.uuid4())
+  filename = u'pdfs/' + _uuid + u'.pdf'
 
   response = requests.get(url)
-  with open(filename, 'wb') as f:
+  with open(filename, u'wb') as f:
     f.write(response.content)
 
   #Maybe somehow stream content
-  with open(filename, 'rb') as f:
+  with open(filename, u'rb') as f:
     pdf_reader = PyPDF2.PdfFileReader(f)
 
     #Really pages but whatever for now
-    all_lines = [pdf_reader.getPage(i).extractText() for i in range(0, pdf_reader.numPages)]
+    all_lines = [pdf_reader.getPage(i).extractText() for i in xrange(0, pdf_reader.numPages)]
 
     #cleanup section
     #Remove newlines and form feed characters
-    all_lines = [line.rstrip().replace('\x0C', '') for line in all_lines]
+    all_lines = [line.rstrip().replace(u'\x0C', u'') for line in all_lines]
 
     #Get rid of any page #s sitting around
-    all_lines = [re.sub(r'Page \d*', r'', line) for line in all_lines]
+    all_lines = [re.sub(ur'Page \d*', ur'', line) for line in all_lines]
 
     #Get rid of empty lines and page # lines
     all_lines = [line for line in all_lines if line and not line.isdigit()]
 
     #Remove random "
-    all_lines = [line.replace('"', '') for line in all_lines]
+    all_lines = [line.replace(u'"', u'') for line in all_lines]
 
     #Deal with crossing stuff out...
 
@@ -159,31 +165,31 @@ def tryOne(state):
   tup = get_state_bill_ids(state)[0]
 
   bill = get_bill_details(tup)
-  url = bill['full_text_url']
+  url = bill[u'full_text_url']
 
   url_format = identify_url_format(url)
 
-  if url_format == 'ftp':
+  if url_format == u'ftp':
     #Handle ftp stuff (ar)
-    return (state, 'ftp')
-  elif url_format == 'html':
+    return (state, u'ftp')
+  elif url_format == u'html':
     txt = download_html(url)
-    ret = 'htmlok' if len(txt) > 0 else 'htmlbad'
+    ret = u'htmlok' if len(txt) > 0 else u'htmlbad'
     #if len(txt) > 0:
       #print(txt)
       #import ipdb; ipdb.set_trace()
-  elif url_format == 'pdf':
+  elif url_format == u'pdf':
     txt = download_pdf(url)
     #print(txt)
     #import ipdb; ipdb.set_trace() 
-    ret = 'pdf'
-  elif url_format == 'nourl':
-    ret = 'nourl'
+    ret = u'pdf'
+  elif url_format == u'nourl':
+    ret = u'nourl'
 
   return (state, ret)
 
 
-'''
+u'''
 xx = [tryOne(state) for state in states]
 
 all_ok = [x for x,y in xx if y == "htmlok"]
@@ -200,14 +206,13 @@ print("ftp", all_ftp, len(all_ftp))
 def flatten(_list):
   return [item for sublist in _list for item in sublist]
 
-import time
 
 #For one state XXX
 
 #Get state bill ids 
 start = time.time()
-bill_ids = get_state_bill_ids('mi')
-print(len(bill_ids), "bill ids", time.time() - start)
+bill_ids = get_state_bill_ids(u'mi')
+print len(bill_ids), u"bill ids", time.time() - start
 #TODO narrow down to only most recent updates here
 
 bill_ids = bill_ids[:10] #So we can test without taking too much time
@@ -217,10 +222,10 @@ p = Pool(10)
 bills = p.map(get_bill_details, bill_ids)
 #Sync version
 #bills = [get_bill_details(bill_id) for bill_id in bill_ids]
-print("bill details", time.time() - start)
+print u"bill details", time.time() - start
 
 for idx, bill in enumerate(bills):
-  url = bill['full_text_url']
-  with open('test/' + str(idx) + '.txt', 'w') as f:
+  url = bill[u'full_text_url']
+  with open(u'test/' + unicode(idx) + u'.txt', u'w') as f:
     f.write(download_html(url))
 
