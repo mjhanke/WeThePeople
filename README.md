@@ -15,6 +15,9 @@ pod install
 open WeThePeople.xcworkspace
 cd ..
 yarn start
+brew cask install fastlane
+export PATH="$HOME/.fastlane/bin:$PATH"
+match init
 ```
 
 There will be an error in one of the React files. Change "RCTAnimation/" to "React/". 
