@@ -68,17 +68,21 @@ def senate_passage(bill):
 
 def bill_title(bill):
     """Converts bill title to common format"""
-    assert bill['official_title']
     if bill['popular_title']:
         return bill['popular_title']
     elif bill['short_title']:
         return bill['short_title']
     elif bill['official_title']:
         return bill['official_title']
+    else:
+        return ''
 
-def shortened_title(title):
+def shortened_title(bill):
     """Shortens bill title"""
-    new_title = title
+    new_title = bill.get('title', '')
+    if new_title == '':
+        return ''
+
     if new_title.startswith('To '):
         new_title = new_title[3:]
     new_title = new_title.replace(', and for other purposes.', '')
