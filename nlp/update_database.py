@@ -14,9 +14,7 @@ def load_json_to_database():
     database = connection.bills
     congress_bills = database.congress
 
-    # PATH = '/home/danielbennett481/congress/data/115/bills'
-    # use environment variable
-    PATH = '/Users/danbennett/PythonProjects/bulkBillData/114-congress/bills'
+    PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'congress/data/115/bills'))
 
     bills = []
 
