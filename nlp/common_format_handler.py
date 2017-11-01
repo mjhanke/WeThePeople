@@ -25,8 +25,8 @@ def convert_congress_bill(bill):
     new_bill['status']['signed'] = bill['history']['enacted']
     new_bill['status']['vetoed'] = bill['history']['vetoed']
     new_bill['bill_id'] = bill['bill_id']
-    new_bill['topic'] = bill['subjects_top_term']
-    new_bill['subtopics'] = bill['subjects']
+    new_bill['topic'] = bill['subjects_top_term'].replace(' ', '_')
+    new_bill['subtopics'] = list(map(lambda subtopic : subtopic.replace(' ', '_'), bill['subjects']))
     new_bill['scraped_topics'] = []
     new_bill['state'] = None
     new_bill['level_code'] = 0
