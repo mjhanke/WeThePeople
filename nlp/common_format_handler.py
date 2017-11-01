@@ -40,8 +40,9 @@ def convert_congress_bill(bill):
     new_bill['cosponsors'] = bill_cosponsors(bill)
     new_bill['related_bills'] = bill['related_bills']
     new_bill['introduction_date'] = introduction_date(bill)
-    new_bill['short_title'] = shortened_title(bill)
     new_bill['title'] = bill_title(bill)
+    new_bill['short_title'] = shortened_title(new_bill['title'])
+
     return json.dumps(new_bill)
 
 def bill_actions(bill):
@@ -77,12 +78,11 @@ def bill_title(bill):
     else:
         return ''
 
-def shortened_title(bill):
+def shortened_title(title):
     """Shortens bill title"""
-    new_title = bill.get('title', '')
+    new_title = title
     if new_title == '':
         return ''
-
     if new_title.startswith('To '):
         new_title = new_title[3:]
     new_title = new_title.replace(', and for other purposes.', '')
@@ -164,7 +164,7 @@ def full_text_url(bill):
     A full-text url is not provided, so we have to construct it. Example:
     https://www.congress.gov/bill/115th-congress/house-joint-resolution/113
     """
-    congress_num = '114th'
+    congress_num = '115th'
     bill_type = bill_type_url(bill['bill_type'])
     bill_num  = bill['number']
     template = 'https://www.congress.gov/bill/${congress_num}-congress/${bill_type}/${bill_num}/text?format=txt'
