@@ -24,6 +24,15 @@ There will be an error in one of the React files. Change "RCTAnimation/" to "Rea
 
 Sorry about the hack.
 
+If you'd like to run WeThePeople on your physical iPhone:
+
+1) Find UUID of your iPhone by visiting http://get.udid.io/ on Safari on your phone.
+
+2) I (Dan) will need to run ```fastlane run register_device```, follow prompts, then ```match development --force```
+
+3) On your computer, run ```match development --force``` to download the updated certs
+
+
 ```python
 """
 create-user/

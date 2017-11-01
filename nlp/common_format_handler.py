@@ -182,6 +182,7 @@ def bill_sponsor(person):
     sponsor['state'] = person['state']
     sponsor['title'] = person['title']
     sponsor['facebook_id'] = ''
+    sponsor['party'] = ''
     endpoint = 'https://api.propublica.org/congress/v1/members/' \
         + sponsor['id'] + '.json'
     headers = {
@@ -191,6 +192,7 @@ def bill_sponsor(person):
     response = json.loads(request.text)
     if 'results' in response and response['results']:
         sponsor['facebook_id'] = response['results'][0]['facebook_account']
+        sponsor['party'] = response['results'][0]['current_party']
     else: assert False
     return sponsor
 
