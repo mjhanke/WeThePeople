@@ -15,6 +15,7 @@ import pdb
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from common_format_handler import convert_congress_bill
+from update_database import insert_bills
 
 def run(options):
     bill_id = options.get('bill_id', None)
@@ -98,19 +99,10 @@ def get_bills_to_process(options):
                     bulkfile_lastmod = utils.read(fn.replace(".xml", "-lastmod.txt"))
                     parse_lastmod = utils.read(get_data_path(congress, bill_type, bill_type_and_number, "data-fromfdsys-lastmod.txt"))
                     #if bulkfile_lastmod != parse_lastmod or options.get("force"):
-                    if not os.path.isfile(fn.replace('fdsys_billstatus.xml', 'formatted.json')):
-                        print("%s formatted doesn't exist" % bill_type_and_number)
+                    if bulkfile_lastmod != parse_lastmod or options.get("force") or not os.path.isfile(fn.replace('fdsys_billstatus.xml', 'formatted.json')):
+                        print("Creating formatted JSON for %s" % bill_type_and_number)
                         bill_id = bill_type_and_number + "-" + congress
                         yield bill_id
-                    else:
-                        print("%s formatted exists" % bill_type_and_number)
-                    # if folder_name == "hjres109":
-                    #     print("this one %s" % bill_type_and_number)
-                    #     bill_id = bill_type_and_number + "-" + congress
-                    #     process_bill(bill_id, None)
-                    #     wait = input("pause")
-                    # else:
-                    #     print("not this one")
 
 def process_bill(bill_id, options):
     #pdb.set_trace()
@@ -128,13 +120,14 @@ def process_bill(bill_id, options):
 
     try:
         formatted = convert_congress_bill(bill_data)
-        # CALL CURT'S INSERT FUNCTION HERE
+        formatted = json.loads(formatted)
+        insert_bills(formatted)
 
         utils.write(
             unicode(formatted),
             os.path.dirname(fdsys_xml_path) + '/formatted.json')
         # maybe a logging.info call instead
-        print("Formatted %s" % fdsys_xml_path)
+        print("Formatted and inserted %s" % fdsys_xml_path)
     except:
         print("FAILED FORMATTING %s" % fdsys_xml_path)
 

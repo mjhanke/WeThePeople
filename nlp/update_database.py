@@ -11,8 +11,8 @@ def load_json_to_database():
     to MongoDB database
     """
     connection = pymongo.MongoClient()
-    database = connection.bills
-    congress_bills = database.congress
+    database = connection.wtp
+    congress_bills = database.bills
 
     PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'congress/data/115/bills'))
 
@@ -22,21 +22,13 @@ def load_json_to_database():
     for path, dirs, files in os.walk(PATH):
         for filename in files:
             fullpath = os.path.join(path, filename)
-            print(fullpath)
 
-            if filename == 'data.json':
+            if filename == 'formatted.json':
                 with codecs.open(fullpath, 'r', encoding='utf-8',
                                  errors='replace') as data:
-                    print(fullpath)
                     bill = json.load(data)
-                    # bill = json.load(data.read())
-                    bills.append(bill)
-
-    for bill in bills:
-        # Since we have a relatively small (< 10,000) number of bills, we
-        # replace every one, without checking if the contents have changed.
-        # True flag is an "upsert": performs an insert if nothing found
-        congress_bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
+                    print("Replacing/inserting %s" % bill['bill_id'])
+                    congress_bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
 from pymongo import MongoClient
 def insert_bills(bill):
         client = MongoClient()
