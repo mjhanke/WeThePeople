@@ -81,15 +81,21 @@ def get_bills(request):
 	relevant_bills = []
 	state = request.GET.get("state", "").lower()
 	if(state == ""):
+		#get the national bills
 		level_code = 0
 		for interest in listOfInterests:
 			relevant_bills = relevant_bills + list(wtp_db.bills.find({"$and" :[ { "$or": [ {"topic": interest}, {"subtopics": interest}] }, {"level_code": level_code}]}))
 	else:
 		level_code = 1
+		#make sure the state code is valid
 		if(state not in state_abbreviations):
 			return JsonResponse({"status": "error", "message": "incorrect state abbreviation"})
+		#get the state bills
 		for interest in listOfInterests:
 			relevant_bills = relevant_bills + list(wtp_db.bills.find({"$and" :[ { "$or": [ {"topic": interest}, {"subtopics": interest}] }, {"level_code": level_code}, {"state": state} ] } ) )
+	#convert '_id' to a string to make the bill serializable
+	for bill in relevant_bills:
+		bill['_id'] = str(bill['_id'])
 	return JsonResponse(relevant_bills, safe=False)
 def create_user(request):
 	return JsonResponse({'status': 'not implemented'})
