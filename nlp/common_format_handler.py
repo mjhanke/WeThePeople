@@ -26,7 +26,7 @@ def convert_congress_bill(bill):
     new_bill['status']['vetoed'] = bill['history']['vetoed']
     new_bill['bill_id'] = bill['bill_id']
     new_bill['topic'] = bill['subjects_top_term'].replace(' ', '_')
-    new_bill['subtopics'] = list(map(lambda subtopic : subtopic.replace(' ', '_'), bill['subjects']))
+    new_bill['subtopics'] = list(map(lambda sub : sub.replace(' ', '_'), bill['subjects']))
     new_bill['scraped_topics'] = []
     new_bill['state'] = None
     new_bill['level_code'] = 0
@@ -40,9 +40,10 @@ def convert_congress_bill(bill):
     new_bill['cosponsors'] = bill_cosponsors(bill)
     new_bill['related_bills'] = bill['related_bills']
     new_bill['introduction_date'] = introduction_date(bill)
+    new_bill['short_title'] = shortened_title(bill)
     new_bill['title'] = bill_title(bill)
-    new_bill['short_title'] = shortened_title(new_bill['title'])
-
+    new_bill['smiley_count'] = 0
+    new_bill['frowny_count'] = 0
     return json.dumps(new_bill)
 
 def bill_actions(bill):
@@ -78,11 +79,12 @@ def bill_title(bill):
     else:
         return ''
 
-def shortened_title(title):
+def shortened_title(bill):
     """Shortens bill title"""
-    new_title = title
+    new_title = bill.get('title', '')
     if new_title == '':
         return ''
+
     if new_title.startswith('To '):
         new_title = new_title[3:]
     new_title = new_title.replace(', and for other purposes.', '')
@@ -164,7 +166,7 @@ def full_text_url(bill):
     A full-text url is not provided, so we have to construct it. Example:
     https://www.congress.gov/bill/115th-congress/house-joint-resolution/113
     """
-    congress_num = '115th'
+    congress_num = '114th'
     bill_type = bill_type_url(bill['bill_type'])
     bill_num  = bill['number']
     template = 'https://www.congress.gov/bill/${congress_num}-congress/${bill_type}/${bill_num}/text?format=txt'
@@ -182,7 +184,6 @@ def bill_sponsor(person):
     sponsor['state'] = person['state']
     sponsor['title'] = person['title']
     sponsor['facebook_id'] = ''
-    sponsor['party'] = ''
     endpoint = 'https://api.propublica.org/congress/v1/members/' \
         + sponsor['id'] + '.json'
     headers = {
@@ -192,7 +193,6 @@ def bill_sponsor(person):
     response = json.loads(request.text)
     if 'results' in response and response['results']:
         sponsor['facebook_id'] = response['results'][0]['facebook_account']
-        sponsor['party'] = response['results'][0]['current_party']
     else: assert False
     return sponsor
 
