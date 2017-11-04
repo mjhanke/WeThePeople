@@ -11,14 +11,12 @@ import requests
 import uuid
 from io import open
 import time
-
-
-'''
 import sys
 sys.path.append("..")
 import summarize_bill
-'''
 
+
+print "Make sure you are using 2.7 lol"
 
 states = [u'ak', u'al', u'ar', u'az', u'ca', u'co', u'de', u'fl', u'ga', u'hi', u'ia', u'id', u'il', u'in', u'ks', u'ky', u'la', u'ma', u'md', u'me', u'mi', u'mo', u'ms', u'mt', u'nc', u'nd', u'ne', u'nh', u'nj', u'nm', u'nv', u'oh', u'ok', u'or', u'pa', u'ri', u'sc', u'sd', u'tn', u'ut', u'va', u'vt', u'wa', u'wi', u'wv', u'wy']
 broken_states = [u'ct', u'mn', u'ny', u'tx']
@@ -152,11 +150,53 @@ def download_pdf(url):
 
   return full_text
 
+def get_mi_title(text):
+  small_text = ' '.join([x for x in text.split('\n') if x])[:1000] #Should be within first 1000 words
+  sentences = small_text.split('.')
+  #Amendment
+  #Bill
+  #Joint resolution
+  possible_titles = [s for s in sentences if "AN ACT" in s or 'entitled' in s or 'joint resolution' in s]
+
+  if len(possible_titles) == 0:
+    return ''
+
+  title_sentence = possible_titles[0]
+
+  title = ''
+  if 'amend' and 'entitled' in title_sentence:
+    #Amending bill, so grab title of actual bill between quotes
+    start_idx = title_sentence.find(u'\u201c') + 1 #for length of unicode quote
+    end_idx = title_sentence.rfind(u'\u201d')
+
+    if start_idx == 0 and end_idx == -1: #NO unicode quote, regular quotes
+      start_idx = title_sentence.find(r'"') + 1 #for length of unicode quote
+      end_idx = title_sentence.rfind(r'"')
+
+    title = title_sentence[start_idx:end_idx]
+    title = title.capitalize()
+    if title.startswith("An ac to "):
+      title = title[len("An act to "):]
+  else:
+    import ipdb; ipdb.set_trace() 
+  '''
+  elif 'joint resolution' in title_sentence:
+    print(title_sentence)
+    import ipdb; ipdb.set_trace() 
+
+
+  else: #New bill, will have title
+    title = title_sentence[len("AN ACT to "):].capitalize()
+  '''
+  return title
+
 def download_html(url):
   article = Article(url)
   article.download()
   article.download() #TODO this is not necessary probably
   article.parse()
+
+  #Sometimes this messes up...
 
   return article.text
 
@@ -215,8 +255,9 @@ bill_ids = get_state_bill_ids(u'mi')
 print len(bill_ids), u"bill ids", time.time() - start
 #TODO narrow down to only most recent updates here
 
-bill_ids = bill_ids[:10] #So we can test without taking too much time
-
+#bill_ids = bill_ids[:10] #So we can test without taking too much time
+#bill_ids = bill_ids[10:20] #So we can test without taking too much time
+bill_ids = bill_ids[:100] #So we can test without taking too much time
 start = time.time()
 p = Pool(10)
 bills = p.map(get_bill_details, bill_ids)
@@ -226,6 +267,13 @@ print u"bill details", time.time() - start
 
 for idx, bill in enumerate(bills):
   url = bill[u'full_text_url']
-  with open(u'test/' + unicode(idx) + u'.txt', u'w') as f:
-    f.write(download_html(url))
-
+  text = download_html(url)
+  print(url)
+  title = get_mi_title(text)
+  if title:
+    sum_text = summarize_bill.summarize_bill(title, text)
+    bill['machine_summary'] = ' '.join(sum_text)
+    print(title, bill['machine_summary'])
+  else:
+    print("SOMETHING WENT WRONG")
+    bill['machine_summary'] = ""
