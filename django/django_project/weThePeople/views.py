@@ -115,6 +115,7 @@ def get_bill_by_id(request):
 	return JsonResponse(bill)
 
 def user_reaction(request):
+	return JsonResponse({'status': 'not implemented'})
 
 def create_user(request):
 	return JsonResponse({'status': 'not implemented'})
