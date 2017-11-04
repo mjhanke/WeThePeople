@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse 
 from db_connect import test_db, wtp_db
+from bson.objectid import ObjectId
 
 state_abbreviations = {
 			"al": True,
@@ -97,6 +98,24 @@ def get_bills(request):
 	for bill in relevant_bills:
 		bill['_id'] = str(bill['_id'])
 	return JsonResponse(relevant_bills, safe=False)
+
+def get_bill_by_id(request):
+	if(request.method != 'GET'):
+		return JsonResponse({"status": "error", "message": "request method should be GET"})
+	bill_uid = request.GET.get("bill_uid", "")
+	if(bill_uid == ""):
+		return JsonResponse({"status": "error", "message": "no unique bill id given"})
+	results = list(wtp_db.bills.find({"_id": ObjectId(bill_uid)}))
+	if((len(results)) > 1):
+		return JsonResponse({"status": "error", "message": "not a unique bill id"})
+	if((len(results)) == 0):
+		return JsonResponse({"status": "error", "message": "no bill found for that id"})
+	bill = results[0]
+	bill["_id"] = str(bill["_id"])
+	return JsonResponse(bill)
+
+def user_reaction(request):
+
 def create_user(request):
 	return JsonResponse({'status': 'not implemented'})
 
