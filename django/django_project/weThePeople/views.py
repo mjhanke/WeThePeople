@@ -115,7 +115,41 @@ def get_bill_by_id(request):
 	return JsonResponse(bill)
 
 def user_reaction(request):
-	return JsonResponse({'status': 'not implemented'})
+	if(request.method != 'POST'):
+		return JsonResponse({"status": "error", "message": "request method should be POST"})
+	bill_id = request.POST.get("bill_id", "")
+	if(bill_id == ""):
+		return JsonResponse({"status": "error", "message": "no unique bill id given"})
+	smiley_action = request.POST.get("smiley_action", "")
+	frowny_action = request.POST.get("frowny_action", "")
+	result = ""
+	#increas smiley count
+	if(smiley_action == "add"):
+		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"smiley_count": 1} } )
+	#decrease smiley count
+	elif(smiley_action == "remove"):
+		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"smiley_count": -1} } )
+	#input string is not well formed
+	elif(smiley_action != ""):
+		return JsonResponse({"status": "error", "message": "smiley_action should be either \"add\" or \"remove\" "})
+	#bill id does not match bill in database
+	if result.matched_count != 1:
+			return JsonResponse({"status": "error", "message": "bill_id does not corresspond to a bill in database"})
+	
+
+	#increase frowney count
+	if(frowny_action == "add"):
+		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"frowny_count": 1} } )
+	#decrease frowney count
+	elif(frowny_action == "remove"):
+		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"frowny_count": -1} } )
+	#input string is not well formed
+	elif(frowny_action != ""):
+		return JsonResponse({"status": "error", "message": "frowny_action should be either \"add\" or \"remove\" "})
+	#bill id does not match bill in database
+	if result.matched_count != 1:
+			return JsonResponse({"status": "error", "message": "bill_id does not corresspond to a bill in database"})
+	return JsonResponse({"status": "error", "message": "unknown error"})
 
 def create_user(request):
 	return JsonResponse({'status': 'not implemented'})
