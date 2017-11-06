@@ -63,8 +63,8 @@ def get_bill_details(os_id):
     u'signed': raw[u'action_dates'][u'signed'],
     u'vetoed': None
   }
-  B[u'bill_id'] = raw[u'bill_id']
-  B[u'openstates_id'] = os_id
+
+  B[u'bill_id'] = os_id
   B[u'topic'] = u"" #We need to pick this
   B[u'subtopics'] = [s.title() for s in raw[u'subjects']]
   if u'scraped_subjects' in raw:
@@ -95,6 +95,15 @@ def get_bill_details(os_id):
   B[u"history"] = {} #TODO
 
   B[u"introduction_date"] = raw[u'created_at']
+
+  B["house_committees"] = []
+  B["senate_committtees"] = []
+
+
+  B["smiley_count"] = 0
+  B["frowny_count"] = 0
+
+
 
   return B
 
@@ -281,8 +290,8 @@ def main():
   #Query database to see when these were last updated
   client = MongoClient()
   db = client.wtp
-  cursor = db.bills.find({'state':state}, {'_id': 0, 'last_updated': 1, 'openstates_id': 1})
-  current_db_info = {doc['openstates_id']: get_dt(doc['last_updated']) for doc in cursor if doc}
+  cursor = db.bills.find({'state':state}, {'_id': 0, 'last_updated': 1, 'bill_id': 1})
+  current_db_info = {doc['bill_id']: get_dt(doc['last_updated']) for doc in cursor if doc}
 
   print("Current db size", len(current_db_info))
   print("openstates get size", len(os_info))
@@ -301,14 +310,14 @@ def main():
 
   print("To update", len(to_update))
 
-  to_update = to_update[:10]
+  #to_update = to_update[:10]
 
   #Process all the bills we need to update
   start = time.time()
   p = Pool(10)
-  #bills = p.map(update_db, to_update)
+  bills = p.map(update_db, to_update)
   #Sync version
-  bills = [update_db(os_id) for os_id in to_update]
+  #bills = [update_db(os_id) for os_id in to_update]
   print u"bill details", time.time() - start
 
 
@@ -325,13 +334,25 @@ def update_db(os_id):
   if title:
     sum_text = summarize_bill.summarize_bill(title, text)
     bill['machine_summary'] = ' '.join(sum_text)
+  '''
     print("GOOD")
   else:
     print("SOMETHING WENT WRONG")
+  '''
+  print(os_id)
 
   client = MongoClient()
   db = client.wtp
   #     filter that picks correct bill VV                   V replaces existing document with new one or just creates new one
   db.bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
 
-main()
+#main()
+
+
+#TODO
+#
+# insert all into DB
+# get topics -> move to replace_many/insert_many?
+#
+
+
