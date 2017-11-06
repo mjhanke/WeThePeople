@@ -34,8 +34,8 @@ def convert_congress_bill(bill):
     new_bill['full_text_url'] = full_text_url(bill)
     new_bill['machine_summary'] = machine_summary(bill)
     new_bill['last_updated'] = last_updated_date(bill)
-    new_bill['house_committee'] = house_committee(bill)
-    new_bill['senate_committee'] = senate_committee(bill)
+    new_bill['house_committees'] = house_committees(bill)
+    new_bill['senate_committees'] = senate_committees(bill)
     new_bill['sponsor'] = bill_sponsor(bill['sponsor'])
     new_bill['cosponsors'] = bill_cosponsors(bill)
     new_bill['related_bills'] = bill['related_bills']
@@ -110,23 +110,26 @@ def bill_type_url(bill_type):
     assert bill_type in bill_type_map
     return bill_type_map[bill_type]
 
-def bill_committee_codes(bill):
+def bill_committees(bill):
     """Find all committee codes associated with a bill."""
-    committee_codes = []
-    for action in bill['actions']:
-        if 'committees' in action:
-            committee_codes += action['committees']
-    # Remove duplicates
-    committee_codes = list(set(committee_codes))
-    # assert len(committee_codes) <= 2
-    return committee_codes
-
-
+    committees = []
+    for committee in bill['committees']:
+        try:
+            if committee.get('committee_id') not in list(c['committee_id'] for c in committees):
+                new_comm = {}
+                new_comm['committee'] = committee.get('committee', '')
+                new_comm['committee_id'] = committee.get('committee_id', '')
+                committees.append(new_comm)
+        except:
+            print("Failed getting committee %s" % str(committee))
+    return committees
+ 
+ 
 def committee_name(code):
     """Find full name of committee based off thomas_id."""
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
     file_name = 'congress_committees.json'
-
+ 
     with open(os.path.join(script_dir, file_name)) as file:
         committees = json.load(file)
         # element for element in people if element['name'] == name
@@ -134,23 +137,21 @@ def committee_name(code):
                           if comm['thomas_id'] == code]
         assert matching_names
         return matching_names[0]
-
-
-def senate_committee(bill):
+ 
+ 
+def senate_committees(bill):
     """Find senate committee of origin, if one exists."""
-    codes = bill_committee_codes(bill)
-    for code in codes:
-        if code[0] == 'S':
-            return committee_name(code)
+    coms = bill_committees(bill)
+    if len(coms) != 0 and coms[0].get('committee_id')[0] == 'S':
+        return coms
     return ''
-
-
-def house_committee(bill):
+ 
+ 
+def house_committees(bill):
     """Find house committee of origin, if one exists."""
-    codes = bill_committee_codes(bill)
-    for code in codes:
-        if code[0] == 'H':
-            return committee_name(code)
+    coms = bill_committees(bill)
+    if len(coms) != 0 and coms[0].get('committee_id')[0] == 'H':
+        return coms
     return ''
 
 
