@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse 
 from db_connect import test_db, wtp_db
 from bson.objectid import ObjectId
+from django.views.decorators.csrf import csrf_exempt
 
 state_abbreviations = {
 			"al": True,
@@ -114,27 +115,29 @@ def get_bill_by_id(request):
 	bill["_id"] = str(bill["_id"])
 	return JsonResponse(bill)
 
+@csrf_exempt
 def user_reaction(request):
 	if(request.method != 'POST'):
 		return JsonResponse({"status": "error", "message": "request method should be POST"})
 	bill_id = request.POST.get("bill_id", "")
 	if(bill_id == ""):
 		return JsonResponse({"status": "error", "message": "no unique bill id given"})
+	res = list(wtp_db.bills.find({"bill_id": bill_id}))
+	if(len(res)==0):
+		return JsonResponse({"status": "error", "message": "bill_id does not corresspond to a bill in database"})
 	smiley_action = request.POST.get("smiley_action", "")
 	frowny_action = request.POST.get("frowny_action", "")
-	result = ""
-	#increas smiley count
+	#increases smiley count
 	if(smiley_action == "add"):
 		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"smiley_count": 1} } )
 	#decrease smiley count
 	elif(smiley_action == "remove"):
-		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"smiley_count": -1} } )
+		bill_to_update = wtp_db.bills.find_one({"bill_id": bill_id})
+		if(bill_to_update['smiley_count'] >= 1):
+			result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"smiley_count": -1} } )
 	#input string is not well formed
 	elif(smiley_action != ""):
 		return JsonResponse({"status": "error", "message": "smiley_action should be either \"add\" or \"remove\" "})
-	#bill id does not match bill in database
-	if result.matched_count != 1:
-			return JsonResponse({"status": "error", "message": "bill_id does not corresspond to a bill in database"})
 	
 
 	#increase frowney count
@@ -142,14 +145,14 @@ def user_reaction(request):
 		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"frowny_count": 1} } )
 	#decrease frowney count
 	elif(frowny_action == "remove"):
-		result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"frowny_count": -1} } )
+		bill_to_update = wtp_db.bills.find_one({"bill_id": bill_id})
+		if(bill_to_update['frowny_count'] >= 1):
+			result = wtp_db.bills.update_one({"bill_id": bill_id}, {"$inc": {"frowny_count": -1} } )
 	#input string is not well formed
 	elif(frowny_action != ""):
 		return JsonResponse({"status": "error", "message": "frowny_action should be either \"add\" or \"remove\" "})
-	#bill id does not match bill in database
-	if result.matched_count != 1:
-			return JsonResponse({"status": "error", "message": "bill_id does not corresspond to a bill in database"})
-	return JsonResponse({"status": "error", "message": "unknown error"})
+	#return JsonResponse({"status": "success", "message": "unknown error", "bill_id": bill_id, "smiley_action": smiley_action})
+	return JsonResponse({"status": "success", "message": "added user reaction"})
 
 def create_user(request):
 	return JsonResponse({'status': 'not implemented'})
