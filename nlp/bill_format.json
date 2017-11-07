@@ -10,7 +10,7 @@
       "passed_upper": "a date",
       "passed_lower": "a date",
       "signed": "a date",
-      "vetoed": "a date",
+      "vetoed": "a date"
     },
     "bill_id": "",
     "topic": "",
@@ -24,8 +24,18 @@
     "short_title": "",
     "last_updated": "",
     "full_text_url": "",
-    "house_committee": "",
-    "senate_committee": "",
+    "house_committees": [
+      {
+        "committee": "",
+        "committee_id": ""
+      }
+    ],
+    "senate_committees": [
+      {
+        "committee": "",
+        "committee_id": ""
+      }
+    ],
     "sponsor": {
       "first_name": "",
       "last_name": "",
@@ -50,4 +60,6 @@
       }
     ],
     "introduction_date": "",
+    "smiley_count": 0,
+    "frowny_count": 0
 }

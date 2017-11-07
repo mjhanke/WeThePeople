@@ -25,8 +25,8 @@ def convert_congress_bill(bill):
     new_bill['status']['signed'] = bill['history']['enacted']
     new_bill['status']['vetoed'] = bill['history']['vetoed']
     new_bill['bill_id'] = bill['bill_id']
-    new_bill['topic'] = bill['subjects_top_term']
-    new_bill['subtopics'] = bill['subjects']
+    new_bill['topic'] = bill['subjects_top_term'].replace(' ', '_')
+    new_bill['subtopics'] = list(map(lambda sub : sub.replace(' ', '_'), bill['subjects']))
     new_bill['scraped_topics'] = []
     new_bill['state'] = None
     new_bill['level_code'] = 0
@@ -34,15 +34,16 @@ def convert_congress_bill(bill):
     new_bill['full_text_url'] = full_text_url(bill)
     new_bill['machine_summary'] = machine_summary(bill)
     new_bill['last_updated'] = last_updated_date(bill)
-    new_bill['house_committee'] = house_committee(bill)
-    new_bill['senate_committee'] = senate_committee(bill)
+    new_bill['house_committees'] = house_committees(bill)
+    new_bill['senate_committees'] = senate_committees(bill)
     new_bill['sponsor'] = bill_sponsor(bill['sponsor'])
     new_bill['cosponsors'] = bill_cosponsors(bill)
     new_bill['related_bills'] = bill['related_bills']
     new_bill['introduction_date'] = introduction_date(bill)
+    new_bill['short_title'] = shortened_title(bill)
     new_bill['title'] = bill_title(bill)
-    new_bill['short_title'] = shortened_title(new_bill['title'])
-
+    new_bill['smiley_count'] = 0
+    new_bill['frowny_count'] = 0
     return json.dumps(new_bill)
 
 def bill_actions(bill):
@@ -78,11 +79,12 @@ def bill_title(bill):
     else:
         return ''
 
-def shortened_title(title):
+def shortened_title(bill):
     """Shortens bill title"""
-    new_title = title
+    new_title = bill.get('title', '')
     if new_title == '':
         return ''
+
     if new_title.startswith('To '):
         new_title = new_title[3:]
     new_title = new_title.replace(', and for other purposes.', '')
@@ -108,23 +110,26 @@ def bill_type_url(bill_type):
     assert bill_type in bill_type_map
     return bill_type_map[bill_type]
 
-def bill_committee_codes(bill):
+def bill_committees(bill):
     """Find all committee codes associated with a bill."""
-    committee_codes = []
-    for action in bill['actions']:
-        if 'committees' in action:
-            committee_codes += action['committees']
-    # Remove duplicates
-    committee_codes = list(set(committee_codes))
-    # assert len(committee_codes) <= 2
-    return committee_codes
-
-
+    committees = []
+    for committee in bill['committees']:
+        try:
+            if committee.get('committee_id') not in list(c['committee_id'] for c in committees):
+                new_comm = {}
+                new_comm['committee'] = committee.get('committee', '')
+                new_comm['committee_id'] = committee.get('committee_id', '')
+                committees.append(new_comm)
+        except:
+            print("Failed getting committee %s" % str(committee))
+    return committees
+ 
+ 
 def committee_name(code):
     """Find full name of committee based off thomas_id."""
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
     file_name = 'congress_committees.json'
-
+ 
     with open(os.path.join(script_dir, file_name)) as file:
         committees = json.load(file)
         # element for element in people if element['name'] == name
@@ -132,23 +137,21 @@ def committee_name(code):
                           if comm['thomas_id'] == code]
         assert matching_names
         return matching_names[0]
-
-
-def senate_committee(bill):
+ 
+ 
+def senate_committees(bill):
     """Find senate committee of origin, if one exists."""
-    codes = bill_committee_codes(bill)
-    for code in codes:
-        if code[0] == 'S':
-            return committee_name(code)
+    coms = bill_committees(bill)
+    if len(coms) != 0 and coms[0].get('committee_id')[0] == 'S':
+        return coms
     return ''
-
-
-def house_committee(bill):
+ 
+ 
+def house_committees(bill):
     """Find house committee of origin, if one exists."""
-    codes = bill_committee_codes(bill)
-    for code in codes:
-        if code[0] == 'H':
-            return committee_name(code)
+    coms = bill_committees(bill)
+    if len(coms) != 0 and coms[0].get('committee_id')[0] == 'H':
+        return coms
     return ''
 
 
@@ -164,7 +167,7 @@ def full_text_url(bill):
     A full-text url is not provided, so we have to construct it. Example:
     https://www.congress.gov/bill/115th-congress/house-joint-resolution/113
     """
-    congress_num = '115th'
+    congress_num = '114th'
     bill_type = bill_type_url(bill['bill_type'])
     bill_num  = bill['number']
     template = 'https://www.congress.gov/bill/${congress_num}-congress/${bill_type}/${bill_num}/text?format=txt'
@@ -182,7 +185,6 @@ def bill_sponsor(person):
     sponsor['state'] = person['state']
     sponsor['title'] = person['title']
     sponsor['facebook_id'] = ''
-    sponsor['party'] = ''
     endpoint = 'https://api.propublica.org/congress/v1/members/' \
         + sponsor['id'] + '.json'
     headers = {
@@ -192,7 +194,6 @@ def bill_sponsor(person):
     response = json.loads(request.text)
     if 'results' in response and response['results']:
         sponsor['facebook_id'] = response['results'][0]['facebook_account']
-        sponsor['party'] = response['results'][0]['current_party']
     else: assert False
     return sponsor
 

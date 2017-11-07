@@ -11,14 +11,13 @@ import requests
 import uuid
 from io import open
 import time
-
-
-'''
 import sys
 sys.path.append("..")
 import summarize_bill
-'''
+from pymongo import MongoClient
 
+
+print "Make sure you are using 2.7 lol"
 
 states = [u'ak', u'al', u'ar', u'az', u'ca', u'co', u'de', u'fl', u'ga', u'hi', u'ia', u'id', u'il', u'in', u'ks', u'ky', u'la', u'ma', u'md', u'me', u'mi', u'mo', u'ms', u'mt', u'nc', u'nd', u'ne', u'nh', u'nj', u'nm', u'nv', u'oh', u'ok', u'or', u'pa', u'ri', u'sc', u'sd', u'tn', u'ut', u'va', u'vt', u'wa', u'wi', u'wv', u'wy']
 broken_states = [u'ct', u'mn', u'ny', u'tx']
@@ -26,12 +25,12 @@ broken_states = [u'ct', u'mn', u'ny', u'tx']
 
 apikey = u'b80dbeb2-7653-4b55-ba06-c382003f4eaa'
 
-def get_state_bill_ids(state):
+def get_openstates_info(state):
   #API can be filtered by updated since yesterday
   params = {u"apikey": apikey, u'state': state, u'search_window': u'session'}
   result = requests.get(u'https://openstates.org/api/v1/bills/', params=params)
   bills = json.loads(result.text)
-  new_bills = [(bill[u'id'], bill[u'updated_at']) for bill in bills]
+  new_bills = [(bill[u'id'], get_dt(bill[u'updated_at'])) for bill in bills]
   return new_bills
 
 def get_sponsor(leg_id):
@@ -50,9 +49,8 @@ def get_sponsor(leg_id):
 
   return sponsor
 
-def get_bill_details(tup):
-  bill_id, last_updated = tup
-  result = requests.get(u"https://openstates.org/api/v1/bills/" + bill_id, params={u"apikey": apikey})
+def get_bill_details(os_id):
+  result = requests.get(u"https://openstates.org/api/v1/bills/" + os_id, params={u"apikey": apikey})
   raw = json.loads(result.text)
 
   B = {}
@@ -65,8 +63,8 @@ def get_bill_details(tup):
     u'signed': raw[u'action_dates'][u'signed'],
     u'vetoed': None
   }
-  B[u'bill_id'] = raw[u'bill_id']
-  B[u'openstates_id'] = raw[u'id']
+
+  B[u'bill_id'] = os_id
   B[u'topic'] = u"" #We need to pick this
   B[u'subtopics'] = [s.title() for s in raw[u'subjects']]
   if u'scraped_subjects' in raw:
@@ -97,6 +95,15 @@ def get_bill_details(tup):
   B[u"history"] = {} #TODO
 
   B[u"introduction_date"] = raw[u'created_at']
+
+  B["house_committees"] = []
+  B["senate_committtees"] = []
+
+
+  B["smiley_count"] = 0
+  B["frowny_count"] = 0
+
+
 
   return B
 
@@ -152,17 +159,59 @@ def download_pdf(url):
 
   return full_text
 
+def get_mi_title(text):
+  small_text = ' '.join([x for x in text.split('\n') if x])[:1000] #Should be within first 1000 words
+  sentences = small_text.split('.')
+  #Amendment
+  #Bill
+  #Joint resolution
+  possible_titles = [s for s in sentences if "AN ACT" in s or 'entitled' in s or 'joint resolution' in s]
+
+  if len(possible_titles) == 0:
+    return ''
+
+  title_sentence = possible_titles[0]
+
+  title = ''
+  if 'amend' and 'entitled' in title_sentence:
+    #Amending bill, so grab title of actual bill between quotes
+    start_idx = title_sentence.find(u'\u201c') + 1 #for length of unicode quote
+    end_idx = title_sentence.rfind(u'\u201d')
+
+    if start_idx == 0 and end_idx == -1: #NO unicode quote, regular quotes
+      start_idx = title_sentence.find(r'"') + 1 #for length of unicode quote
+      end_idx = title_sentence.rfind(r'"')
+
+    title = title_sentence[start_idx:end_idx]
+    title = title.capitalize()
+    if title.startswith("An ac to "):
+      title = title[len("An act to "):]
+  '''
+  else:
+    import ipdb; ipdb.set_trace() 
+  elif 'joint resolution' in title_sentence:
+    print(title_sentence)
+    import ipdb; ipdb.set_trace() 
+
+
+  else: #New bill, will have title
+    title = title_sentence[len("AN ACT to "):].capitalize()
+  '''
+  return title
+
 def download_html(url):
   article = Article(url)
   article.download()
   article.download() #TODO this is not necessary probably
   article.parse()
 
+  #Sometimes this messes up...
+
   return article.text
 
 
 def tryOne(state):
-  tup = get_state_bill_ids(state)[0]
+  tup = get_openstates_info(state)[0]
 
   bill = get_bill_details(tup)
   url = bill[u'full_text_url']
@@ -203,29 +252,107 @@ print("pdf", all_pdf, len(all_pdf))
 all_ftp = [x for x,y in xx if y == "ftp"]
 print("ftp", all_ftp, len(all_ftp))
 '''
-def flatten(_list):
-  return [item for sublist in _list for item in sublist]
-
 
 #For one state XXX
 
-#Get state bill ids 
-start = time.time()
-bill_ids = get_state_bill_ids(u'mi')
-print len(bill_ids), u"bill ids", time.time() - start
-#TODO narrow down to only most recent updates here
 
-bill_ids = bill_ids[:10] #So we can test without taking too much time
 
-start = time.time()
-p = Pool(10)
-bills = p.map(get_bill_details, bill_ids)
-#Sync version
-#bills = [get_bill_details(bill_id) for bill_id in bill_ids]
-print u"bill details", time.time() - start
+#Query mongo for each bill coming in and see if last updated has changed
 
-for idx, bill in enumerate(bills):
-  url = bill[u'full_text_url']
-  with open(u'test/' + unicode(idx) + u'.txt', u'w') as f:
-    f.write(download_html(url))
+#try catch for converting and inserting
+
+#get topics for each 
+
+'''
+  from pymongo import MongoClient()
+  client = MongoClient()
+  db = client.wtp
+  db.bills.replace_one()
+
+  cursor = db.bills.find({})
+  [document for document in cursor]
+
+
+
+'''
+def get_dt(in_str):
+  return datetime.strptime(in_str, '%Y-%m-%d %I:%M:%S')
+
+
+
+def main():
+  state = 'mi'
+  #Get all state bill ids 
+  os_info = get_openstates_info(state) 
+  #rework this to query with updated_since so 
+  #it gets all those above a lowest date (across all state bills?)
+
+  #Query database to see when these were last updated
+  client = MongoClient()
+  db = client.wtp
+  cursor = db.bills.find({'state':state}, {'_id': 0, 'last_updated': 1, 'bill_id': 1})
+  current_db_info = {doc['bill_id']: get_dt(doc['last_updated']) for doc in cursor if doc}
+
+  print("Current db size", len(current_db_info))
+  print("openstates get size", len(os_info))
+
+  to_update = []
+  
+  for osi in os_info:
+    os_id, ts = osi
+
+    if os_id not in current_db_info:
+      to_update.append(os_id)
+    else:
+      if ts > current_db_info[os_id]:
+        to_update.append(os_id)
+      # if in DB and ts <=, then we don't need to update it
+
+  print("To update", len(to_update))
+
+  #to_update = to_update[:10]
+
+  #Process all the bills we need to update
+  start = time.time()
+  p = Pool(10)
+  bills = p.map(update_db, to_update)
+  #Sync version
+  #bills = [update_db(os_id) for os_id in to_update]
+  print u"bill details", time.time() - start
+
+
+  '''
+  Could insert many bills at once here
+  '''
+
+
+def update_db(os_id):
+  bill = get_bill_details(os_id)
+
+  text = download_html(bill['full_text_url'])
+  title = get_mi_title(text)
+  if title:
+    sum_text = summarize_bill.summarize_bill(title, text)
+    bill['machine_summary'] = ' '.join(sum_text)
+  '''
+    print("GOOD")
+  else:
+    print("SOMETHING WENT WRONG")
+  '''
+  print(os_id)
+
+  client = MongoClient()
+  db = client.wtp
+  #     filter that picks correct bill VV                   V replaces existing document with new one or just creates new one
+  db.bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
+
+#main()
+
+
+#TODO
+#
+# insert all into DB
+# get topics -> move to replace_many/insert_many?
+#
+
 
