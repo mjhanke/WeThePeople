@@ -15,6 +15,7 @@ import sys
 sys.path.append("..")
 import summarize_bill
 from pymongo import MongoClient, ReplaceOne
+import subprocess
 
 
 print "Make sure you are using 2.7 lol"
@@ -65,10 +66,11 @@ def get_bill_details(os_id):
   }
 
   B[u'bill_id'] = os_id
-  B[u'topic'] = u"" #We need to pick this
-  B[u'subtopics'] = [s.title() for s in raw[u'subjects']]
-  if u'scraped_subjects' in raw:
-    B[u'scraped_topics'] = [s.title() for s in raw[u'scraped_subjects']]
+  B[u'topic'] = u"" #Main topic not currently used by frontend
+  B[u'subtopics'] = [] #From our classifier 
+  if u'scraped_subjects' in raw and 'subjects' in raw:
+    B[u'scraped_topics'] = [s.title() for s in raw[u'scraped_subjects']] + [s.title() for s in raw[u'subjects']]
+
   B[u'state'] = raw[u'state']
   B[u'level_code'] = 1 #state
   B[u'human_summary'] = u""
@@ -349,6 +351,17 @@ def update_db(os_id):
     print("SOMETHING WENT WRONG")
   '''
   print("Summarize bill", time.time() - start)
+
+  start = time.time()
+  cmd = '../fasttext/fasttext predict ../fasttext/model_subtopics.bin - 6'
+  process = subprocess.Popen(cmd.split(' '), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+  output, error = process.communicate(title)
+  topics = output.rstrip().split(' ')
+  print(topics)
+  bill['subtopics'] = [topic[len("__label__"):] for topic in topics]
+  print(bill['subtopics'])
+
+  print("Get topics", time.time() - start)
 
   #     filter that picks correct bill VV         V replaces existing document with new one or just creates new one
   return ReplaceOne({'bill_id': bill['bill_id']}, bill, True)
