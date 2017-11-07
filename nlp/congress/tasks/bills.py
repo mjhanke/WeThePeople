@@ -98,7 +98,6 @@ def get_bills_to_process(options):
                     # file need to be updated?
                     bulkfile_lastmod = utils.read(fn.replace(".xml", "-lastmod.txt"))
                     parse_lastmod = utils.read(get_data_path(congress, bill_type, bill_type_and_number, "data-fromfdsys-lastmod.txt"))
-                    #if bulkfile_lastmod != parse_lastmod or options.get("force"):
                     if bulkfile_lastmod != parse_lastmod or options.get("force") or not os.path.isfile(fn.replace('fdsys_billstatus.xml', 'formatted.json')):
                         print("Creating formatted JSON for %s" % bill_type_and_number)
                         bill_id = bill_type_and_number + "-" + congress
@@ -124,7 +123,7 @@ def process_bill(bill_id, options):
         insert_bills(formatted)
 
         utils.write(
-            unicode(formatted),
+            unicode(json.dumps(formatted, indent=2, sort_keys=True)),
             os.path.dirname(fdsys_xml_path) + '/formatted.json')
         # maybe a logging.info call instead
         print("Formatted and inserted %s" % fdsys_xml_path)
