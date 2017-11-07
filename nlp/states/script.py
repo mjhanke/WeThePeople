@@ -14,7 +14,7 @@ import time
 import sys
 sys.path.append("..")
 import summarize_bill
-from pymongo import MongoClient
+from pymongo import MongoClient, ReplaceOne
 
 
 print "Make sure you are using 2.7 lol"
@@ -310,16 +310,21 @@ def main():
 
   print("To update", len(to_update))
 
-  #to_update = to_update[:10]
+  to_update = to_update[:10]
 
   #Process all the bills we need to update
   start = time.time()
   p = Pool(10)
-  bills = p.map(update_db, to_update)
+  #bills = p.map(update_db, to_update)
   #Sync version
-  #bills = [update_db(os_id) for os_id in to_update]
+  bills = [update_db(os_id) for os_id in to_update]
   print u"bill details", time.time() - start
 
+  start = time.time()
+  client = MongoClient()
+  db = client.wtp
+  db.bills.bulk_write(bills)
+  print u"bulk write", time.time() - start
 
   '''
   Could insert many bills at once here
@@ -327,8 +332,12 @@ def main():
 
 
 def update_db(os_id):
+  start = time.time()
   bill = get_bill_details(os_id)
 
+  print("get_bill_details", time.time() - start)
+
+  start = time.time()
   text = download_html(bill['full_text_url'])
   title = get_mi_title(text)
   if title:
@@ -339,14 +348,14 @@ def update_db(os_id):
   else:
     print("SOMETHING WENT WRONG")
   '''
-  print(os_id)
+  print("Summarize bill", time.time() - start)
 
-  client = MongoClient()
-  db = client.wtp
-  #     filter that picks correct bill VV                   V replaces existing document with new one or just creates new one
-  db.bills.replace_one({'bill_id': bill['bill_id']}, bill, True)
+  #     filter that picks correct bill VV         V replaces existing document with new one or just creates new one
+  return ReplaceOne({'bill_id': bill['bill_id']}, bill, True)
 
-#main()
+
+
+main()
 
 
 #TODO
