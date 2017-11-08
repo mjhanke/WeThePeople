@@ -313,21 +313,21 @@ def main():
 
   print("To update", len(to_update))
 
-  to_update = to_update[:100]
+  #to_update = to_update[:30] #To test in smaller increments
 
   #Process all the bills we need to update
   start = time.time()
   p = Pool(10)
-  #bills = p.map(update_db, to_update)
+  bills = p.map(update_db, to_update)
   #Sync version
-  bills = [update_db(os_id) for os_id in to_update]
-  print u"bill details", time.time() - start
+  #bills = [update_db(os_id) for os_id in to_update]
+  print("bill details", time.time() - start)
 
   start = time.time()
   client = MongoClient()
   db = client.wtp
   db.bills.bulk_write(bills)
-  print u"bulk write", time.time() - start
+  print("bulk write", time.time() - start)
 
   '''
   Could insert many bills at once here
@@ -338,34 +338,25 @@ def update_db(os_id):
   start = time.time()
   bill = get_bill_details(os_id)
 
-  print("get_bill_details", time.time() - start)
-
-  start = time.time()
   text = download_html(bill['full_text_url'])
   title = get_mi_title(text)
   if title:
     sum_text = summarize_bill.summarize_bill(title, text)
     bill['machine_summary'] = ' '.join(sum_text)
-  '''
-    print("GOOD")
+
+    cmd = '../fasttext/fasttext predict ../fasttext/model_subtopics.bin - 6'
+    process = subprocess.Popen(cmd.split(' '), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+    #Get rid of leftover unicode
+    title = ''.join([c if ord(c) < 128 else ' ' for c in text])
+    #Strip punctuation from title
+    stripped_title = str(title).translate(None, string.punctuation)
+    output, error = process.communicate(stripped_title)
+    topics = output.rstrip().split(' ')
+    bill['subtopics'] = [topic[len("__label__"):] for topic in topics]
+    print(os_id, time.time() - start, 'summarized')
   else:
-    print("SOMETHING WENT WRONG")
-  '''
-  print("Summarize bill", time.time() - start)
-
-  start = time.time()
-  cmd = '../fasttext/fasttext predict ../fasttext/model_subtopics.bin - 6'
-  process = subprocess.Popen(cmd.split(' '), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-
-  #Get rid of leftover unicode
-  title = ''.join([c if ord(c) < 128 else ' ' for c in text])
-  #Strip punctuation from title
-  stripped_title = str(title).translate(None, string.punctuation)
-  output, error = process.communicate(stripped_title)
-  topics = output.rstrip().split(' ')
-  bill['subtopics'] = [topic[len("__label__"):] for topic in topics]
-
-  print("Get topics", time.time() - start)
+    print(os_id, time.time() - start, 'No machine summary')
 
   #     filter that picks correct bill VV         V replaces existing document with new one or just creates new one
   return ReplaceOne({'bill_id': bill['bill_id']}, bill, True)
