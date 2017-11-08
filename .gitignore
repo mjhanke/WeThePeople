@@ -70,3 +70,8 @@ fastlane/screenshots
 /nlp/states/pdfs
 /nlp/states/test
 *.sw*
+
+.bash_logout
+.bashrc
+.profile
+nlp/cronjob.log
