@@ -16,6 +16,7 @@ sys.path.append("..")
 import summarize_bill
 from pymongo import MongoClient, ReplaceOne
 import subprocess
+import string
 
 
 print "Make sure you are using 2.7 lol"
@@ -312,7 +313,7 @@ def main():
 
   print("To update", len(to_update))
 
-  to_update = to_update[:10]
+  to_update = to_update[:100]
 
   #Process all the bills we need to update
   start = time.time()
@@ -355,11 +356,14 @@ def update_db(os_id):
   start = time.time()
   cmd = '../fasttext/fasttext predict ../fasttext/model_subtopics.bin - 6'
   process = subprocess.Popen(cmd.split(' '), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-  output, error = process.communicate(title)
+
+  #Get rid of leftover unicode
+  title = ''.join([c if ord(c) < 128 else ' ' for c in text])
+  #Strip punctuation from title
+  stripped_title = str(title).translate(None, string.punctuation)
+  output, error = process.communicate(stripped_title)
   topics = output.rstrip().split(' ')
-  print(topics)
   bill['subtopics'] = [topic[len("__label__"):] for topic in topics]
-  print(bill['subtopics'])
 
   print("Get topics", time.time() - start)
 
