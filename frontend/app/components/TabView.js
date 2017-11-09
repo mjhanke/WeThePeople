@@ -46,12 +46,12 @@ export default class TabView extends Component {
     ),
     3: () => (
       <MyReps
-        voterAddress={this.props.voterAddress}
+        navigation={this.props.navigation}
       />
     ),
     3: () => (
       <MyReps
-        voterAddress={this.props.voterAddress}
+        navigation={this.props.navigation}
       />
     ),
   });
