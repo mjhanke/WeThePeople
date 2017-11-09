@@ -8,6 +8,7 @@
  */
 
 #import <UIKit/UIKit.h>
+@class OnboardingController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

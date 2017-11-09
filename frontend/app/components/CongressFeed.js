@@ -45,6 +45,7 @@ export default class CongressFeed extends Component {
         style={styles.backgroundView}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
+        enableEmptySections
       />
     );
   }

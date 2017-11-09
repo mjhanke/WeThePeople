@@ -22,7 +22,6 @@ export default class MainView extends Component {
         billWasTapped={bill => this.billWasTapped(bill)}
         personWasTapped={bill => this.personWasTapped(bill)}
         toggleDrawer={() => this.toggleDrawer()}
-        voterAddress={this.props.screenProps.voterAddress}
       />
     );
   }
@@ -31,8 +30,5 @@ export default class MainView extends Component {
 MainView.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
-  }).isRequired,
-  screenProps: PropTypes.shape({
-    voterAddress: PropTypes.string.isRequired,
   }).isRequired,
 };

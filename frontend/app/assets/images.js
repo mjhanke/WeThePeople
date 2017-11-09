@@ -18,6 +18,10 @@ const images = {
   lightCheckmark: require('../images/lightCheckmark.png'),
   weLogo: require('../images/We.png'),
   hamster: require('../images/hamsterOnWheel.gif'),
-}
+  globe: require('../images/globe.png'),
+  oldPhone: require('../images/oldphone.jpg'),
+  gavel: require('../images/gavel.png'),
+  clipboard: require('../images/clipboard.jpg'),
+};
 
 export default images;

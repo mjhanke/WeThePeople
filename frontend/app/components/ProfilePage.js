@@ -31,7 +31,7 @@ export default class ProfilePage extends Component {
     CongressAPI.getLegislator(params.legId)
       .then((response) => {
         this.setState({
-          response: response,
+          response,
           name: `${response.first_name} ${response.last_name} `,
           imageUrl: `https://graph.facebook.com/${response.facebook_account}/picture?type=large`,
           party: response.current_party,
@@ -40,22 +40,21 @@ export default class ProfilePage extends Component {
         });
       }).then(() => {
         this.fetchBio();
-      })
-
+      });
   }
 
   fetchBio() {
     first_name = this.state.response.first_name;
     last_name = this.state.response.last_name;
-    url = `https://en.wikipedia.org/w/api.php?format=json&action=query` +
-           `&prop=extracts&exintro=&explaintext=&titles=` +
+    url = 'https://en.wikipedia.org/w/api.php?format=json&action=query' +
+           '&prop=extracts&exintro=&explaintext=&titles=' +
            `${first_name}%20${last_name}`;
     return fetch(url)
       .then(response => response.json())
       .then((response) => {
-        const pages = response['query']['pages'];
-        this.setState({ bio: 'not set'});
-        if (!response['query']['pages'].hasOwnProperty('-1')) {
+        const pages = response.query.pages;
+        this.setState({ bio: 'not set' });
+        if (!response.query.pages.hasOwnProperty('-1')) {
           // found a matching Wikipedia page
           for (const key in pages) {
             if (pages.hasOwnProperty(key)) {
@@ -68,14 +67,12 @@ export default class ProfilePage extends Component {
         }
         return response;
       }).catch((error) => {
-        this.setState({ bio: 'Bio unavailable'});
-        console.log(error)
+        this.setState({ bio: 'Bio unavailable' });
+        console.log(error);
       });
-
   }
 
   shortenBio(bio) {
-
     if (bio.includes(')')) {
       // Removes birthday
       bio = bio.replace(/ *\([^)]*\) */g, ' ');

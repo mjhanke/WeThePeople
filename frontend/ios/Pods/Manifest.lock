@@ -1,99 +1,68 @@
 PODS:
-  - BugsnagReactNative (2.5.0):
-    - BugsnagReactNative/Core (= 2.5.0)
-    - React
-  - BugsnagReactNative/Core (2.5.0):
-    - React
-  - CodePush (5.1.3):
-    - CodePush/Base64 (= 5.1.3)
-    - CodePush/Core (= 5.1.3)
-    - CodePush/JWT (= 5.1.3)
-    - CodePush/SSZipArchive (= 5.1.3)
-    - React
-  - CodePush/Base64 (5.1.3):
-    - React
-  - CodePush/Core (5.1.3):
-    - React
-  - CodePush/JWT (5.1.3):
-    - React
-  - CodePush/SSZipArchive (5.1.3):
-    - React
-  - React (0.48.4):
-    - React/Core (= 0.48.4)
-  - React/BatchedBridge (0.48.4):
-    - React/Core
-    - React/cxxreact_legacy
-  - React/Core (0.48.4):
-    - Yoga (= 0.48.4.React)
-  - React/cxxreact_legacy (0.48.4):
-    - React/jschelpers_legacy
-  - React/DevSupport (0.48.4):
-    - React/Core
-    - React/RCTWebSocket
-  - React/jschelpers_legacy (0.48.4)
-  - React/RCTActionSheet (0.48.4):
-    - React/Core
-  - React/RCTAnimation (0.48.4):
-    - React/Core
-  - React/RCTBlob (0.48.4):
-    - React/Core
-  - React/RCTGeolocation (0.48.4):
-    - React/Core
-  - React/RCTImage (0.48.4):
-    - React/Core
-    - React/RCTNetwork
-  - React/RCTLinkingIOS (0.48.4):
-    - React/Core
-  - React/RCTNetwork (0.48.4):
-    - React/Core
-  - React/RCTSettings (0.48.4):
-    - React/Core
-  - React/RCTText (0.48.4):
-    - React/Core
-  - React/RCTVibration (0.48.4):
-    - React/Core
-  - React/RCTWebSocket (0.48.4):
-    - React/Core
-    - React/RCTBlob
+  - Firebase/Auth (4.5.0):
+    - Firebase/Core
+    - FirebaseAuth (= 4.3.1)
+  - Firebase/Core (4.5.0):
+    - FirebaseAnalytics (= 4.0.4)
+    - FirebaseCore (= 4.0.10)
+  - Firebase/Database (4.5.0):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.1.0)
+  - FirebaseAnalytics (4.0.4):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - nanopb (~> 0.3)
+  - FirebaseAuth (4.3.1):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseCore (4.0.10):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - nanopb (~> 0.3)
+  - FirebaseDatabase (4.1.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (2.0.5)
+  - GoogleToolboxForMac/DebugUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GTMSessionFetcher/Core (1.1.12)
+  - leveldb-library (1.20)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - SwiftyJSON (3.1.4)
-  - Yoga (0.48.4.React)
 
 DEPENDENCIES:
-  - BugsnagReactNative (from `../node_modules/bugsnag-react-native`)
-  - CodePush (from `../node_modules/react-native-code-push`)
-  - React/BatchedBridge (from `../node_modules/react-native`)
-  - React/Core (from `../node_modules/react-native`)
-  - React/DevSupport (from `../node_modules/react-native`)
-  - React/RCTActionSheet (from `../node_modules/react-native`)
-  - React/RCTAnimation (from `../node_modules/react-native`)
-  - React/RCTGeolocation (from `../node_modules/react-native`)
-  - React/RCTImage (from `../node_modules/react-native`)
-  - React/RCTLinkingIOS (from `../node_modules/react-native`)
-  - React/RCTNetwork (from `../node_modules/react-native`)
-  - React/RCTSettings (from `../node_modules/react-native`)
-  - React/RCTText (from `../node_modules/react-native`)
-  - React/RCTVibration (from `../node_modules/react-native`)
-  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Database
   - SwiftyJSON
-  - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
-
-EXTERNAL SOURCES:
-  BugsnagReactNative:
-    :path: ../node_modules/bugsnag-react-native
-  CodePush:
-    :path: ../node_modules/react-native-code-push
-  React:
-    :path: ../node_modules/react-native
-  Yoga:
-    :path: ../node_modules/react-native/ReactCommon/yoga
 
 SPEC CHECKSUMS:
-  BugsnagReactNative: 7810890dca86366c6a8ef9b46ce587f6de33635e
-  CodePush: ffe876b57db57e0295653d69aa1653b0278b43ad
-  React: 6d68659481a8a56e0f6b3dbecd984d5b9bb2d6c5
+  Firebase: d83d287bdb6b1c78320561482706d1fcfc8ddfc1
+  FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
+  FirebaseAuth: e7c2b1359c2df4af23a568100a8eace0b8c507e4
+  FirebaseCore: da5e8e372cb6046212739a4d81e42d32c22907cc
+  FirebaseDatabase: 607284a103e961d7f5863ee603cab5e85f443bd6
+  FirebaseInstanceID: f2b688c66b972f30d7fa9f5f9f91455454a03b47
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  leveldb-library: 9e29a1d913f922444127a7d0f28b025a0e2ba053
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  Yoga: ccefa1454b2e9825dce3b2df98088b7f0e3c2675
 
-PODFILE CHECKSUM: 49fd54b920565fbb5201047010e1f85ac0bbe98a
+PODFILE CHECKSUM: 86b4fabf0170a72615570ad351d5d6f598ba5e59
 
 COCOAPODS: 1.3.1

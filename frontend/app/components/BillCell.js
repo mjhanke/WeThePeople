@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import CongressAPI from './CongressAPI';
 import NameHeader from './NameHeader';
 import We from '../images/We.png';
+
 const moment = require('moment');
 
 export default class BillCell extends Component {
@@ -30,7 +31,7 @@ export default class BillCell extends Component {
           party: `(${response.current_party}-${response.roles[0].state})`,
           legId: response.member_id,
         });
-      })
+      });
   }
 
   render() {
@@ -45,7 +46,7 @@ export default class BillCell extends Component {
             imageUrl={this.state.imageUrl}
             party={this.state.party}
             wasTapped={this.props.personWasTapped}
-            date={'3 days ago'}
+            date="3 days ago"
             legId={this.state.legId}
           />
           <Text style={styles.content} numberOfLines={2}>

@@ -86,7 +86,7 @@ export default class BillDetail extends Component {
           imageUrl={this.state.imageUrl}
           party={this.state.party}
           wasTapped={this.state.personWasTapped}
-          date={'3 days ago'}
+          date="3 days ago"
           legId={this.state.legId}
         />
         <View style={styles.contentWrapper}>
