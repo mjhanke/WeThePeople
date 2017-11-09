@@ -32,7 +32,7 @@ def get_openstates_info(state):
   params = {u"apikey": apikey, u'state': state, u'search_window': u'session'}
   result = requests.get(u'https://openstates.org/api/v1/bills/', params=params)
   bills = json.loads(result.text)
-  new_bills = [(bill[u'id'], get_dt(bill[u'updated_at'])) for bill in bills]
+  new_bills = [(bill[u'id'], get_dt(get_date(bill[u'updated_at']))) for bill in bills]
   return new_bills
 
 def get_sponsor(leg_id):
@@ -57,12 +57,12 @@ def get_bill_details(os_id):
 
   B = {}
 
-  B[u'actions'] = [{u'date': a[u'date'], u'action': a[u'action']} for a in raw[u'actions']]
+  B[u'actions'] = [{u'date': get_date(a[u'date']), u'action': a[u'action']} for a in raw[u'actions']]
   B[u'bill_status'] = {
     u'active': False, #bool for has seen activity beyond introduction, ok for state not to have
-    u'passed_upper' :raw[u'action_dates'][u'passed_upper'],
-    u'passed_lower': raw[u'action_dates'][u'passed_lower'],
-    u'signed': raw[u'action_dates'][u'signed'],
+    u'passed_upper': None if not raw[u'action_dates'][u'passed_upper'] else get_date(raw[u'action_dates'][u'passed_upper']),
+    u'passed_lower': None if not raw[u'action_dates'][u'passed_lower'] else get_date(raw[u'action_dates'][u'passed_lower']),
+    u'signed': None if not raw[u'action_dates'][u'signed'] else get_date(raw[u'action_dates'][u'signed']),
     u'vetoed': None
   }
 
@@ -78,7 +78,7 @@ def get_bill_details(os_id):
   B[u'machine_summary'] = u"" #get this lol
   B[u'title'] = raw[u'title']
   B[u'short_title'] = u""
-  B[u'last_updated'] = raw[u'updated_at']
+  B[u'last_updated'] = get_date(raw[u'updated_at'])
 
   if raw[u'versions']:
     B[u"full_text_url"] = raw[u'versions'][-1][u'url'] #Get latest text
@@ -97,7 +97,7 @@ def get_bill_details(os_id):
   B[u"related_bills"] = [] #TODO
   B[u"history"] = {} #TODO
 
-  B[u"introduction_date"] = raw[u'created_at']
+  B[u"introduction_date"] = get_date(raw[u'created_at'])
 
   B["house_committees"] = []
   B["senate_committtees"] = []
@@ -279,9 +279,10 @@ print("ftp", all_ftp, len(all_ftp))
 
 '''
 def get_dt(in_str):
-  return datetime.strptime(in_str, '%Y-%m-%d %I:%M:%S')
+  return datetime.strptime(in_str, '%Y-%m-%d')
 
-
+def get_date(in_str):
+  return in_str.split(' ')[0]
 
 def main():
   state = 'mi'
@@ -313,7 +314,7 @@ def main():
 
   print("To update", len(to_update))
 
-  #to_update = to_update[:30] #To test in smaller increments
+  #to_update = to_update[:10] #To test in smaller increments
 
   #Process all the bills we need to update
   start = time.time()
@@ -349,12 +350,16 @@ def update_db(os_id):
     process = subprocess.Popen(cmd.split(' '), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
     #Get rid of leftover unicode
-    title = ''.join([c if ord(c) < 128 else ' ' for c in text])
+    title = ''.join([c if ord(c) < 128 else ' ' for c in title])
     #Strip punctuation from title
     stripped_title = str(title).translate(None, string.punctuation)
+    #print(stripped_title)
+    #TODO title needs to be one line, or else 6 categories are repeated
     output, error = process.communicate(stripped_title)
+    #import ipdb; ipdb.set_trace() 
     topics = output.rstrip().split(' ')
     bill['subtopics'] = [topic[len("__label__"):] for topic in topics]
+    #print(bill['subtopics'])
     print(os_id, time.time() - start, 'summarized')
   else:
     print(os_id, time.time() - start, 'No machine summary')
