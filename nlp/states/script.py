@@ -324,9 +324,10 @@ def main():
   print("bill details", time.time() - start)
 
   start = time.time()
-  client = MongoClient()
-  db = client.wtp
-  db.bills.bulk_write(bills)
+  if bills:
+    client = MongoClient()
+    db = client.wtp
+    db.bills.bulk_write(bills)
   print("bulk write", time.time() - start)
 
   '''
