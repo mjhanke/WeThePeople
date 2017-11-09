@@ -9,7 +9,6 @@ import {
 import PropTypes from 'prop-types';
 
 /* Tab bar pages */
-import Recent from './Recent';
 import MyReps from './MyReps';
 import CongressFeed from './CongressFeed';
 
@@ -22,7 +21,7 @@ export default class TabView extends Component {
     index: 0,
     routes: [
       { key: '1', title: 'CONGRESS' },
-      //{ key: '2', title: 'STATE' },
+      // { key: '2', title: 'STATE' },
       { key: '3', title: 'MY REPS' },
     ],
   };
@@ -45,7 +44,11 @@ export default class TabView extends Component {
         personWasTapped={this.props.personWasTapped}
       />
     ),
-    2: () => <Recent />,
+    3: () => (
+      <MyReps
+        voterAddress={this.props.voterAddress}
+      />
+    ),
     3: () => (
       <MyReps
         voterAddress={this.props.voterAddress}
@@ -72,7 +75,6 @@ export default class TabView extends Component {
 TabView.propTypes = {
   billWasTapped: PropTypes.func.isRequired,
   personWasTapped: PropTypes.func.isRequired,
-  voterAddress: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Firebase
 
 class OnboardingController: UIViewController {
 
@@ -23,7 +24,7 @@ class OnboardingController: UIViewController {
 
     var topicNodes = [TopicNode]()
 
-    let generator = UIImpactFeedbackGenerator(style: .medium)
+    //let generator = UIImpactFeedbackGenerator(style: .medium)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +56,16 @@ class OnboardingController: UIViewController {
             navigationController?.pushViewController(nextVC, animated: true)
             break
         case .subtopicSelect:
-            let nextVC = NewsfeedController()
-            nextVC.selectedSubtopics = extractSelectedSubtopics()
-            UserDefaults.standard.set(true, forKey: "finishedOnboarding")
-            present(nextVC, animated: true, completion: nil)
+            let newsfeed = ReactNativeController()
+            newsfeed.addReactView()
+            if let userID = Auth.auth().currentUser?.uid {
+              let subtopics = extractSelectedSubtopics()
+              let ref = Database.database().reference()
+              ref.child("users/\(userID)/subtopics").setValue(subtopics)
+              present(newsfeed, animated: true, completion: nil)
+            } else {
+              assert(false)
+            }
             break
         }
     }
@@ -134,7 +141,7 @@ extension OnboardingController: MagneticDelegate {
         }
 
         self.navigationItem.rightBarButtonItem?.isEnabled = true
-        generator.impactOccurred()
+        //generator.impactOccurred()
     }
 
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
@@ -156,7 +163,7 @@ extension OnboardingController: MagneticDelegate {
         if topicNodes.isEmpty {
             self.navigationItem.rightBarButtonItem?.isEnabled = false
         }
-        generator.impactOccurred()
+        //generator.impactOccurred()
     }
 }
 

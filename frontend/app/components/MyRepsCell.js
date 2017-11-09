@@ -53,9 +53,11 @@ export default class MyReps extends Component {
   }
 
   render() {
+    const imageBorderRadius = ((Dimensions.get('window').width * 0.4) - 7) / 2;
     return (
       <View style={styles.backgroundView}>
         <ImageBackground
+          borderRadius={imageBorderRadius}
           style={styles.profilePic}
           source={{ uri: this.state.imageUrl }}
         >
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     marginRight: 7,
     borderColor: 'black',
     borderRadius: ((Dimensions.get('window').width * 0.4) - 7) / 2,
-    //resizeMode: 'contain',
+    // resizeMode: 'contain',
   },
   descriptionView: {
     height: 140,
