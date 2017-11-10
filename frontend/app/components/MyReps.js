@@ -21,23 +21,23 @@ export default class MyReps extends Component {
       voterAddress: 'None',
       viewStatement: 'your representatives'
     };
+    AsyncStorage.getItem("voterAddress").then((value) => {
+      if (value != null) {
+        this.state['voterAddress'] = value;
+      }
+    }).done();
   }
 
   componentWillMount() {
-    AsyncStorage.getItem("voterAddress").then((value) => {
-      var voterAddress = this.state.voterAddress;
-      if (value != null) {
-        voterAddress = value;
-      }
-      CivicAPI.getRepresentatives(voterAddress).then(response => this.parseReps(response));
-      const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { true; } });
-      this.state = {
-        voterAddress: voterAddress,
-        dataSource: ds.cloneWithRows([]),
-        fetched: false,
-        viewStatement: 'your representatives',
-      };
-    }).done();
+    var voterAddress = this.state.voterAddress;
+    CivicAPI.getRepresentatives(voterAddress).then(response => this.parseReps(response));
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { true; } });
+    this.state = {
+      voterAddress: voterAddress,
+      dataSource: ds.cloneWithRows([]),
+      fetched: false,
+      viewStatement: 'your representatives',
+    };
   }
 
   render() {
