@@ -41,15 +41,14 @@ export default class MyReps extends Component {
       initialsColor = 'white';
     }
 
-    this.state = {
+    this.setState({
       name: displayName,
-      // party: party,
       imageUrl,
       initials,
       initialsColor,
       position,
       party,
-    };
+    });
   }
 
   render() {
