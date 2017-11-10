@@ -51,12 +51,11 @@
   OnboardingController *topicBubbles = [OnboardingController new];
 
   dispatch_sync(dispatch_get_main_queue(), ^{
-    UINavigationController *nav =
-    [[UINavigationController alloc] initWithRootViewController:topicBubbles];
-    [nav.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    nav.navigationBar.shadowImage = [UIImage new];
-    nav.navigationBar.translucent = YES;
-    [self presentViewController:nav animated:true completion:nil];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    [self.navigationController pushViewController:topicBubbles animated:true];
   });
 
 

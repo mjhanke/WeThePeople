@@ -24,8 +24,6 @@ class OnboardingController: UIViewController {
 
     var topicNodes = [TopicNode]()
 
-    //let generator = UIImpactFeedbackGenerator(style: .medium)
-
     override func viewDidLoad() {
         super.viewDidLoad()
         loadTopicNodes()
@@ -53,7 +51,7 @@ class OnboardingController: UIViewController {
             let nextVC = OnboardingController()
             nextVC.type = .subtopicSelect
             nextVC.topicNodes = topicNodes.filter({ $0.isSelected == true })
-            navigationController?.pushViewController(nextVC, animated: true)
+            navigationController?.viewControllers = [nextVC]
             break
         case .subtopicSelect:
             let newsfeed = ReactNativeController()
