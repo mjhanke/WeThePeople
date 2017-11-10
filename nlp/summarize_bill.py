@@ -41,7 +41,7 @@ def simplify_human_summary(text):
     text = replace_formal_words(text)
     text = re.sub(r'\s+', ' ', text)
     text = fix_punctuation_errors(text)
-    return text
+    return nltk.sent_tokenize(text)
 
 def remove_page_artifacts(title, text):
     """Removes headers and titles from page, if scrapped from congress.gov"""
@@ -236,9 +236,9 @@ def summarize_bill_from_url(title, url):
 
     if 'The page you requested is unavailable' in article.text:
         return ''
-
+    text = article.text.replace('Text available as: Xml/Html Xml/Html Txt Pdf Tip ?', '')
     summary = summarize_bill(title, article.text)
     summary = [sentence.lstrip() for sentence in summary]
-    return '\n\n'.join(summary)
+    return summary
 
 #print summarize_bill_from_url('guns', 'https://www.congress.gov/bill/115th-congress/house-bill/3999/text?format=txt')

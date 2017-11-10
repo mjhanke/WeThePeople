@@ -123,13 +123,13 @@ def bill_committees(bill):
         except:
             print("Failed getting committee %s" % str(committee))
     return committees
- 
- 
+
+
 def committee_name(code):
     """Find full name of committee based off thomas_id."""
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
     file_name = 'congress_committees.json'
- 
+
     with open(os.path.join(script_dir, file_name)) as file:
         committees = json.load(file)
         # element for element in people if element['name'] == name
@@ -137,16 +137,16 @@ def committee_name(code):
                           if comm['thomas_id'] == code]
         assert matching_names
         return matching_names[0]
- 
- 
+
+
 def senate_committees(bill):
     """Find senate committee of origin, if one exists."""
     coms = bill_committees(bill)
     if len(coms) != 0 and coms[0].get('committee_id')[0] == 'S':
         return coms
     return ''
- 
- 
+
+
 def house_committees(bill):
     """Find house committee of origin, if one exists."""
     coms = bill_committees(bill)
@@ -159,7 +159,7 @@ def human_summary(bill):
     """Grab human-written bill summary, if one exists."""
     if 'summary' in bill and bill['summary'] != None and 'text' in bill['summary']:
         return simplify_human_summary(bill['summary']['text'])
-    return ''
+    return []
 
 
 def full_text_url(bill):
@@ -167,7 +167,7 @@ def full_text_url(bill):
     A full-text url is not provided, so we have to construct it. Example:
     https://www.congress.gov/bill/115th-congress/house-joint-resolution/113
     """
-    congress_num = '114th'
+    congress_num = '115th'
     bill_type = bill_type_url(bill['bill_type'])
     bill_num  = bill['number']
     template = 'https://www.congress.gov/bill/${congress_num}-congress/${bill_type}/${bill_num}/text?format=txt'
@@ -184,7 +184,7 @@ def bill_sponsor(person):
     sponsor['id'] = person['bioguide_id']
     sponsor['state'] = person['state']
     sponsor['title'] = person['title']
-    sponsor['facebook_id'] = ''
+    sponsor['facebook_id'] = None
     endpoint = 'https://api.propublica.org/congress/v1/members/' \
         + sponsor['id'] + '.json'
     headers = {
@@ -193,6 +193,7 @@ def bill_sponsor(person):
     request = requests.get(endpoint, headers=headers)
     response = json.loads(request.text)
     if 'results' in response and response['results']:
+        sponsor['party'] = response['results'][0]['current_party']
         sponsor['facebook_id'] = response['results'][0]['facebook_account']
     else: assert False
     return sponsor
