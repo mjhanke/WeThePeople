@@ -57,6 +57,31 @@ state_abbreviations = {
 			"wy": True
 }
 
+# -1 is <, 0 is ==, 1 is >
+def bill_compare(bill1, bill2):
+	d1 = bill1.get('actions', [-1])[-1]
+	d2 = bill2.get('actions', [-1])[-1]
+
+	# if either doesn't have a date/failed to read or something
+	if d1 == -1:
+		return -1
+	if d2 == -1:
+		return 1
+
+	# one year is more recent
+	if d1.split('-')[0] != d2.split('-')[0]:
+		return int(d1.split('-')[0]) - int(d2.split('-')[0])
+	# one month is more recent
+	if d1.split('-')[1] != d2.split('-')[1]:
+		return int(d1.split('-')[1]) - int(d2.split('-')[1])
+	# one day is more recent
+	if d1.split('-')[2] != d2.split('-')[2]:
+		return int(d1.split('-')[2]) - int(d2.split('-')[2])
+
+	# must be same date
+	return 0
+
+
 def index(request):
 	return render(request, 'weThePeople/index.html')
 # Create your views here
@@ -180,7 +205,7 @@ def get_all_bills_new(request):
 		bill['_id'] = str(bill['_id'])
 
 	# lines = sorted(lines, key=lambda k: k['page'].get('update_time', 0), reverse=True)
-	relevant_bills = sorted(relevant_bills, key = lambda k: k.get('actions', [])[-1], reverse=True)
+	relevant_bills = sorted(relevant_bills, cmp=bill_compare)
 	# now return 20 most recent
 	return JsonResponse(relevant_bills, safe=False)
 
