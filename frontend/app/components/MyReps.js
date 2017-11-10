@@ -39,6 +39,7 @@ export default class MyReps extends Component {
       };
     }).done();
   }
+
   render() {
     if (this.state.voterAddress == 'None') {
       return (
