@@ -75,8 +75,8 @@ def get_bill_details(os_id):
   B[u'state'] = raw[u'state']
   B[u'level_code'] = 1 #state
   B[u'human_summary'] = u""
-  B[u'machine_summary'] = u"" #get this lol
-  B[u'title'] = raw[u'title']
+  B[u'machine_summary'] = []
+  B[u'title'] = raw[u'title'] #TODO Pick between this and grabbing title out of text
   B[u'short_title'] = u""
   B[u'last_updated'] = get_date(raw[u'updated_at'])
 
@@ -95,12 +95,11 @@ def get_bill_details(os_id):
       B[u'cosponsors'].append(get_sponsor(sponsor[0]))
 
   B[u"related_bills"] = [] #TODO
-  B[u"history"] = {} #TODO
 
   B[u"introduction_date"] = get_date(raw[u'created_at'])
 
   B["house_committees"] = []
-  B["senate_committtees"] = []
+  B["senate_committees"] = []
 
 
   B["smiley_count"] = 0
@@ -187,8 +186,11 @@ def get_mi_title(text):
 
     title = title_sentence[start_idx:end_idx]
     title = title.capitalize()
-    if title.startswith("An ac to "):
+    if title.startswith("An act to "):
       title = title[len("An act to "):]
+
+    
+
   '''
   else:
     import ipdb; ipdb.set_trace() 
@@ -314,7 +316,7 @@ def main():
 
   print("To update", len(to_update))
 
-  #to_update = to_update[:10] #To test in smaller increments
+  to_update = to_update[:10] #To test in smaller increments
 
   #Process all the bills we need to update
   start = time.time()
@@ -344,7 +346,8 @@ def update_db(os_id):
   title = get_mi_title(text)
   if title:
     sum_text = summarize_bill.summarize_bill(title, text)
-    bill['machine_summary'] = ' '.join(sum_text)
+    bill['machine_summary'] = sum_text
+    bill['short_title'] = title
 
     cmd = '../fasttext/fasttext predict ../fasttext/model_subtopics.bin - 6'
     process = subprocess.Popen(cmd.split(' '), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -355,11 +358,12 @@ def update_db(os_id):
     stripped_title = str(title).translate(None, string.punctuation)
     #print(stripped_title)
     #TODO title needs to be one line, or else 6 categories are repeated
-    output, error = process.communicate(stripped_title)
-    #import ipdb; ipdb.set_trace() 
+    scraped_topics = ' '.join(bill['scraped_topics'])
+    stripped_topics = str(scraped_topics).translate(None, string.punctuation)
+    stripped_total = stripped_title + ' ' + stripped_topics
+    output, error = process.communicate(stripped_total)
     topics = output.rstrip().split(' ')
     bill['subtopics'] = [topic[len("__label__"):] for topic in topics]
-    #print(bill['subtopics'])
     print(os_id, time.time() - start, 'summarized')
   else:
     print(os_id, time.time() - start, 'No machine summary')
