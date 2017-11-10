@@ -68,6 +68,9 @@ def bill_compare(bill1, bill2):
 	if d2 == -1:
 		return 1
 
+	d1 = d1['date']
+	d2 = d2['date']
+
 	# one year is more recent
 	if d1.split('-')[0] != d2.split('-')[0]:
 		return int(d1.split('-')[0]) - int(d2.split('-')[0])
