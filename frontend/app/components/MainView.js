@@ -22,6 +22,7 @@ export default class MainView extends Component {
         billWasTapped={bill => this.billWasTapped(bill)}
         personWasTapped={bill => this.personWasTapped(bill)}
         toggleDrawer={() => this.toggleDrawer()}
+        navigation={this.props.navigation}
       />
     );
   }
