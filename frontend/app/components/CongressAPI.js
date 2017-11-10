@@ -1,21 +1,26 @@
-/* Calls the Propublica Congress API */
+import firebase from 'react-native-firebase';
+
 const CongressAPI = {
-  /*
-    Returns curated list of bills based on user's interests
-  */
-  getRecentBills() {
-    const url = 'https://api.propublica.org/congress/v1/115/senate/bills/passed.json';
-    return fetch(url, this.header)
-      .then(response => response.json())
-      .then((responseJson) => {
-        console.log('\n\n********PROPUBLICA API RESULT RECEIVED *********\n\n');
-        const bills = responseJson.results[0].bills;
-        const filteredBills = this.filterResolutions(bills);
-        return filteredBills;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  // Returns curated list of bills based on user's interests
+  async getRecentBills() {
+    await firebase.auth().onAuthStateChanged((user) => {});
+    const user = firebase.auth().currentUser;
+    if (user == null) {
+      throw 'accessing bills while currentUser for Firebase is null';
+    };
+    const ref = firebase.database().ref('users/' + user.uid + '/subtopics');
+    // Reads value 'once', without listening for future changes to database
+    return ref.once('value').then(async snapshot => {
+      const subtopics = ['Health', 'Families'].map(subtopic => subtopic.replace(/ /g,'_'));
+      const base_url = 'http://www.wethepeople.tech/api/v1/get_newsfeed_bills?';
+      const state = 'state=mi';
+      const query = '&topic=' + subtopics.join('&topic=');
+      const url = base_url + state + query;
+      const response = await fetch(url);
+      const bills = await response.json();
+      throw bills;
+      return bills;
+    });
   },
   /*
     Accepts a bioguide_id and returns a legislator object from the API
@@ -35,7 +40,7 @@ const CongressAPI = {
     */
     const url = `https://api.propublica.org/congress/v1/members/${
       bioguide_id}.json`;
-    return fetch(url, this.header)
+    return fetch(url, this.propublicaHeader)
       .then(response => response.json())
       .then(response => response.results[0])
       .catch((error) => {
@@ -43,20 +48,8 @@ const CongressAPI = {
         console.log(error);
       });
   },
-  /*
-    Removes low-impact bills, e.g., "Recognizing National Youth Sports Week"
-  */
-  filterResolutions(bills) {
-    return bills.filter(bill => (this.isResolution(bill) == false));
-  },
 
-  isResolution(bill) {
-    const keywords = ['resolution', 'recognizing', 'designat', 'calling for'];
-    const hasKeyword = new RegExp(keywords.join('|'));
-    return hasKeyword.test(bill.title);
-  },
-
-  header: {
+  propublicaHeader: {
     headers: {
       'X-API-Key': '76l8Lwp3w45mu6BeOShc17r3H4I264iK2mqMfX1k',
     },

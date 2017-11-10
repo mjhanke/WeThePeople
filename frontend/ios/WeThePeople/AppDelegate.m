@@ -22,9 +22,12 @@
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
-  ReactNativeController *rootViewController = [ReactNativeController new];
-  [rootViewController addReactView];
-  self.window.rootViewController = rootViewController;
+  ReactNativeController *reactController = [ReactNativeController new];
+  UINavigationController *navController = [UINavigationController new];
+  [navController pushViewController:reactController animated:false];
+  [reactController addReactView];
+  navController.navigationBar.hidden = YES;
+  self.window.rootViewController = navController;
   [self.window makeKeyAndVisible];
   return YES;
 }

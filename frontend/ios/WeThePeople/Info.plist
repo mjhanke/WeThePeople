@@ -39,6 +39,10 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>wethepeople.tech</key>
+			<dict/>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<string></string>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
