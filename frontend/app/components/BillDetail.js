@@ -18,7 +18,7 @@ export default class BillDetail extends Component {
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
-    this.state = {
+    this.setState({
       summary: 'loading...',
       billExcerpts: '',
       sponsor: '',
@@ -26,7 +26,7 @@ export default class BillDetail extends Component {
       imageUrl: ' ',
       legId: '',
       personWasTapped: params.personWasTapped,
-    };
+    });
     const url = this.state.bill.sponsor.bioguide_id;
     CongressAPI.getLegislator(url)
       .then((response) => {

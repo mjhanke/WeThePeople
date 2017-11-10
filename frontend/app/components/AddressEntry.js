@@ -11,9 +11,6 @@ import {
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import TabView from './TabView';
 
-import { NavigationActions } from 'react-navigation'
-
-
 export default class AddressEntry extends Component {
   render() {
     return (
@@ -24,7 +21,7 @@ export default class AddressEntry extends Component {
         <Text style={styles.description}>
           View {this.props.prevComponent.state.viewStatement}!
         </Text>
-        { GooglePlacesInput(this.props.navigation, this.props.prevComponent) }
+        { GooglePlacesInput(this.props.prevComponent) }
       </View>
     );
   }
@@ -52,7 +49,7 @@ const styles = StyleSheet.create({
 });
 
 
-const GooglePlacesInput = (navigation, prevComponent) => {
+const GooglePlacesInput = (prevComponent) => {
   return (
     <GooglePlacesAutocomplete
       placeholder='Search'
@@ -63,20 +60,8 @@ const GooglePlacesInput = (navigation, prevComponent) => {
       fetchDetails={true}
       renderDescription={row => row.description} // custom description render
       onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-        // Set voterAddress in permanent storage
-        AsyncStorage.setItem("voterAddress", data['description']);
-
-        // Set state of myReps
-        prevComponent.setState((prevState, props) => {
-          prevState['voterAddress'] = data['description'];
-          return prevState;
-        });
-
-        // Go back to previous screen
-        const backAction = NavigationActions.back({
-          key: 'AddressEntry'
-        });
-        navigation.dispatch(backAction);
+        console.log('Address Entered:', data['description']);
+        prevComponent.updateAddress(data['description']);
       }}
 
       getDefaultValue={() => ''}

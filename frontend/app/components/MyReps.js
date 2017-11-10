@@ -13,6 +13,7 @@ import CivicAPI from './CivicAPI';
 import MyRepsCell from './MyRepsCell';
 import LoadingScreen from './LoadingScreen';
 import AddressEntry from './AddressEntry';
+import { NavigationActions } from 'react-navigation'
 
 export default class MyReps extends Component {
   constructor(props) {
@@ -21,19 +22,18 @@ export default class MyReps extends Component {
       voterAddress: 'None',
       viewStatement: 'your representatives'
     };
+
+    var address = this.state.voterAddress;
     AsyncStorage.getItem("voterAddress").then((value) => {
       if (value != null) {
-        this.state['voterAddress'] = value;
+        address = value;
+        CivicAPI.getRepresentatives(address).then(response => this.parseReps(response, address, false));
       }
-    }).done();
-  }
+    });
 
-  componentWillMount() {
-    var voterAddress = this.state.voterAddress;
-    CivicAPI.getRepresentatives(voterAddress).then(response => this.parseReps(response));
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { true; } });
     this.state = {
-      voterAddress: voterAddress,
+      voterAddress: address,
       dataSource: ds.cloneWithRows([]),
       fetched: false,
       viewStatement: 'your representatives',
@@ -44,7 +44,6 @@ export default class MyReps extends Component {
     if (this.state.voterAddress == 'None') {
       return (
         <AddressEntry
-          navigation={this.props.navigation}
           prevComponent={this}
         />
       );
@@ -74,7 +73,17 @@ export default class MyReps extends Component {
     );
   }
 
-  parseReps(response) {
+  updateAddress(address) {
+    // Set permanently
+    AsyncStorage.setItem("voterAddress", address);
+
+    // Fetch representatives
+    CivicAPI.getRepresentatives(address).then((response) => {
+      this.parseReps(response, address, true);
+    });
+  }
+
+  parseReps(response, address, goBack) {
     // Match politicians with their offices
     const reps = response.officials;
     if (reps !== undefined) {
@@ -93,6 +102,16 @@ export default class MyReps extends Component {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(repsWithoutPresident),
         fetched: true,
+        viewStatement: 'your representatives',
+        voterAddress: address,
+      },
+      () => {
+        if (goBack) {
+          const backAction = NavigationActions.back({
+            key: 'AddressEntry'
+          })
+          this.props.navigation.dispatch(backAction)
+        }
       });
     }
   }

@@ -10,7 +10,6 @@ const CivicAPI = {
       .then(response => response.json())
       .then((response) => {
         console.log('CIVIC API RESPONSE RECEIVED');
-        // console.log(JSON.stringify(response));
         return response;
       })
       .catch((error) => {
