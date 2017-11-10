@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse 
 from db_connect import test_db, wtp_db
 from bson.objectid import ObjectId
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt		
 
 state_abbreviations = {
 			"al": True,
@@ -56,6 +56,34 @@ state_abbreviations = {
 			"wi": True,
 			"wy": True
 }
+
+# -1 is <, 0 is ==, 1 is >
+def bill_compare(bill1, bill2):
+	d1 = bill1.get('actions', [-1])[-1]
+	d2 = bill2.get('actions', [-1])[-1]
+
+	# if either doesn't have a date/failed to read or something
+	if d1 == -1:
+		return -1
+	if d2 == -1:
+		return 1
+
+	d1 = d1['date']
+	d2 = d2['date']
+
+	# one year is more recent
+	if d1.split('-')[0] != d2.split('-')[0]:
+		return int(d1.split('-')[0]) - int(d2.split('-')[0])
+	# one month is more recent
+	if d1.split('-')[1] != d2.split('-')[1]:
+		return int(d1.split('-')[1]) - int(d2.split('-')[1])
+	# one day is more recent
+	if d1.split('-')[2] != d2.split('-')[2]:
+		return int(d1.split('-')[2]) - int(d2.split('-')[2])
+
+	# must be same date
+	return 0
+
 
 def index(request):
 	return render(request, 'weThePeople/index.html')
@@ -153,6 +181,36 @@ def user_reaction(request):
 		return JsonResponse({"status": "error", "message": "frowny_action should be either \"add\" or \"remove\" "})
 	#return JsonResponse({"status": "success", "message": "unknown error", "bill_id": bill_id, "smiley_action": smiley_action})
 	return JsonResponse({"status": "success", "message": "added user reaction"})
+
+def get_newsfeed_bills(request):
+	if(request.method != 'GET'):
+		return JsonResponse({"status": "error", "message": "request method should be GET"})
+	#get interests
+	listOfInterests = request.GET.getlist("topic", [])
+	if(listOfInterests == []):
+		return JsonResponse({"status": "error", "message": "no topics selected as interests"})
+	#determine if want national or state level legislation
+	relevant_bills = []
+	state = request.GET.get("state", "").lower()
+	
+	#get the national bills
+	for interest in listOfInterests:
+		relevant_bills = relevant_bills + list(wtp_db.bills.find({"$and" :[ { "$or": [ {"topic": interest}, {"subtopics": interest}] }, {"level_code": 0}]}))
+	if state != "":
+		#make sure the state code is valid
+		if(state not in state_abbreviations):
+			return JsonResponse({"status": "error", "message": "incorrect state abbreviation"})
+		#get the state bills
+		for interest in listOfInterests:
+			relevant_bills = relevant_bills + list(wtp_db.bills.find({"$and" :[ { "$or": [ {"topic": interest}, {"subtopics": interest}] }, {"level_code": 1}, {"state": state} ] } ) )
+	#convert '_id' to a string to make the bill serializable
+	for bill in relevant_bills:
+		bill['_id'] = str(bill['_id'])
+
+	# lines = sorted(lines, key=lambda k: k['page'].get('update_time', 0), reverse=True)
+	relevant_bills = sorted(relevant_bills, cmp=bill_compare, reverse=True)
+	# now return 20 most recent
+	return JsonResponse(relevant_bills, safe=False)
 
 def create_user(request):
 	return JsonResponse({'status': 'not implemented'})
