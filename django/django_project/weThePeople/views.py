@@ -212,7 +212,6 @@ def get_newsfeed_bills(request):
     # lines = sorted(lines, key=lambda k: k['page'].get('update_time', 0), reverse=True)
     relevant_bills = sorted(relevant_bills, cmp=bill_compare, reverse=True)
     
-    return JsonResponse({'length': len(relevant_bills)})
     # now return the correct page
     if 20*(page - 1) > len(relevant_bills):
         relevant_bills = relevant_bills[len(relevant_bills)-(len(relevant_bills) % 20):]
