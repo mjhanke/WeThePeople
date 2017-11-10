@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse 
 from db_connect import test_db, wtp_db
 from bson.objectid import ObjectId
-from django.views.decorators.csrf import csrf_exempt		
+from django.views.decorators.csrf import csrf_exempt	
 
 state_abbreviations = {
 			"al": True,
@@ -192,6 +192,7 @@ def get_newsfeed_bills(request):
 	#determine if want national or state level legislation
 	relevant_bills = []
 	state = request.GET.get("state", "").lower()
+	page = request.GET.get("page", 1)
 	
 	#get the national bills
 	for interest in listOfInterests:
@@ -209,7 +210,14 @@ def get_newsfeed_bills(request):
 
 	# lines = sorted(lines, key=lambda k: k['page'].get('update_time', 0), reverse=True)
 	relevant_bills = sorted(relevant_bills, cmp=bill_compare, reverse=True)
-	# now return 20 most recent
+	# now return the correct page
+
+	if 20*(page - 1) > len(relevant_bills):
+		relevant_bills = relevant_bills[len(relevant_bills)-(len(relevant_bills) % 20):]
+	else:
+		relevant_bills = relevant_bills[20*(page-1):20*page]
+
+
 	return JsonResponse(relevant_bills, safe=False)
 
 def create_user(request):
