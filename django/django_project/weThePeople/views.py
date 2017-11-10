@@ -182,7 +182,7 @@ def user_reaction(request):
 	#return JsonResponse({"status": "success", "message": "unknown error", "bill_id": bill_id, "smiley_action": smiley_action})
 	return JsonResponse({"status": "success", "message": "added user reaction"})
 
-def get_all_bills_new(request):
+def get_newsfeed_bills(request):
 	if(request.method != 'GET'):
 		return JsonResponse({"status": "error", "message": "request method should be GET"})
 	#get interests
