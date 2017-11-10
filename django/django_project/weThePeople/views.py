@@ -2,16 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse 
 from db_connect import test_db, wtp_db
 from bson.objectid import ObjectId
-from django.views.decorators.csrf import csrf_exempt
-import heapq
-
-class RecentBill(bill):
-	def __init__(self, val):
-		self.val = val
-	def __cmp__(self, other):
-		return moreRecent(self.val['actions'][-1], other.val['actions'][-1])
-	def self.moreRecent(action1, action2):
-		
+from django.views.decorators.csrf import csrf_exempt		
 
 state_abbreviations = {
 			"al": True,
