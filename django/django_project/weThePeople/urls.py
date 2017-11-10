@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^api/v1/address', views.address, name='address'),
 	url(r'^api/v1/get_bill_by_id', views.get_bill_by_id, name='get_bill_by_id'),
 	url(r'^api/v1/user_reaction', views.user_reaction, name='user_reaction')
+	url(r'^api/v1/get_all_bills_new', views.get_all_bills_new, name='get_all_bills_new')
 ]

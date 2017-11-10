@@ -3,6 +3,15 @@ from django.http import JsonResponse
 from db_connect import test_db, wtp_db
 from bson.objectid import ObjectId
 from django.views.decorators.csrf import csrf_exempt
+import heapq
+
+class RecentBill(bill):
+	def __init__(self, val):
+		self.val = val
+	def __cmp__(self, other):
+		return moreRecent(self.val['actions'][-1], other.val['actions'][-1])
+	def self.moreRecent(action1, action2):
+		
 
 state_abbreviations = {
 			"al": True,
@@ -153,6 +162,36 @@ def user_reaction(request):
 		return JsonResponse({"status": "error", "message": "frowny_action should be either \"add\" or \"remove\" "})
 	#return JsonResponse({"status": "success", "message": "unknown error", "bill_id": bill_id, "smiley_action": smiley_action})
 	return JsonResponse({"status": "success", "message": "added user reaction"})
+
+def get_all_bills_new(request):
+	if(request.method != 'GET'):
+		return JsonResponse({"status": "error", "message": "request method should be GET"})
+	#get interests
+	listOfInterests = request.GET.getlist("topic", [])
+	if(listOfInterests == []):
+		return JsonResponse({"status": "error", "message": "no topics selected as interests"})
+	#determine if want national or state level legislation
+	relevant_bills = []
+	state = request.GET.get("state", "").lower()
+	
+	#get the national bills
+	for interest in listOfInterests:
+		relevant_bills = relevant_bills + list(wtp_db.bills.find({"$and" :[ { "$or": [ {"topic": interest}, {"subtopics": interest}] }, {"level_code": 0}]}))
+	if state != "":
+		#make sure the state code is valid
+		if(state not in state_abbreviations):
+			return JsonResponse({"status": "error", "message": "incorrect state abbreviation"})
+		#get the state bills
+		for interest in listOfInterests:
+			relevant_bills = relevant_bills + list(wtp_db.bills.find({"$and" :[ { "$or": [ {"topic": interest}, {"subtopics": interest}] }, {"level_code": 1}, {"state": state} ] } ) )
+	#convert '_id' to a string to make the bill serializable
+	for bill in relevant_bills:
+		bill['_id'] = str(bill['_id'])
+
+	# lines = sorted(lines, key=lambda k: k['page'].get('update_time', 0), reverse=True)
+	relevant_bills = sorted(relevant_bills, key = lambda k: k.get('actions', [])[-1], reverse=True)
+	# now return 20 most recent
+	return JsonResponse(relevant_bills, safe=False)
 
 def create_user(request):
 	return JsonResponse({'status': 'not implemented'})
