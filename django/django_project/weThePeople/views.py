@@ -208,7 +208,7 @@ def get_all_bills_new(request):
 		bill['_id'] = str(bill['_id'])
 
 	# lines = sorted(lines, key=lambda k: k['page'].get('update_time', 0), reverse=True)
-	relevant_bills = sorted(relevant_bills, cmp=bill_compare)
+	relevant_bills = sorted(relevant_bills, cmp=bill_compare, reverse=True)
 	# now return 20 most recent
 	return JsonResponse(relevant_bills, safe=False)
 
