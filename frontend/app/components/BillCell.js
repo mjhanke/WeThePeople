@@ -19,11 +19,11 @@ export default class BillCell extends Component {
       sponsor: '',
       imageUrl: ' ',
       party: '',
-      details: 'Amend title 38, United States Code, to improve the accountability of employees of the Department of Veterans Affairs',
+      details: this.props.bill.title,
       legId: '',
     });
-    const url = this.props.bill.sponsor.bioguide_id;
-    CongressAPI.getLegislator(url)
+    const legislatorId = this.props.bill.sponsor.id;
+    CongressAPI.getLegislator(legislatorId)
       .then((response) => {
         this.setState({
           sponsor: `${response.first_name} ${response.last_name} `,
@@ -46,7 +46,7 @@ export default class BillCell extends Component {
             imageUrl={this.state.imageUrl}
             party={this.state.party}
             wasTapped={this.props.personWasTapped}
-            date="3 days ago"
+            date={this.props.bill.last_updated}
             legId={this.state.legId}
           />
           <Text style={styles.content} numberOfLines={2}>

@@ -18,17 +18,18 @@ export default class BillDetail extends Component {
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
+    var summary = this.getSummaryForBill(params.bill);
     this.setState({
-      summary: 'loading...',
       billExcerpts: '',
       sponsor: '',
       bill: params.bill,
       imageUrl: ' ',
       legId: '',
       personWasTapped: params.personWasTapped,
+      summary: summary,
     });
-    const url = this.state.bill.sponsor.bioguide_id;
-    CongressAPI.getLegislator(url)
+    const legislatorId = params.bill.sponsor.id;
+    CongressAPI.getLegislator(legislatorId)
       .then((response) => {
         this.setState({
           sponsor: `${response.first_name} ${response.last_name} `,
@@ -37,16 +38,16 @@ export default class BillDetail extends Component {
           legId: response.member_id,
         });
       });
-    this.loadShortenedSummary(this.state.bill);
   }
 
-  loadShortenedSummary(bill) {
-    const summary = bill.summary.text;
-    if (summary.length === 0) {
-      this.state.summary = '';
-      return;
+  getSummaryForBill(bill) {
+    if (bill.human_summary.length !== 0) {
+      return `${bill.human_summary.split('.')[0]}.`;
     }
-    this.state.summary = `${summary.split('.')[0]}.`;
+    else if (bill.machine_summary.length !== 0) {
+      return bill.machine_summary;
+    }
+    return '';
   }
 
   renderBillExcerpts() {
@@ -66,11 +67,11 @@ export default class BillDetail extends Component {
   }
 
   render() {
-    const details = 'A bill to amend title 38, United States Code, to improve the accountability of employees of the Department of Veterans Affairs, and for other purposes.';
-    const subject = 'VETERANS AFFAIRS';
-    const date = 'latest action date';
-    const relativeDate = 'latest action date';
-    const sponsor = 'Sherrod Brown';
+    const details = this.state.bill.title;
+    const subject = this.state.bill.topic;
+    const date = this.state.bill.introduction_date;
+    const relativeDate = this.state.bill.last_updated;
+    const sponsor = this.state.sponsor;
     return (
       <ScrollView
         style={styles.backgroundView}
@@ -86,7 +87,7 @@ export default class BillDetail extends Component {
           imageUrl={this.state.imageUrl}
           party={this.state.party}
           wasTapped={this.state.personWasTapped}
-          date="3 days ago"
+          date={relativeDate}
           legId={this.state.legId}
         />
         <View style={styles.contentWrapper}>

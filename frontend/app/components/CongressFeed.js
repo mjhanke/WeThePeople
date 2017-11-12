@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 
 import BillCell from './BillCell';
 import LoadingScreen from './LoadingScreen';
-import sampleBill from '../assets/sampleGpoBill.json';
+// import sampleBill from '../assets/sampleGpoBill.json';
+import sampleBill from '../assets/sampleWeThePeopleBill.json';
 
 export default class CongressFeed extends Component {
   constructor(props) {
