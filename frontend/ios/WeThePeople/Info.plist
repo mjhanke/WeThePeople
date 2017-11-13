@@ -40,9 +40,10 @@
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>wethepeople.tech</key>
-			<dict/>
-			<key>NSExceptionAllowsInsecureHTTPLoads</key>
-			<string></string>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
