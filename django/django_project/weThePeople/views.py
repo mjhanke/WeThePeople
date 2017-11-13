@@ -126,6 +126,10 @@ def get_bills(request):
     #convert '_id' to a string to make the bill serializable
     for bill in relevant_bills:
         bill['_id'] = str(bill['_id'])
+
+    # remove duplicates by bill_id
+    relevant_bills = {v['bill_id']:v for v in relevant_bills}.values()
+
     return JsonResponse(relevant_bills, safe=False)
 
 def get_bill_by_id(request):
@@ -209,6 +213,9 @@ def get_newsfeed_bills(request):
     for bill in relevant_bills:
         bill['_id'] = str(bill['_id'])
 
+    # remove duplicates by bill_id
+    relevant_bills = {v['bill_id']:v for v in relevant_bills}.values()
+    
     # lines = sorted(lines, key=lambda k: k['page'].get('update_time', 0), reverse=True)
     relevant_bills = sorted(relevant_bills, cmp=bill_compare, reverse=True)
     
