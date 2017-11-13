@@ -141,8 +141,7 @@ let styles = StyleSheet.create({
     // backgroundColor: 'blue',
   },
   header: {
-
-    marginTop: 7, 
+    marginTop: 7,
   },
   subject: {
     backgroundColor: 'white',

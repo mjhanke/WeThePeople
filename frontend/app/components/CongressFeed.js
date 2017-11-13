@@ -10,6 +10,7 @@ import BillCell from './BillCell';
 import LoadingScreen from './LoadingScreen';
 // import sampleBill from '../assets/sampleGpoBill.json';
 import sampleBill from '../assets/sampleWeThePeopleBill.json';
+import CongressAPI from './CongressAPI';
 
 export default class CongressFeed extends Component {
   constructor(props) {
@@ -17,9 +18,11 @@ export default class CongressFeed extends Component {
     this.renderRow = this.renderRow.bind(this);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
+    CongressAPI.getRecentBills().then(response => this.parseBills(response));
+
     this.state = {
-      dataSource: ds.cloneWithRows([sampleBill]),
-      fetched: true,
+      dataSource: ds.cloneWithRows([]),
+      fetched: false,
     };
   }
 
@@ -49,6 +52,13 @@ export default class CongressFeed extends Component {
         enableEmptySections
       />
     );
+  }
+
+  parseBills(response) {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(response),
+      fetched: true,
+    });
   }
 }
 
