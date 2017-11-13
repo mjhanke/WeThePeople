@@ -4069,6 +4069,12 @@ p-locate@^2.0.0:
   dependencies:
     p-limit "^1.1.0"
 
+parse-address@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/parse-address/-/parse-address-0.0.8.tgz#196702e6d6357f38f05f70827a66d1204b00ecc4"
+  dependencies:
+    xregexp "^3.1.1"
+
 parse-glob@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/parse-glob/-/parse-glob-3.0.4.tgz#b2c376cfb11f35513badd173ef0bb6e3a388391c"
@@ -5605,6 +5611,10 @@ xmldom@0.1.x:
 xpipe@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/xpipe/-/xpipe-1.0.5.tgz#8dd8bf45fc3f7f55f0e054b878f43a62614dafdf"
+
+xregexp@^3.1.1:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/xregexp/-/xregexp-3.2.0.tgz#cb3601987bfe2695b584000c18f1c4a8c322878e"
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.1"

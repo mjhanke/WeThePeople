@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   ListView,
+  AsyncStorage,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -18,7 +19,13 @@ export default class CongressFeed extends Component {
     this.renderRow = this.renderRow.bind(this);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
-    CongressAPI.getRecentBills().then(response => this.parseBills(response));
+    var voterState = '';
+    AsyncStorage.getItem("voterState").then((value) => {
+      if (value != null) {
+        voterState = value;
+        CongressAPI.getRecentBills(voterState).then(response => this.parseBills(response));
+      }
+    });
 
     this.state = {
       dataSource: ds.cloneWithRows([]),

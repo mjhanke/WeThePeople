@@ -76,6 +76,10 @@ export default class MyReps extends Component {
   updateAddress(address) {
     // Set permanently
     AsyncStorage.setItem("voterAddress", address);
+    var parser = require('parse-address'); 
+    var parsedState = parser.parseLocation(address)['state'];
+    console.log('voterState: ', parsedState)
+    AsyncStorage.setItem("voterState", parsedState);
 
     // Fetch representatives
     CivicAPI.getRepresentatives(address).then((response) => {
