@@ -56,7 +56,7 @@ Returns:
 
 
 ## Backend - Server
-Backend code for API requests is maintained in the `django` folder, which has been cloned onto our DigitalOcean droplet at `wethepeople.tech`. To start the `mongo` service, run `service mongo start`. To start the Django server, run `CURT PUT THAT COMMAND HERE`. To start the Gunicorn service, run `service gunicorn start`. In `django/django_project/weThePeople`, `views.py` and `urls.py` do the heavy-lifting for API requests and responses.
+Backend code for API requests is maintained in the `django` folder, which has been cloned onto our DigitalOcean droplet at `wethepeople.tech`. To start the `mongo` service, run `service mongo start`. To start the Gunicorn service, run `service gunicorn start`. In `django/django_project/weThePeople`, `views.py` and `urls.py` do the heavy-lifting for API requests and responses.
 
 ## Backend - Bill Stuff
 Backend code for bill fetching and insertions is maintain in the `nlp` folder. The end-all script to run is `nlp/fetch_bills.sh`, which uses some Python and Bash scripts in the `congress` folder to fetch bills and insert them into the database. This is automated every-6-hourly with a cronjob, which is set to:
