@@ -12,7 +12,7 @@ import ProfilePic from './ProfilePic';
 export default class NameHeader extends Component {
   render() {
     return (
-      <View style={styles.header}>
+      <View style={[styles.header, this.props.style]}>
         <ProfilePic
           imageUrl={this.props.imageUrl}
           wasTapped={() => this.props.wasTapped(this.props.legId)}
@@ -53,8 +53,6 @@ let styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: 'white',
-    marginLeft: 7,
-    marginRight: 7,
     // backgroundColor: 'green'
     // backgroundColor: '#FF6F00',
   },

@@ -21,6 +21,11 @@ const images = {
   globe: require('../images/globe.png'),
   oldPhone: require('../images/oldphone.jpg'),
   clipboard: require('../images/clipboard.jpg'),
+  smileyEmoji: require('../images/smileyEmoji.png'),
+  angryEmoji: require('../images/angryEmoji.png'),
+  grinEmoji: require('../images/grinEmoji.png'),
+  uhohEmoji: require('../images/uhohEmoji.png'),
+  sadEmoji: require('../images/sadEmoji.png'),
 };
 
 export default images;

@@ -5,11 +5,13 @@ import {
   View,
   Image,
   ScrollView,
+  TouchableHighlight,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import CongressAPI from './CongressAPI';
 import BillProgress from './BillProgress';
 import NameHeader from './NameHeader';
+import images from '../assets/images';
 
 export default class BillDetail extends Component {
   static navigationOptions = {
@@ -26,10 +28,10 @@ export default class BillDetail extends Component {
       imageUrl: ' ',
       legId: '',
       personWasTapped: params.personWasTapped,
-      summary: summary,
-    });
-    const legislatorId = params.bill.sponsor.id;
-    CongressAPI.getLegislator(legislatorId)
+      });
+      /*
+    const url = this.state.bill.sponsor.bioguide_id;
+    CongressAPI.getLegislator(url)
       .then((response) => {
         this.setState({
           sponsor: `${response.first_name} ${response.last_name} `,
@@ -38,6 +40,7 @@ export default class BillDetail extends Component {
           legId: response.member_id,
         });
       });
+    */
   }
 
   getSummaryForBill(bill) {
@@ -48,22 +51,6 @@ export default class BillDetail extends Component {
       return bill.machine_summary;
     }
     return '';
-  }
-
-  renderBillExcerpts() {
-    if (this.state.billExcerpts === '') {
-      return null;
-    }
-    return (
-      <View style={styles.excerptsWrapper}>
-        <Text style={styles.excerptsHeader}>
-            Excerpts from Full Bill
-        </Text>
-        <Text style={styles.billExcerpts}>
-          {this.state.billExcerpts}
-        </Text>
-      </View>
-    );
   }
 
   render() {
@@ -77,18 +64,14 @@ export default class BillDetail extends Component {
         style={styles.backgroundView}
         contentContainerStyle={styles.scrollViewContent}
       >
-        <View style={styles.subjectWrapper}>
-          <Text style={styles.subject}>
-            {subject}
-          </Text>
-        </View>
         <NameHeader
-          name={this.state.sponsor}
+          name={sponsor}
           imageUrl={this.state.imageUrl}
           party={this.state.party}
           wasTapped={this.state.personWasTapped}
           date={relativeDate}
           legId={this.state.legId}
+          style={styles.header}
         />
         <View style={styles.contentWrapper}>
           <Text style={styles.title}>
@@ -101,9 +84,39 @@ export default class BillDetail extends Component {
           <Text style={styles.summary}>
             {this.state.summary}
           </Text>
+          <View style={styles.divider} />
         </View>
-        {this.renderBillExcerpts()}
+        <View style={styles.reactionView}>
+          <Emoji image={images.smileyEmoji}/>
+          <Emoji image={images.grinEmoji}/>
+          <Emoji image={images.uhohEmoji}/>
+          <Emoji image={images.sadEmoji}/>
+          <Emoji image={images.angryEmoji}/>
+        </View>
       </ScrollView>
+    );
+  }
+}
+
+export class Emoji extends Component {
+  state = {
+    isSelected: false,
+  }
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+      <TouchableHighlight
+        style={styles.highlight}
+        underlayColor="white"
+        onPress={() => this.setState({isSelected: !this.state.isSelected})}
+      >
+          <Image
+            source={this.props.image}
+            style={this.state.isSelected ? styles.selectedEmoji : styles.unselectedEmoji}
+          />
+      </TouchableHighlight>
     );
   }
 }
@@ -128,13 +141,8 @@ let styles = StyleSheet.create({
     // backgroundColor: 'blue',
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
-    // backgroundColor: 'blue',
-    marginLeft: 7,
-    marginRight: 7,
-    backgroundColor: 'white',
+
+    marginTop: 7, 
   },
   subject: {
     backgroundColor: 'white',
@@ -148,8 +156,6 @@ let styles = StyleSheet.create({
   subjectWrapper: {
     backgroundColor: 'white',
     // backgroundColor: 'red',
-    marginLeft: 7,
-    marginRight: 7,
     marginTop: 7,
   },
   title: {
@@ -158,15 +164,15 @@ let styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginBottom: 15,
-    fontSize: 17,
+    fontSize: 16,
     lineHeight: 25,
     backgroundColor: 'white',
     // backgroundColor: 'yellow',
-    fontFamily: 'OpenSans-Light',
+    fontFamily: 'OpenSans-Regular',
+    color: '#1F222A',
   },
   progressView: {
-    flex: 1,
-    // backgroundColor: 'cyan',
+    marginBottom: 10,
   },
   date: {
     marginTop: 5,
@@ -197,10 +203,9 @@ let styles = StyleSheet.create({
   },
   contentWrapper: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: 'white',
     // backgroundColor: 'cyan',
-    marginLeft: 7,
-    marginRight: 7,
   },
   summary: {
     flex: -1,
@@ -213,8 +218,8 @@ let styles = StyleSheet.create({
     lineHeight: 25,
   },
   summaryView: {
-    marginTop: 9,
-    margin: 7,
+    marginLeft: 0,
+    marginRight: 0,
     backgroundColor: 'white',
   },
   excerptsWrapper: {
@@ -240,5 +245,49 @@ let styles = StyleSheet.create({
     fontFamily: 'OpenSans-Light',
     fontSize: 15,
   },
+  reactionView: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    marginBottom: 15,
+  },
+  unselectedEmoji: {
+    resizeMode: 'contain',
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  selectedEmoji: {
+    resizeMode: 'contain',
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    marginLeft: 15,
+    marginRight: 15,
+    backgroundColor: '#489AF0',
+    borderRadius: 5,
+  },
+  highlight: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    margin: 7,
+  },
+  divider: {
+    height: 0.75,
+    backgroundColor: '#CFD8DC',
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  reactionLabel: {
+    flex: 1
+  }
 
 });
