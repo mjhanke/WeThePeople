@@ -7,7 +7,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"moment": "^2.19.1",
+		"moment": "^2.19.2",
 		"parse-address": "^0.0.8",
 		"prop-types": "^15.6.0",
 		"react": "16.0.0",

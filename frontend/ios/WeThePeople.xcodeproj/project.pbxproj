@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -1455,7 +1456,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = WeThePeopleApp;
 				PRODUCT_NAME = WeThePeople;
-				PROVISIONING_PROFILE = "f482f0f8-248c-43f7-8369-8a1c36a597a8";
+				PROVISIONING_PROFILE = "2ec3fc08-8cac-4074-8ee4-fd41e1241201";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development WeThePeopleApp";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeThePeople-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1470,6 +1471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9CZ4UVFHRQ;
@@ -1486,8 +1488,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = WeThePeopleApp;
 				PRODUCT_NAME = WeThePeople;
-				PROVISIONING_PROFILE = "f482f0f8-248c-43f7-8369-8a1c36a597a8";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development WeThePeopleApp";
+				PROVISIONING_PROFILE = "64d8988f-8021-4544-9405-187fce040da8";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore WeThePeopleApp";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeThePeople-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";

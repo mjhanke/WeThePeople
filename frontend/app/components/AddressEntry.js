@@ -15,12 +15,14 @@ export default class AddressEntry extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>
-          Where's home?
-        </Text>
-        <Text style={styles.description}>
-          View {this.props.prevComponent.state.viewStatement}!
-        </Text>
+        <View style={styles.header}>
+          <Text style={styles.title}>
+            {"Where's home?"}
+          </Text>
+          <Text style={styles.description}>
+            View {this.props.prevComponent.state.viewStatement}!
+          </Text>
+        </View>
         { GooglePlacesInput(this.props.prevComponent) }
       </View>
     );
@@ -30,8 +32,8 @@ export default class AddressEntry extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
+    backgroundColor: '#CFD8DC',
+    alignItems: 'stretch',
   },
   title: {
     textAlign: 'center',
@@ -39,13 +41,19 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     marginTop: 10,
+    backgroundColor: 'white',
   },
   description: {
     textAlign: 'center',
     fontFamily: 'OpenSans-Light',
     fontSize: 20,
     marginBottom: 15,
+    backgroundColor: 'white',
   },
+  header: {
+    marginTop: 7,
+    backgroundColor: 'white',
+  }
 });
 
 

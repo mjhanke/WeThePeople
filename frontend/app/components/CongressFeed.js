@@ -24,8 +24,11 @@ export default class CongressFeed extends Component {
       if (value != null) {
         voterState = value;
         CongressAPI.getRecentBills(voterState).then(response => this.parseBills(response));
+      } else {
+          CongressAPI.getRecentBills('mi').then(response => this.parseBills(response));
       }
     });
+
 
     this.state = {
       dataSource: ds.cloneWithRows([]),
