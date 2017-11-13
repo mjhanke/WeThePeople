@@ -18,7 +18,6 @@ export default class BillDetail extends Component {
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
-    var summary = this.getSummaryForBill(params.bill);
     this.setState({
       billExcerpts: '',
       sponsor: '',
@@ -26,7 +25,8 @@ export default class BillDetail extends Component {
       imageUrl: ' ',
       legId: '',
       personWasTapped: params.personWasTapped,
-      summary: summary,
+      humanSummary: this.getHumanSummaryForBill(params.bill),
+      machineSummary: this.getMachineSummaryForBill(params.bill),
     });
     const legislatorId = params.bill.sponsor.id;
     CongressAPI.getLegislator(legislatorId)
@@ -40,15 +40,21 @@ export default class BillDetail extends Component {
       });
   }
 
-  getSummaryForBill(bill) {
+  getHumanSummaryForBill(bill) {
     if (bill.human_summary.length !== 0) {
       return `${bill.human_summary.split('.')[0]}.`;
     }
-    else if (bill.machine_summary.length !== 0) {
+    return '';
+  }
+
+
+  getMachineSummaryForBill(bill) {
+    if (bill.machine_summary.length !== 0) {
       return bill.machine_summary;
     }
     return '';
   }
+
 
   renderBillExcerpts() {
     if (this.state.billExcerpts === '') {
@@ -99,7 +105,12 @@ export default class BillDetail extends Component {
         </View>
         <View style={styles.summaryView}>
           <Text style={styles.summary}>
-            {this.state.summary}
+            {this.state.humanSummary}
+          </Text>
+        </View>
+        <View style={styles.summaryView}>
+          <Text style={styles.summary}>
+            {this.state.machineSummary}
           </Text>
         </View>
         {this.renderBillExcerpts()}
