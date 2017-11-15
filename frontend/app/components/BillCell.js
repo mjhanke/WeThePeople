@@ -35,6 +35,10 @@ export default class BillCell extends Component {
   }
 
   render() {
+    const { actions } = this.props.bill;
+    const last_action_date = actions[actions.length - 1].date;
+    const { last_updated } = this.props.bill;
+    const humanized_date = moment(last_updated, 'YYYY-MM-DD').startOf('day').fromNow();
     return (
       <TouchableHighlight
         underlayColor="white"
@@ -46,7 +50,7 @@ export default class BillCell extends Component {
             imageUrl={this.state.imageUrl}
             party={this.state.party}
             wasTapped={this.props.personWasTapped}
-            date={this.props.bill.last_updated}
+            date={humanized_date}
             legId={this.state.legId}
           />
           <Text style={styles.content} numberOfLines={2}>
@@ -65,7 +69,7 @@ BillCell.propTypes = {
 
 let styles = StyleSheet.create({
   cardView: {
-    height: 150,
+    height: 140,
     marginRight: 7,
     marginLeft: 7,
     marginTop: 7,
@@ -86,7 +90,7 @@ let styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 16,
     // backgroundColor: 'yellow',
-    fontFamily: 'OpenSans-Light',
+    fontFamily: 'OpenSans-Regular',
   },
   date: {
     marginTop: 5,

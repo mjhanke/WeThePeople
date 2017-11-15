@@ -57,7 +57,7 @@ let styles = StyleSheet.create({
     // backgroundColor: '#FF6F00',
   },
   date: {
-    marginTop: 5,
+    marginTop: 8,
     marginLeft: 10,
     fontSize: 14,
     color: 'grey',

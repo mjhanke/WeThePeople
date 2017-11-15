@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableHighlight,
+  Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import CongressAPI from './CongressAPI';
@@ -20,37 +21,54 @@ export default class BillDetail extends Component {
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
-    var summary = this.getSummaryForBill(params.bill);
-    this.setState({
+    const { sponsor } = params.bill;
+    let imageUrl = '';
+    if ('facebook_id' in params.bill.sponsor) {
+      const facebook_id = params.bill.sponsor.facebook_id;
+      imageUrl = `https://graph.facebook.com/${facebook_id}/picture?type=large`;
+    } else {
+      imageUrl = params.bill.sponsor.picture_url;
+    }
+    this.state = {
       billExcerpts: '',
-      sponsor: '',
+      sponsor: `${sponsor.first_name} ${sponsor.last_name} `,
       bill: params.bill,
-      imageUrl: ' ',
+      imageUrl: imageUrl,
       legId: '',
       personWasTapped: params.personWasTapped,
-      });
-      /*
-    const url = this.state.bill.sponsor.bioguide_id;
-    CongressAPI.getLegislator(url)
+    };
+
+    const legislatorId = params.bill.sponsor.id;
+    CongressAPI.getLegislator(legislatorId)
       .then((response) => {
         this.setState({
-          sponsor: `${response.first_name} ${response.last_name} `,
           imageUrl: `https://graph.facebook.com/${response.facebook_account}/picture?type=large`,
           party: `(${response.current_party}-${response.roles[0].state})`,
           legId: response.member_id,
         });
       });
-    */
+
+
   }
 
-  getSummaryForBill(bill) {
-    if (bill.human_summary.length !== 0) {
-      return `${bill.human_summary.split('.')[0]}.`;
+  renderMachineSummary() {
+    if (this.state.bill.machine_summary !== '') {
+      return(
+        <Text style={styles.summary}>
+          {this.state.bill.machine_summary}
+        </Text>
+      );
     }
-    else if (bill.machine_summary.length !== 0) {
-      return bill.machine_summary;
+  }
+
+  renderHumanSummary() {
+    if (this.state.bill.human_summary !== '') {
+      return(
+        <Text style={styles.summary}>
+          {this.state.bill.human_summary}
+        </Text>
+      );
     }
-    return '';
   }
 
   render() {
@@ -77,15 +95,12 @@ export default class BillDetail extends Component {
           <Text style={styles.title}>
             {details}
           </Text>
-
           <BillProgress style={styles.progressView} />
+          {this.renderHumanSummary()}
+          {this.renderMachineSummary()}
         </View>
-        <View style={styles.summaryView}>
-          <Text style={styles.summary}>
-            {this.state.summary}
-          </Text>
-          <View style={styles.divider} />
-        </View>
+
+        <View style={styles.divider} />
         <View style={styles.reactionView}>
           <Emoji image={images.smileyEmoji}/>
           <Emoji image={images.grinEmoji}/>
@@ -162,16 +177,17 @@ let styles = StyleSheet.create({
     marginTop: 15,
     marginLeft: 15,
     marginRight: 15,
-    marginBottom: 15,
+    marginBottom: 30,
     fontSize: 16,
     lineHeight: 25,
     backgroundColor: 'white',
+    width: Dimensions.get('window').width - 30,
     // backgroundColor: 'yellow',
     fontFamily: 'OpenSans-Regular',
     color: '#1F222A',
   },
   progressView: {
-    marginBottom: 10,
+    marginBottom: 100,
   },
   date: {
     marginTop: 5,
@@ -212,13 +228,9 @@ let styles = StyleSheet.create({
     margin: 15,
     marginTop: 21,
     marginBottom: 28,
-    fontFamily: 'OpenSans-Light',
-    fontSize: 15,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
     lineHeight: 25,
-  },
-  summaryView: {
-    marginLeft: 0,
-    marginRight: 0,
     backgroundColor: 'white',
   },
   excerptsWrapper: {
