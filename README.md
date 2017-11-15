@@ -60,4 +60,4 @@ Backend code for API requests is maintained in the `django` folder, which has be
 
 ## Backend - Bill Stuff
 Backend code for bill fetching and insertions is maintain in the `nlp` folder. The end-all script to run is `nlp/fetch_bills.sh`, which uses some Python and Bash scripts in the `congress` folder to fetch bills and insert them into the database. This is automated every-6-hourly with a cronjob, which is set to:
-`cd /home/nlp && source /root/.virtualenvs/congress/bin/activate && ./fetch_bills.sh >> /home/nlp/cronjob.log 2>&1 && deactivate`.
+`cd /home/nlp && source /root/.virtualenvs/congress/bin/activate && ./fetch_bills.sh >> /home/nlp/cronjob.log 2>&1 && deactivate`. Bill fetching uses parts of the public domain data collectors for the work of Congress, found at https://github.com/unitedstates/congress.
