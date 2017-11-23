@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     backgroundColor: 'white',
+    color: 'black',
   },
   description: {
     textAlign: 'center',

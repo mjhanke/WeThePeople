@@ -8,8 +8,6 @@ import {
 import PropTypes from 'prop-types';
 import NameHeader from './NameHeader';
 
-const moment = require('moment');
-
 export default class BillCell extends Component {
   componentWillMount() {
     this.setState({
@@ -26,6 +24,7 @@ export default class BillCell extends Component {
         <View style={styles.cardView}>
           <NameHeader
             bill={this.props.bill}
+            wasTapped={this.props.personWasTapped}
           />
           <Text style={styles.content} numberOfLines={2}>
             {this.state.details}
@@ -38,6 +37,7 @@ export default class BillCell extends Component {
 
 BillCell.propTypes = {
   billWasTapped: PropTypes.func.isRequired,
+  personWasTapped: PropTypes.func.isRequired,
   bill: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }).isRequired,
@@ -52,6 +52,7 @@ let styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: 'white',
+    elevation: 2,
   },
   header: {
     flexDirection: 'row',

@@ -9,6 +9,7 @@ import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import PropTypes from 'prop-types';
 import CongressFeed from './CongressFeed';
 import BillSwiper from './BillSwiper';
+import MyReps from './MyReps';
 import AccountTab from './AccountTab';
 import images from '../assets/images';
 
@@ -19,7 +20,8 @@ export default class TabView extends PureComponent {
       { key: '1', image: images.profile },
       // { key: '2', image: images.bolt },
       { key: '2', image: images.newspaper },
-      { key: '3', image: images.notification },
+      { key: '3', image: images.location },
+      // { key: '3', image: images.notification },
     ],
   };
 
@@ -31,7 +33,15 @@ export default class TabView extends PureComponent {
 
   billWasTapped = (bill) => {
     const { navigate } = this.props.navigation;
-    navigate('BillDetail', { bill });
+    navigate('BillDetail', {
+      bill,
+      personWasTapped: this.personWasTapped,
+    });
+  }
+
+  personWasTapped = (legId) => {
+    const { navigate } = this.props.navigation;
+    navigate('ProfilePage', { legId });
   }
 
   renderIcon = ({ route }) => (
@@ -60,11 +70,12 @@ export default class TabView extends PureComponent {
         return (
           <CongressFeed
             billWasTapped={this.billWasTapped}
+            personWasTapped={this.personWasTapped}
           />
         );
       case '3':
         return (
-          <AccountTab />
+          <MyReps />
         );
       default:
         return null;

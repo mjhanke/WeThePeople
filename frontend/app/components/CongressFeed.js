@@ -19,13 +19,13 @@ export default class CongressFeed extends Component {
     this.renderRow = this.renderRow.bind(this);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
-    var voterState = '';
-    AsyncStorage.getItem("voterState").then((value) => {
+    let voterState = '';
+    AsyncStorage.getItem('voterState').then((value) => {
       if (value != null) {
         voterState = value;
         CongressAPI.getRecentBills(voterState).then(response => this.parseBills(response));
       } else {
-          CongressAPI.getRecentBills('mi').then(response => this.parseBills(response));
+        CongressAPI.getRecentBills('mi').then(response => this.parseBills(response));
       }
     });
 

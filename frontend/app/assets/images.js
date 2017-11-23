@@ -13,6 +13,7 @@ const images = {
   notification: require('../images/notification.png'),
   bolt: require('../images/bolt.png'),
   newspaper: require('../images/newspaper.png'),
+  location: require('../images/location.png'),
 };
 
 export default images;

@@ -13,7 +13,7 @@ export default class BillProgressItem extends Component {
         <Image
           style={[styles.progressImage,
                     {
-tintColor: this.props.color,
+                      tintColor: this.props.color,
                       borderColor: this.props.color,
                     }]}
         />
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 1.5,
     resizeMode: 'contain',
+    backgroundColor: 'blue',
   },
   progressItemText: {
     // backgroundColor: 'purple',

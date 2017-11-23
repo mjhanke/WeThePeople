@@ -115,7 +115,7 @@ export default class MyReps extends Component {
             const backAction = NavigationActions.back({
               key: 'AddressEntry',
             });
-            this.props.navigation.dispatch(backAction);
+            // this.props.navigation.dispatch(backAction);
           }
         },
       );

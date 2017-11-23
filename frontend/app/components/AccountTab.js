@@ -11,7 +11,9 @@ export default class AccountTab extends Component {
   render() {
     return (
       <View style={styles.card}>
-        <Text>Welcome! This page is currently under construction</Text>
+        <Text style={styles.welcomeText}>
+          {'Welcome! \n\nYou\'re currently signed in.'}
+        </Text>
       </View>
     );
   }
@@ -20,10 +22,16 @@ export default class AccountTab extends Component {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    margin: 30,
-    marginBottom: 280,
+    margin: 15,
     backgroundColor: 'white',
     elevation: 4,
     borderRadius: 15,
+  },
+  welcomeText: {
+    margin: 15,
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    color: 'black',
+    textAlign: 'center',
   },
 });

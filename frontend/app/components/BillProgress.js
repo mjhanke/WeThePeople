@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import images from '../assets/images';
-import BillProgressItem from './BillProgressItem.js';
+import BillProgressItem from './BillProgressItem';
 
 export default class BillProgress extends Component {
   render() {
@@ -48,14 +48,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'stretch',
     margin: 7,
-    marginTop: 0,
-    marginBottom: 35,
-    height: 65,
+    height: 80,
     width: Dimensions.get('window').width - 30 - 14,
-
   },
   shadow: {
-
     shadowColor: '#494F54',
     shadowOffset: {
       width: 0,
@@ -66,5 +62,6 @@ const styles = StyleSheet.create({
     height: 90,
     marginBottom: 10,
     borderRadius: 10,
+    elevation: 2,
   },
 });

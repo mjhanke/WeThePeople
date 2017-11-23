@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import CongressAPI from './CongressAPI';
 import BillProgress from './BillProgress';
 import NameHeader from './NameHeader';
+import Emoji from './Emoji';
 import images from '../assets/images';
 
 export default class BillDetail extends Component {
@@ -33,7 +34,7 @@ export default class BillDetail extends Component {
       billExcerpts: '',
       sponsor: `${sponsor.first_name} ${sponsor.last_name} `,
       bill: params.bill,
-      imageUrl: imageUrl,
+      imageUrl,
       legId: '',
       personWasTapped: params.personWasTapped,
     };
@@ -47,28 +48,36 @@ export default class BillDetail extends Component {
           legId: response.member_id,
         });
       });
-
-
   }
 
   renderMachineSummary() {
-    if (this.state.bill.machine_summary !== '') {
-      return(
-        <Text style={styles.summary}>
-          {this.state.bill.machine_summary}
-        </Text>
-      );
+    let textToShowUser = this.state.bill.machine_summary.join('\n\n');
+    if (textToShowUser === '') {
+      textToShowUser = 'Currently unavailable';
     }
+    return (
+      <Text style={styles.summary}>
+        {textToShowUser}
+      </Text>
+    );
   }
 
   renderHumanSummary() {
-    if (this.state.bill.human_summary !== '') {
-      return(
-        <Text style={styles.summary}>
-          {this.state.bill.human_summary}
-        </Text>
+    const textToShowUser = this.state.bill.human_summary.join('\n\n');
+    if (textToShowUser !== '') {
+      return (
+        <View>
+          <Text style={styles.summaryHeader}>
+            {'Human Summary'}
+          </Text>
+          <Text style={styles.summary}>
+            {textToShowUser}
+          </Text>
+        </View>
+
       );
     }
+    return null;
   }
 
   render() {
@@ -83,58 +92,35 @@ export default class BillDetail extends Component {
         contentContainerStyle={styles.scrollViewContent}
       >
         <NameHeader
-          name={sponsor}
-          imageUrl={this.state.imageUrl}
-          party={this.state.party}
+          bill={this.state.bill}
           wasTapped={this.state.personWasTapped}
-          date={relativeDate}
-          legId={this.state.legId}
-          style={styles.header}
         />
         <View style={styles.contentWrapper}>
           <Text style={styles.title}>
             {details}
           </Text>
           <BillProgress style={styles.progressView} />
+
           {this.renderHumanSummary()}
+          <Text style={styles.summaryHeader}>
+            {'Machine Summary'}
+          </Text>
           {this.renderMachineSummary()}
         </View>
 
         <View style={styles.divider} />
         <View style={styles.reactionView}>
-          <Emoji image={images.smileyEmoji}/>
-          <Emoji image={images.grinEmoji}/>
-          <Emoji image={images.uhohEmoji}/>
-          <Emoji image={images.sadEmoji}/>
-          <Emoji image={images.angryEmoji}/>
+          <Emoji image={images.smileyEmoji} />
+          <Emoji image={images.grinEmoji} />
+          <Emoji image={images.uhohEmoji} />
+          <Emoji image={images.sadEmoji} />
+          <Emoji image={images.angryEmoji} />
         </View>
       </ScrollView>
     );
   }
 }
 
-export class Emoji extends Component {
-  state = {
-    isSelected: false,
-  }
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return(
-      <TouchableHighlight
-        style={styles.highlight}
-        underlayColor="white"
-        onPress={() => this.setState({isSelected: !this.state.isSelected})}
-      >
-          <Image
-            source={this.props.image}
-            style={this.state.isSelected ? styles.selectedEmoji : styles.unselectedEmoji}
-          />
-      </TouchableHighlight>
-    );
-  }
-}
 
 BillDetail.propTypes = {
   navigation: PropTypes.shape({
@@ -222,6 +208,13 @@ let styles = StyleSheet.create({
     backgroundColor: 'white',
     // backgroundColor: 'cyan',
   },
+  summaryHeader: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'gray',
+    marginTop: 7,
+  },
   summary: {
     flex: -1,
     // backgroundColor: 'orange',
@@ -232,29 +225,7 @@ let styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 25,
     backgroundColor: 'white',
-  },
-  excerptsWrapper: {
-    marginTop: 9,
-    margin: 7,
-    backgroundColor: 'white',
-
-  },
-  excerptsHeader: {
-    // backgroundColor: 'red',
-    flex: 1,
-    fontFamily: 'OpenSans-Light',
-    margin: 15,
-    marginTop: 21,
-    marginBottom: 0,
-    fontSize: 17,
-  },
-  billExcerpts: {
-    flex: -1,
-    // backgroundColor: 'orange',
-    margin: 15,
-    marginTop: 0,
-    fontFamily: 'OpenSans-Light',
-    fontSize: 15,
+    textAlign: 'left',
   },
   reactionView: {
     flex: 1,
@@ -264,33 +235,6 @@ let styles = StyleSheet.create({
     backgroundColor: 'white',
     marginBottom: 15,
   },
-  unselectedEmoji: {
-    resizeMode: 'contain',
-    borderRadius: 25,
-    width: 50,
-    height: 50,
-    marginLeft: 15,
-    marginRight: 15,
-  },
-  selectedEmoji: {
-    resizeMode: 'contain',
-    borderRadius: 25,
-    width: 50,
-    height: 50,
-    marginLeft: 15,
-    marginRight: 15,
-    backgroundColor: '#489AF0',
-    borderRadius: 5,
-  },
-  highlight: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 25,
-    width: 50,
-    height: 50,
-    margin: 7,
-  },
   divider: {
     height: 0.75,
     backgroundColor: '#CFD8DC',
@@ -298,7 +242,7 @@ let styles = StyleSheet.create({
     marginRight: 15,
   },
   reactionLabel: {
-    flex: 1
-  }
+    flex: 1,
+  },
 
 });

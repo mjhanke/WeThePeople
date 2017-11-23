@@ -15,6 +15,7 @@ import CongressAPI from './CongressAPI';
 export default class ProfilePage extends Component {
   static navigationOptions = {
     headerStyle: { backgroundColor: 'white' },
+    gesturesEnabled: true,
   };
 
   constructor(props) {
@@ -62,29 +63,44 @@ export default class ProfilePage extends Component {
               this.setState({
                 bio: this.shortenBio(extract),
               });
+            } else {
+              this.setState({
+                bio: 'Bio currently unavailable',
+              });
             }
           }
         }
         return response;
       }).catch((error) => {
-        this.setState({ bio: 'Bio unavailable' });
+        this.setState({ bio: 'Bio currently unavailable' });
         console.log(error);
       });
   }
 
-  shortenBio(bio) {
+  shortenBio = (bio) => {
+    let shortBio = bio;
     if (bio.includes(')')) {
       // Removes birthday
-      bio = bio.replace(/ *\([^)]*\) */g, ' ');
+      shortBio = bio.replace(/ *\([^)]*\) */g, ' ');
     }
-    // if (bio.includes('. ')) {
-    //   //remove first sentence
-    //   bio = bio.substring(bio.indexOf(' is ') + 1);
-    //   bio = bio.substring(bio.indexOf('. ') + 2);
-    // }
-
-    return bio;
+    if (bio.includes('may refer to')) {
+      shortBio = 'Bio currently unavailable';
+    }
+    return shortBio;
   }
+
+  renderBadge = (text, label) => (
+    <View style={styles.expView}>
+      <Text style={styles.experience}>
+        {text}
+      </Text>
+      <View style={styles.expLabelView}>
+        <Text style={styles.expLabel}>
+          {label}
+        </Text>
+      </View>
+    </View>
+  )
 
   render() {
     return (
@@ -113,42 +129,6 @@ export default class ProfilePage extends Component {
       </ScrollView>
     );
   }
-
-  renderBadge(text, label) {
-    return (
-      <View style={styles.expView}>
-        <Text style={styles.experience}>
-          {text}
-        </Text>
-        <View style={styles.expLabelView}>
-          <Text style={styles.expLabel}>
-            {label}
-          </Text>
-        </View>
-      </View>
-    );
-  }
-
-  renderIdeologyScale() {
-    return (
-      <View style={styles.gradientView}>
-        <ImageBackground
-          style={styles.gradient}
-          source={require('../images/ideology_gradient.png')}
-        >
-          <View style={styles.ideologyIndicator} />
-        </ImageBackground>
-        <View style={styles.ideologyLabelView}>
-          <Text style={styles.ideologyLabel}>
-            Liberal
-          </Text>
-          <Text style={styles.ideologyLabel}>
-            Conservative
-          </Text>
-        </View>
-      </View>
-    );
-  }
 }
 
 let styles = StyleSheet.create({
@@ -159,7 +139,8 @@ let styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: 'white',
     margin: 9,
-    marginTop: 100,
+    marginTop: 15,
+    overflow: 'visible',
   },
   name: {
     flex: 2,
@@ -186,11 +167,11 @@ let styles = StyleSheet.create({
     flex: 5,
     height: 150,
     width: 150,
-    marginTop: -75,
+    marginTop: 15,
     marginBottom: 15,
     borderRadius: 75,
     borderColor: 'gray',
-    backgroundColor: 'gray',
+    // backgroundColor: 'gray',
     borderWidth: 2,
   },
   stats: {

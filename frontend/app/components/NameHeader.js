@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import ProfilePic from './ProfilePic';
 
+const moment = require('moment');
+
 export default class NameHeader extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,9 @@ export default class NameHeader extends Component {
     const sponsorName = `${bill.sponsor.first_name} ${bill.sponsor.last_name}`;
     const fbId = bill.sponsor.facebook_id;
     const imageUrl = `https://graph.facebook.com/${fbId}/picture?type=large`;
-    const date = '3 days ago  •  Senate';
+    const { actions } = this.props.bill;
+    const lastActionDate = actions[actions.length - 1].date;
+    const date = moment(lastActionDate, 'YYYY-MM-DD').startOf('day').fromNow();
     const party = ` (${bill.sponsor.party}-${bill.sponsor.state})`;
     const sponsorId = bill.sponsor.id;
     this.state = {
@@ -35,7 +39,7 @@ export default class NameHeader extends Component {
       <View style={[styles.header, this.props.style]}>
         <ProfilePic
           imageUrl={this.state.imageUrl}
-          wasTapped={this.props.wasTapped(this.state.sponsorId)}
+          wasTapped={() => this.props.wasTapped(this.state.sponsorId)}
         />
         <View style={styles.nameView}>
           <View>
@@ -46,16 +50,16 @@ export default class NameHeader extends Component {
             >
               <Text>
                 <Text style={styles.sponsor}>
-                  {this.props.name}
+                  {this.state.sponsorName}
                 </Text>
                 <Text style={styles.party}>
-                  {this.props.party}
+                  {this.state.party}
                 </Text>
               </Text>
             </TouchableHighlight>
           </View>
           <Text style={styles.date}>
-            {this.props.date}
+            {this.state.date}
           </Text>
         </View>
       </View>
@@ -98,10 +102,12 @@ let styles = StyleSheet.create({
   sponsor: {
     fontSize: 18,
     fontFamily: 'OpenSans-Semibold',
+    color: 'black',
   },
   party: {
     fontSize: 18,
     fontFamily: 'OpenSans-Light',
+    color: 'black',
   },
   profilePic: {
     height: 60,

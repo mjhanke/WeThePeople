@@ -87,9 +87,7 @@ export default class PhoneAuth extends Component {
     }, 100);
   }
 
-  getSubmitAction = () => {
-    return this.state.enterCode ? this.verifyCode() : this.getCode();
-  }
+  getSubmitAction = () => (this.state.enterCode ? this.verifyCode() : this.getCode())
 
   tryAgain = () => {
     this.refs.form.refs.textInput.setNativeProps({ text: '' });
@@ -101,7 +99,7 @@ export default class PhoneAuth extends Component {
     NativeModules.DismissViewControllerManager.goBack();
   }
 
-  verifyCode = () =>  {
+  verifyCode = () => {
     this.setState({ spinner: true });
     setTimeout(async () => {
       try {
@@ -118,7 +116,8 @@ export default class PhoneAuth extends Component {
           setTimeout(() => {
             Alert.alert('Success!', 'You have successfully verified your phone number');
           }, 100);
-          this.navigateToBubblePicker();
+          // this.navigateToBubblePicker();
+          this.props.navigation.navigate('TabView');
         }
       } catch (err) {
         this.setState({ spinner: false });
