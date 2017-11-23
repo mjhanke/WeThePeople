@@ -13,18 +13,18 @@ import CivicAPI from './CivicAPI';
 import MyRepsCell from './MyRepsCell';
 import LoadingScreen from './LoadingScreen';
 import AddressEntry from './AddressEntry';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
 
 export default class MyReps extends Component {
   constructor(props) {
     super(props);
     this.state = {
       voterAddress: 'None',
-      viewStatement: 'your representatives'
+      viewStatement: 'your representatives',
     };
 
-    var address = this.state.voterAddress;
-    AsyncStorage.getItem("voterAddress").then((value) => {
+    let address = this.state.voterAddress;
+    AsyncStorage.getItem('voterAddress').then((value) => {
       if (value != null) {
         address = value;
         CivicAPI.getRepresentatives(address).then(response => this.parseReps(response, address, false));
@@ -75,11 +75,11 @@ export default class MyReps extends Component {
 
   updateAddress(address) {
     // Set permanently
-    AsyncStorage.setItem("voterAddress", address);
-    var parser = require('parse-address'); 
-    var parsedState = parser.parseLocation(address)['state'];
-    console.log('voterState: ', parsedState)
-    AsyncStorage.setItem("voterState", parsedState);
+    AsyncStorage.setItem('voterAddress', address);
+    const parser = require('parse-address');
+    const parsedState = parser.parseLocation(address).state;
+    console.log('voterState: ', parsedState);
+    AsyncStorage.setItem('voterState', parsedState);
 
     // Fetch representatives
     CivicAPI.getRepresentatives(address).then((response) => {
@@ -103,20 +103,22 @@ export default class MyReps extends Component {
       }
       const repsWithoutPresident = reps.filter(rep => this.isNotPresident(rep));
 
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(repsWithoutPresident),
-        fetched: true,
-        viewStatement: 'your representatives',
-        voterAddress: address,
-      },
-      () => {
-        if (goBack) {
-          const backAction = NavigationActions.back({
-            key: 'AddressEntry'
-          })
-          this.props.navigation.dispatch(backAction)
-        }
-      });
+      this.setState(
+        {
+          dataSource: this.state.dataSource.cloneWithRows(repsWithoutPresident),
+          fetched: true,
+          viewStatement: 'your representatives',
+          voterAddress: address,
+        },
+        () => {
+          if (goBack) {
+            const backAction = NavigationActions.back({
+              key: 'AddressEntry',
+            });
+            this.props.navigation.dispatch(backAction);
+          }
+        },
+      );
     }
   }
 

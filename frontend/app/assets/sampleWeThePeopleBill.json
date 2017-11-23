@@ -1,55 +1,98 @@
 {
-    "last_updated": "2017-10-13",
-    "actions": [{"date": "2017-07-24", "action": "Introduced in House"}, {"date": "2017-07-24", "action": "Referred to the House Committee on the Judiciary."}],
-    "topic": "Families",
-    "house_committees": [{"committee_id": "HSJU", "committee": "House Judiciary"}],
-    "sponsor": {
-        "first_name": "Patrick",
-        "last_name": "Meehan",
-        "title": "Rep",
-        "state": "PA",
-        "facebook_id": "CongressmanPatrickMeehan",
-        "id": "M001181"
-    },
-    "related_bills": [],
-    "smiley_count": 0,
-    "title": "Expressing the sense of Congress that child safety is the first priority of custody and visitation adjudications, and that State courts should improve adjudications of custody where family violence is alleged.",
-    "level_code": 0,
-    "state": null,
-    "status": {
-        "passed_upper": false,
-        "passed_lower": false,
-        "signed": false,
-        "vetoed": false
-    },
-    "machine_summary": "= > 17000 = > Agreed to in Senate Array = > 2015-08-04 = > Passed/agreed to in House: On agreeing to the resolution Agreed to without objection. = > 8000 = > Agreed to in House Here are the steps for Status of Legislation: This bill has the status Agreed to in Senate Text: H.Con.Res.72 114th Congress All Information There are 3 versions: Enrolled Bill Received in Senate Engrossed in House Text available as: Xml/Html Xml/Html Txt Pdf Tip ?\n\nThe Speaker or his designee, after consultation with the Minority Leader of the House, will notify the Members of the House to reassemble at such place and time as he can designate if, in his opinion, the public interest will warrant it.\n\nThe Majority Leader of the Senate or his designee, after concurrence with the Minority Leader of the Senate, will notify the Members of the Senate to reassemble at such place and time as he can designate if, in his opinion, the public interest will warrant it.\n\nAttest: Secretary of the Senate.",
-    "senate_committees": "",
-    "human_summary": "",
-    "frowny_count": 0,
-    "introduction_date": "2017-07-24",
-    "short_title": "",
-    "full_text_url": "https://www.congress.gov/bill/114th-congress/house-concurrent-resolution/72/text?format=txt",
-    "scraped_topics": [],
-    "_id": "59ffcf6808b474f7dbf3b286",
-    "cosponsors": [
-        {
-            "first_name": "John",
-            "last_name": "Carter",
-            "title": "Rep",
-            "state": "TX",
-            "facebook_id": "judgecarter",
-            "id": "C001051"
-        }, {"first_name": "Tom", "last_name": "Cole", "title": "Rep", "state": "OK", "facebook_id": "TomColeOK04", "id": "C001053"}, {"first_name": "Daniel", "last_name": "Donovan", "title": "Rep", "state": "NY", "facebook_id": "RepDanDonovan", "id": "D000625"}, {"first_name": "Anna", "last_name": "Eshoo", "title": "Rep", "state": "CA", "facebook_id": "RepAnnaEshoo", "id": "E000215"}, {"first_name": "Trent", "last_name": "Franks", "title": "Rep", "state": "AZ", "facebook_id": "TrentFranks", "id": "F000448"}, {"first_name": "Ruben", "last_name": "Gallego", "title": "Rep", "state": "AZ", "facebook_id": "RepRubenGallego", "id": "G000574"}, {"first_name": "Gene", "last_name": "Green", "title": "Rep", "state": "TX", "facebook_id": "RepGeneGreen", "id": "G000410"}, {"first_name": "Hakeem", "last_name": "Jeffries", "title": "Rep", "state": "NY", "facebook_id": "RepHakeemJeffries", "id": "J000294"}, {"first_name": "Stephen", "last_name": "Knight", "title": "Rep", "state": "CA", "facebook_id": "RepresentativeSteveKnight", "id": "K000387"}, {"first_name": "Ted", "last_name": "Lieu", "title": "Rep", "state": "CA", "facebook_id": "RepTedLieu", "id": "L000582"}, {"first_name": "Carolyn", "last_name": "Maloney", "title": "Rep", "state": "NY", "facebook_id": null, "id": "M000087"}, {"first_name": "Jerry", "last_name": "McNerney", "title": "Rep", "state": "CA", "facebook_id": "jerrymcnerney", "id": "M001166"}, {"first_name": "Grace", "last_name": "Napolitano", "title": "Rep", "state": "CA", "facebook_id": "RepGraceNapolitano", "id": "N000179"}, {"first_name": "Tom", "last_name": "O'Halleran", "title": "Rep", "state": "AZ", "facebook_id": "repohalleran", "id": "O000171"}, {"first_name": "Jamie", "last_name": "Raskin", "title": "Rep", "state": "MD", "facebook_id": "repraskin", "id": "R000606"}, {"first_name": "Kathleen", "last_name": "Rice", "title": "Rep", "state": "NY", "facebook_id": "RepKathleenRice", "id": "R000602"}, {"first_name": "Tim", "last_name": "Ryan", "title": "Rep", "state": "OH", "facebook_id": "timryan", "id": "R000577"}, {"first_name": "Jackie", "last_name": "Speier", "title": "Rep", "state": "CA", "facebook_id": "JackieSpeier", "id": "S001175"}, {"first_name": "Thomas", "last_name": "Suozzi", "title": "Rep", "state": "NY", "facebook_id": "RepTomSuozzi", "id": "S001201"}],
-    "bill_id": "hconres72-115",
-    "subtopics": [
-        "Child_safety_and_welfare",
-        "Crimes_against_children",
-        "Domestic_violence_and_child_abuse",
-        "Evidence_and_witnesses",
-        "Families",
-        "Judicial_procedure_and_administration",
-        "Legal_fees_and_court_costs",
-        "Separation,_divorce,_custody,_support",
-        "Social_work,_volunteer_service,_charitable_organizations"
-    ]
+	"last_updated": "2017-11-17",
+	"actions": [{
+			"date": "2017-11-13",
+			"action": "Introduced in House"
+		},
+		{
+			"date": "2017-11-13",
+			"action": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on Armed Services, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+		},
+		{
+			"date": "2017-11-13",
+			"action": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on Armed Services, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+		},
+		{
+			"date": "2017-11-15",
+			"action": "Mr. Walden moved to suspend the rules and pass the bill."
+		},
+		{
+			"date": "2017-11-15",
+			"action": "Considered under suspension of the rules."
+		},
+		{
+			"date": "2017-11-15",
+			"action": "DEBATE - The House proceeded with forty minutes of debate on H.R. 4374."
+		},
+		{
+			"date": "2017-11-15",
+			"action": "On motion to suspend the rules and pass the bill Agreed to by voice vote."
+		},
+		{
+			"date": "2017-11-15",
+			"action": "Motion to reconsider laid on the table Agreed to without objection."
+		},
+		{
+			"date": "2017-11-15",
+			"action": "Received in the Senate, read twice."
+		},
+		{
+			"date": "2017-11-16",
+			"action": "Passed Senate without amendment by Unanimous Consent."
+		},
+		{
+			"date": "2017-11-16",
+			"action": "Message on Senate action sent to the House."
+		}
+	],
+	"topic": "Health",
+	"house_committees": [{
+			"committee_id": "HSAS",
+			"committee": "House Armed Services"
+		},
+		{
+			"committee_id": "HSIF",
+			"committee": "House Energy and Commerce"
+		}
+	],
+	"sponsor": {
+		"first_name": "Greg",
+		"last_name": "Walden",
+		"title": "Rep",
+		"state": "OR",
+		"facebook_id": "repgregwalden",
+		"party": "R",
+		"id": "W000791"
+	},
+	"related_bills": [],
+	"smiley_count": 0,
+	"title": "To amend the Federal Food, Drug, and Cosmetic Act to authorize additional emergency uses for medical products to reduce deaths and severity of injuries caused by agents of war, and for other purposes.",
+	"level_code": 0,
+	"state": null,
+	"status": {
+		"passed_upper": true,
+		"passed_lower": true,
+		"signed": false,
+		"vetoed": false
+	},
+	"machine_summary": [
+		"Reduce Deaths Severity Of Injuries Caused By Agents Of War.",
+		"Fda Authorization for Medical Products for Use in Emergencies.",
+		"Emergency Uses for Medical Products.",
+		"In order to facilitate enhanced collaboration and communication with respect to the most current priorities of the Department of Defense the Food and Drug Administration will meet with the Department of Defense and any other appropriate development partners, such as the Biomedical Advanced Research and Development Authority, on a semi-annual basis for the purposes of conducting a full review of the relevant products in the Department of Defense portfolio; and the Director of the Center for Biologics Evaluation and Research will meet quarterly with the Department of Defense to discuss the development status of regenerative medicine advanced therapy, blood, and vaccine medical products and projects that are the highest priorities to the Department of Defense, unless the Secretary of Defense determines that any such meetings are not necessary.",
+		"Vice President of the United States and President of the Senate."
+	],
+	"senate_committees": "",
+	"human_summary": [],
+	"frowny_count": 0,
+	"introduction_date": "2017-11-13",
+	"short_title": "",
+	"full_text_url": "https://www.congress.gov/bill/115th-congress/house-bill/4374/text?format=txt",
+	"scraped_topics": [],
+	"_id": "5a109d8ae80c9c20023b2ff7",
+	"cosponsors": [],
+	"bill_id": "hr4374-115",
+	"subtopics": [
+		"Health"
+	]
 }

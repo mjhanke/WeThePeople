@@ -60,8 +60,11 @@ export default class Onboarding extends Component {
           }
         }
         >
-          {this.state.pages.map(page => (
-            <View style={styles.card}>
+          {this.state.pages.map((page, i) => (
+            <View
+              style={styles.card}
+              key={i}
+            >
               <Text style={styles.title}>
                 {page.title}
               </Text>
@@ -76,8 +79,8 @@ export default class Onboarding extends Component {
           style={styles.pageControl}
           numberOfPages={this.state.pages.length}
           currentPage={this.state.page}
-          pageIndicatorTintColor="grey"
-          currentPageIndicatorTintColor="#489AF0"
+          pageIndicatorTintColor="white"
+          currentPageIndicatorTintColor="white" // "#489AF0"
         />
 
         <TouchableHighlight

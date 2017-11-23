@@ -43,7 +43,7 @@ export default class BillProgress extends Component {
 
 const styles = StyleSheet.create({
   progressView: {
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'stretch',
@@ -55,16 +55,16 @@ const styles = StyleSheet.create({
 
   },
   shadow: {
-    
+
     shadowColor: '#494F54',
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowRadius: 0.7,
     shadowOpacity: 0.8,
     height: 90,
     marginBottom: 10,
     borderRadius: 10,
-  }
+  },
 });

@@ -1,8 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+/* @flow */
 
 import React, { Component } from 'react';
 import {
@@ -14,13 +10,14 @@ import {
 import firebase from 'react-native-firebase';
 import Onboarding from './app/components/Onboarding';
 import PhoneAuth from './app/components/PhoneAuth';
-import MainView from './app/components/MainView';
 import BillDetail from './app/components/BillDetail';
 import ProfilePage from './app/components/ProfilePage';
+import TabView from './app/components/TabView';
 
-export default class App extends Component<{}> {
+export default class App extends Component {
   constructor(props) {
     super(props);
+    // To temporarily disable warnings, uncomment this line:
     console.disableYellowBox = true;
     this.state = {
       userIsFetched: false,
@@ -35,7 +32,8 @@ export default class App extends Component<{}> {
   }
 
   render() {
-    //firebase.auth().signOut();
+    // To sign out of Firebase, uncomment this line:
+    // firebase.auth().signOut();
     if (this.state.userIsFetched && this.state.userIsLoggedIn) {
       return (
         <LoggedInUserNavigator />
@@ -46,19 +44,20 @@ export default class App extends Component<{}> {
         <FirstTimeUserNavigator />
       );
     }
-    return (
-      <View />
-    );
+    return (<View />);
   }
 }
 
 const FirstTimeUserNavigator = StackNavigator({
   Onboarding: { screen: Onboarding, navigationOptions: { header: null } },
   PhoneAuth: { screen: PhoneAuth, navigationOptions: { header: null } },
+  TabView: { screen: TabView, navigationOptions: { header: null } },
+  BillDetail: { screen: BillDetail },
+  ProfilePage: { screen: ProfilePage },
 });
 
 const LoggedInUserNavigator = StackNavigator({
-  MainView: { screen: MainView, navigationOptions: { header: null } },
+  TabView: { screen: TabView, navigationOptions: { header: null } },
   BillDetail: { screen: BillDetail },
   ProfilePage: { screen: ProfilePage },
 });

@@ -10,19 +10,39 @@ import {
 import ProfilePic from './ProfilePic';
 
 export default class NameHeader extends Component {
+  constructor(props) {
+    super(props);
+    const { bill } = this.props;
+    const sponsorName = `${bill.sponsor.first_name} ${bill.sponsor.last_name}`;
+    const fbId = bill.sponsor.facebook_id;
+    const imageUrl = `https://graph.facebook.com/${fbId}/picture?type=large`;
+    const date = '3 days ago  •  Senate';
+    const party = ` (${bill.sponsor.party}-${bill.sponsor.state})`;
+    const sponsorId = bill.sponsor.id;
+    this.state = {
+      sponsorName,
+      fbId,
+      imageUrl,
+      date,
+      party,
+      sponsorId,
+    };
+  }
+
   render() {
+    const id = this.state.sponsorId;
     return (
       <View style={[styles.header, this.props.style]}>
         <ProfilePic
-          imageUrl={this.props.imageUrl}
-          wasTapped={() => this.props.wasTapped(this.props.legId)}
+          imageUrl={this.state.imageUrl}
+          wasTapped={this.props.wasTapped(this.state.sponsorId)}
         />
         <View style={styles.nameView}>
           <View>
             <TouchableHighlight
               style={styles.sponsorWrapper}
               underlayColor="white"
-              onPress={() => this.props.wasTapped(this.props.legId)}
+              onPress={() => this.props.wasTapped(this.state.sponsorId)}
             >
               <Text>
                 <Text style={styles.sponsor}>
@@ -43,7 +63,9 @@ export default class NameHeader extends Component {
   }
 }
 
-ProfilePic.propTypes = {
+NameHeader.propTypes = {
+  bill: PropTypes.object.isRequired,
+  style: PropTypes.object.isRequired,
   wasTapped: PropTypes.func.isRequired,
 };
 

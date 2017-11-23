@@ -1,96 +1,110 @@
-import React, { Component } from 'react';
+/* @flow */
+
+import React, { PureComponent } from 'react';
 import {
   StyleSheet,
-  View,
+  Image,
 } from 'react-native';
-import {
-  TabViewAnimated, TabBar, SceneMap,
-} from 'react-native-tab-view';
+import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import PropTypes from 'prop-types';
-
-/* Tab bar pages */
-import MyReps from './MyReps';
 import CongressFeed from './CongressFeed';
+import BillSwiper from './BillSwiper';
+import AccountTab from './AccountTab';
+import images from '../assets/images';
 
-export default class TabView extends Component {
-  static propTypes = {
-    toggleDrawer: PropTypes.func.isRequired,
-  };
-
+export default class TabView extends PureComponent {
   state = {
-    index: 0,
+    index: 1,
     routes: [
-      { key: '1', title: 'CONGRESS' },
-      // { key: '2', title: 'STATE' },
-      { key: '3', title: 'MY REPS' },
+      { key: '1', image: images.profile },
+      // { key: '2', image: images.bolt },
+      { key: '2', image: images.newspaper },
+      { key: '3', image: images.notification },
     ],
   };
 
-  handleIndexChange = index => this.setState({ index });
+  handleIndexChange = (index) => {
+    this.setState({
+      index,
+    });
+  }
+
+  billWasTapped = (bill) => {
+    const { navigate } = this.props.navigation;
+    navigate('BillDetail', { bill });
+  }
+
+  renderIcon = ({ route }) => (
+    <Image
+      source={route.image}
+      style={styles.tabIcon}
+    />
+  )
 
   renderHeader = props => (
     <TabBar
       {...props}
       indicatorStyle={styles.indicator}
-      labelStyle={styles.tabBarLabel}
-      style={styles.tabBarHeader}
+      renderIcon={this.renderIcon}
+      style={styles.tabbar}
     />
   );
 
-  renderScene = SceneMap({
-    1: () => (
-      <CongressFeed
-        billWasTapped={this.props.billWasTapped}
-        personWasTapped={this.props.personWasTapped}
-      />
-    ),
-    3: () => (
-      <MyReps
-        navigation={this.props.navigation}
-      />
-    ),
-    3: () => (
-      <MyReps
-        navigation={this.props.navigation}
-      />
-    ),
-  });
+  renderScene = ({ route }) => {
+    switch (route.key) {
+      case '1':
+        return (
+          <AccountTab />
+        );
+      case '2':
+        return (
+          <CongressFeed
+            billWasTapped={this.billWasTapped}
+          />
+        );
+      case '3':
+        return (
+          <AccountTab />
+        );
+      default:
+        return null;
+    }
+  };
 
   render() {
     return (
-      <View style={styles.container}>
-        <TabViewAnimated
-          style={styles.container}
-          navigationState={this.state}
-          renderScene={this.renderScene}
-          renderHeader={this.renderHeader}
-          onIndexChange={this.handleIndexChange}
-          lazy={false}
-        />
-      </View>
+      <TabViewAnimated
+        style={styles.container}
+        navigationState={this.state}
+        renderScene={this.renderScene}
+        renderHeader={this.renderHeader}
+        onIndexChange={this.handleIndexChange}
+        swipeEnabled
+      />
     );
   }
 }
 
 TabView.propTypes = {
-  billWasTapped: PropTypes.func.isRequired,
-  personWasTapped: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    // marginTop: 20,
   },
-  tabBarHeader: {
+  tabbar: {
     backgroundColor: 'white',
-    marginTop: 20,
-  },
-  tabBarLabel: {
-    fontFamily: 'OpenSans-Semibold',
-    color: '#222',
   },
   indicator: {
-    backgroundColor: 'black',
+    backgroundColor: 'gray',
+  },
+  tabIcon: {
+    height: 30,
+    width: 30,
+    tintColor: '#656572',
   },
 });
