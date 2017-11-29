@@ -15,7 +15,7 @@ export default class BillSwiperCard extends Component {
       <View style={styles.card}>
         <NameHeader
           bill={this.props.bill}
-          navigate={this.props.navigate}
+          wasTapped={this.props.personWasTapped}
           style={styles.header}
         />
         <Text style={styles.title}>
@@ -28,7 +28,7 @@ export default class BillSwiperCard extends Component {
           {this.props.bill.machine_summary.join('\n\n')}
         </Text>
         <Text style={styles.summaryHeader}>
-          Machine generated summary
+          Auto-generated summary
         </Text>
         <Text style={styles.readMoreButton}>
           Read more
@@ -39,8 +39,8 @@ export default class BillSwiperCard extends Component {
 }
 
 BillSwiperCard.propTypes = {
-  navigate: PropTypes.func.isRequired,
   bill: PropTypes.object.isRequired,
+  personWasTapped: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 4,
     shadowOpacity: 0.2,
-    marginTop: 10,
+    margin: 10,
+    elevation: 2,
   },
   header: {
     height: 85,

@@ -18,10 +18,10 @@ export default class TabView extends PureComponent {
     index: 1,
     routes: [
       { key: '1', image: images.profile },
-      // { key: '2', image: images.bolt },
-      { key: '2', image: images.newspaper },
-      { key: '3', image: images.location },
-      // { key: '3', image: images.notification },
+      { key: '2', image: images.bolt },
+      { key: '3', image: images.newspaper },
+      { key: '4', image: images.location },
+      { key: '5', image: images.notification },
     ],
   };
 
@@ -68,14 +68,28 @@ export default class TabView extends PureComponent {
         );
       case '2':
         return (
-          <CongressFeed
+          <BillSwiper
             billWasTapped={this.billWasTapped}
             personWasTapped={this.personWasTapped}
           />
         );
       case '3':
         return (
+          <CongressFeed
+            billWasTapped={this.billWasTapped}
+            personWasTapped={this.personWasTapped}
+          />
+        );
+      case '4':
+        return (
           <MyReps />
+        );
+      case '5':
+        return (
+          <CongressFeed
+            billWasTapped={this.billWasTapped}
+            personWasTapped={this.personWasTapped}
+          />
         );
       default:
         return null;
@@ -90,7 +104,7 @@ export default class TabView extends PureComponent {
         renderScene={this.renderScene}
         renderHeader={this.renderHeader}
         onIndexChange={this.handleIndexChange}
-        swipeEnabled
+        swipeEnabled={this.state.index !== 1}
       />
     );
   }

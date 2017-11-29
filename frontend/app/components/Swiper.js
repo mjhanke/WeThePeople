@@ -93,7 +93,7 @@ export default class Swiper extends React.Component {
 
     this.cardStyle = {
       flex: 1,
-      width: width - 14,
+      width,
       height: height - TABBARHEIGHT - CARDMARGIN - YESNOBUTTONSHEIGHT,
 
     };
@@ -795,7 +795,7 @@ Swiper.defaultProps = {
   animateCardOpacity: false,
   animateOverlayLabelsOpacity: false,
   backgroundColor: '#4FD0E9',
-  cardHorizontalMargin: 20,
+  cardHorizontalMargin: 0,
   cardIndex: 0,
   cardStyle: {},
   cardVerticalMargin: 60,

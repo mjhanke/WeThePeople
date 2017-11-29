@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import Swiper from './Swiper';
 import BillSwiperCard from './BillSwiperCard';
+import SwiperButton from './SwiperButton';
 import bill from '../assets/sampleWeThePeopleBill.json';
 
 export default class BillSwiper extends Component {
@@ -44,14 +45,10 @@ export default class BillSwiper extends Component {
     });
   };
 
-  onTapCard = (index) => {
-    const { navigate } = this.props;
-    navigate('BillDetail', { bill, navigate });
-  }
-
   renderCard = card => (
     <BillSwiperCard
       bill={bill}
+      personWasTapped={this.props.personWasTapped}
     />
   )
 
@@ -63,7 +60,7 @@ export default class BillSwiper extends Component {
           this.swiper = swiper;
         }}
           onSwiped={this.onSwiped}
-          onTapCard={this.onTapCard}
+          onTapCard={this.props.billWasTapped}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={0}
@@ -77,33 +74,42 @@ export default class BillSwiper extends Component {
           animateOverlayLabelsOpacity
           backgroundColor="#CFCFD1"
         />
-
+        <View style={styles.buttonView}>
+          <SwiperButton
+            color="red"
+            text="NO"
+            onPress={() => {}}
+          />
+          <SwiperButton
+            color="green"
+            text="YES"
+            onPress={() => {}}
+          />
+        </View>
       </View>
     );
   }
 }
 
 BillSwiper.propTypes = {
-  navigate: PropTypes.func.isRequired,
+  billWasTapped: PropTypes.func.isRequired,
+  personWasTapped: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     // marginTop: 10,
+    // backgroundColor: 'yellow',
     // backgroundColor: '#CFCFD1',
   },
-  headerView: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: 'white',
-    marginTop: 12,
-  },
   buttonView: {
-    flex: 1,
-    backgroundColor: 'magenta',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: 80,
+    backgroundColor: 'white',
+    // backgroundColor: 'magenta',
   },
   card: {
     flex: 1,
@@ -127,6 +133,7 @@ const styles = StyleSheet.create({
     borderColor: '#4CAF50',
     color: '#4CAF50',
     borderWidth: 2,
+    elevation: 3,
   },
   yesLabelWrapper: {
     flexDirection: 'column',
@@ -134,12 +141,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 30,
     marginLeft: 30,
+    elevation: 3,
   },
   noLabel: {
     backgroundColor: 'white',
     borderColor: '#F44336',
     color: '#F44336',
     borderWidth: 2,
+    elevation: 3,
+    fontFamily: 'OpenSans-Regular',
   },
   noLabelWrapper: {
     flexDirection: 'column',
@@ -147,6 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 30,
     marginLeft: -30,
+    elevation: 3,
   },
   summary: {
 

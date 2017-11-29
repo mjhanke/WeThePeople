@@ -3,9 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
-  TouchableHighlight,
   Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -13,6 +11,7 @@ import CongressAPI from './CongressAPI';
 import BillProgress from './BillProgress';
 import NameHeader from './NameHeader';
 import Emoji from './Emoji';
+import CustomButton from './CustomButton';
 import images from '../assets/images';
 
 export default class BillDetail extends Component {
@@ -25,8 +24,8 @@ export default class BillDetail extends Component {
     const { sponsor } = params.bill;
     let imageUrl = '';
     if ('facebook_id' in params.bill.sponsor) {
-      const facebook_id = params.bill.sponsor.facebook_id;
-      imageUrl = `https://graph.facebook.com/${facebook_id}/picture?type=large`;
+      const facebookId = params.bill.sponsor.facebook_id;
+      imageUrl = `https://graph.facebook.com/${facebookId}/picture?type=large`;
     } else {
       imageUrl = params.bill.sponsor.picture_url;
     }
@@ -103,11 +102,14 @@ export default class BillDetail extends Component {
 
           {this.renderHumanSummary()}
           <Text style={styles.summaryHeader}>
-            {'Machine Summary'}
+            {'Auto-Generated Summary'}
           </Text>
           {this.renderMachineSummary()}
+          <CustomButton
+            onPress={() => {}}
+            text="Read Full Text"
+          />
         </View>
-
         <View style={styles.divider} />
         <View style={styles.reactionView}>
           <Emoji image={images.smileyEmoji} />
@@ -210,21 +212,21 @@ let styles = StyleSheet.create({
   },
   summaryHeader: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 18,
+    fontSize: 17,
     textAlign: 'center',
     color: 'gray',
     marginTop: 7,
   },
   summary: {
     flex: -1,
-    // backgroundColor: 'orange',
     margin: 15,
     marginTop: 21,
-    marginBottom: 28,
+    marginBottom: 15,
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     lineHeight: 25,
     backgroundColor: 'white',
+    // backgroundColor: 'orange',
     textAlign: 'left',
   },
   reactionView: {

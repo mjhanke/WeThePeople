@@ -6,9 +6,13 @@ import {
   StyleSheet,
   AppRegistry,
   Text,
+  Image,
+  Dimensions,
 } from 'react-native';
 import ProfilePic from './ProfilePic';
+import FavoriteButton from './FavoriteButton';
 
+const PAGE_WIDTH = Dimensions.get('window').width;
 const moment = require('moment');
 
 export default class NameHeader extends Component {
@@ -62,6 +66,7 @@ export default class NameHeader extends Component {
             {this.state.date}
           </Text>
         </View>
+        <FavoriteButton />
       </View>
     );
   }
@@ -69,14 +74,13 @@ export default class NameHeader extends Component {
 
 NameHeader.propTypes = {
   bill: PropTypes.object.isRequired,
-  style: PropTypes.object.isRequired,
   wasTapped: PropTypes.func.isRequired,
 };
 
 let styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'stretch',
     backgroundColor: 'white',
     // backgroundColor: 'green'
@@ -89,14 +93,14 @@ let styles = StyleSheet.create({
     color: 'grey',
   },
   nameView: {
+    width: PAGE_WIDTH - 10 - 10 - 60 - 50 - 10 - 10,
     flexDirection: 'column',
-    // backgroundColor: 'magenta'
+    // backgroundColor: 'magenta',
   },
   sponsorWrapper: {
     flexDirection: 'row',
     marginTop: 10,
     marginLeft: 10,
-    marginRight: 10,
     // backgroundColor: 'yellow',
   },
   sponsor: {
@@ -119,6 +123,7 @@ let styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'gray',
   },
+
 });
 
 

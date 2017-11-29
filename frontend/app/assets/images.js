@@ -14,6 +14,8 @@ const images = {
   bolt: require('../images/bolt.png'),
   newspaper: require('../images/newspaper.png'),
   location: require('../images/location.png'),
+  star: require('../images/star.png'),
+  starFilled: require('../images/starFilled.png'),
 };
 
 export default images;
