@@ -20,17 +20,23 @@ export PATH="$HOME/.fastlane/bin:$PATH"
 match init
 ```
 
-There will be an error in one of the React files. Change "RCTAnimation/" to "React/". 
-
-Sorry about the hack.
-
-If you'd like to run WeThePeople on your physical iPhone:
+### Building WeThePeople on Your iPhone
 
 1) Find UUID of your iPhone by visiting http://get.udid.io/ on Safari on your phone.
 
 2) I (Dan) will need to run ```fastlane run register_device```, follow prompts, then ```match development --force```
 
 3) On your computer, run ```match development --force``` to download the updated certs
+
+### Adding Friends to TestFlight
+
+To add friends who want to test the iOS app:
+
+1) Go to https://itunesconnect.apple.com > My Apps > TestFlight > External Testers
+
+2) Click (+) next to Testers, you'll need Apple ID, and first and last name.
+
+3) Tell them to click on email invite to download TestFlight
 
 
 ## Backend - Server
