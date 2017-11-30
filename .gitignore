@@ -9,6 +9,9 @@ venv/
 hirochri/
 mjhanke/
 
+apiKeys.json
+.vscode/
+
 # OSX
 #
 .DS_Store
@@ -32,6 +35,8 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+main.jsbundle*
+*dSYM.zip
 
 ### Android Stuff ###
 # Built application files
@@ -51,8 +56,10 @@ out/
 
 # Gradle files
 .gradle/
-gradle/wrapper/
+wrapper/
 build/
+
+index.android.bundle*
 
 # Local configuration file (sdk path, etc)
 local.properties
