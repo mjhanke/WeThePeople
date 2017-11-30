@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "75835831699",
+    "firebase_url": "https://wethepeople-cb4d1.firebaseio.com",
+    "project_id": "wethepeople-cb4d1",
+    "storage_bucket": "wethepeople-cb4d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75835831699:android:71250a6f89a98a42",
+        "android_client_info": {
+          "package_name": "com.wethepeople"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75835831699-5igssnd6fj8qe44tv7qldqu0j7hm8d14.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wethepeople",
+            "certificate_hash": "0ed9d5a69a997e5073b2e3bac6e70164a353933c"
+          }
+        },
+        {
+          "client_id": "75835831699-7kurd8qude92li7hu80ii908f5qv2c0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3HDv86JLyKuBvWfVkaCAFTg9Zncv2pFc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75835831699-7kurd8qude92li7hu80ii908f5qv2c0u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "75835831699-13e0gcn51uktusr1vnd8cte0tpr35lle.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "WeThePeopleApp"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
